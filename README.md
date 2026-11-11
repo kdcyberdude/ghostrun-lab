@@ -111,7 +111,7 @@ To stop cleanly, run `touch runs/rl/<run>/STOP`. Restarting the same command res
 `scripts/record_all_levels.sh` writes an MP4 and a controller log for each level and each model:
 
 - **v2**: every mood plays the level from its saved entrance, and the mood with the most progress is kept. A clear wins first, then the furthest x, then the longest play. A second pass replays the kept moves and checks every pad byte before it renders the video.
-- **v1**: plays the whole game once and the run is cut per level. v1 runs in its own emulator, the nes_py-based reference lab.
+- **v1**: the fixed-route-assisted player runs once and the recording is cut per level. The external reference lab or documented PNG-only `pixel-player` supplies the native frames. Clips hold each decision’s final image for its 7/8-frame duration and contain no audio.
 
 ```bash
 export GHOSTRUN_V2_POLICY=model.pt                     # from kdcyberdude/ghostrun-smb-policy-v2
@@ -129,13 +129,13 @@ The output goes to `recordings/v{1,2}/<level>/smb_v{1,2}_<level>.{mp4,actions.js
 - `actions`: the same stream run-length encoded in the Three.js tools' native-trace bit order, so it replays in `tools/harness/model-play.mjs`
 - `start`, `clock`, `result`
 
-See `scripts/recording/action_log.py` for the format.
+See `scripts/recording/action_log.py` for the format and [the v1 capture report](docs/V1_RECORDING.md) for the PNG-only command, verified results, and limitations.
 
 ## Models
 
 | | Result | Link |
 |---|---|---|
-| v1 | Clears all 32 levels greedily in one run; one fixed route | [kdcyberdude/ghostrun-smb-policy-v1](https://huggingface.co/kdcyberdude/ghostrun-smb-policy-v1) |
+| v1 | Fixed-route-assisted player; fresh capture visited all 32 levels and reached the Princess room; ending-text win not verified | [kdcyberdude/ghostrun-smb-policy-v1](https://huggingface.co/kdcyberdude/ghostrun-smb-policy-v1) |
 | v2 | RL only, 8 moods, partly trained; best power-on run reached 4-4 | [kdcyberdude/ghostrun-smb-policy-v2](https://huggingface.co/kdcyberdude/ghostrun-smb-policy-v2) |
 
 The full model cards are in [models/README.md](models/README.md). `scripts/upload_models.sh` publishes both.

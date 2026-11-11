@@ -9,6 +9,9 @@ The reference lab is an external JSON-lines tool (one request per stdin line, on
   reset {start: standard} -> auto {ticks: 1} (the policy picks and applies a tick) -> diagnostics (world, stage, mode)
 Each reply has the tick's live 256x240 PNG, its applied 10-bit mask and frames_advanced. Point --reference-lab
 (or GHOSTRUN_REFERENCE_LAB) at its launcher, called as: LAUNCHER --rom ROM --output DIR --diagnostics.
+--pixel-player LAUNCHER --hud-font ATLAS instead uses the documented PNG-only player protocol.
+Level cuts and final messages are read from visible white glyphs, as in the remake audit tool; x is unavailable.
+The atlas is the supplied background-tiles-22-30-21-0f.png, not a ROM input.
 --replay-route plays the bundled recorded route (data/routes/smb_v1_all32_route.json, v1's own applied masks) with
 `step` instead of asking the policy, for when only the emulator is available.
 
@@ -40,19 +43,63 @@ ROUTE = ROOT / 'data/routes/smb_v1_all32_route.json'
 CLOCK = 'reference_lab_frame (legacy 29,781 CPU-cycle slice of the nes_py core, not a PPU frame)'
 
 
+class HudObserver:
+    """Same visible white-glyph test as the remake's tools/audit-gameplay.mjs; no RAM access."""
+    def __init__(self, font):
+        import numpy as np
+        from PIL import Image
+        self.font = np.all(np.asarray(Image.open(font).convert('RGB')) > 220, axis=2)
+        self.level = None
+
+    def matches(self, image, text, x, y):
+        import numpy as np
+        for char in text:
+            tile = (int(char) if char.isdigit() else ord(char) - 55 if char.isupper()
+                    else {' ': 36, '-': 40, '!': 43, '.': 175}[char])
+            tx, ty = tile % 16 * 8, tile // 16 * 8
+            if not np.array_equal(image[y:y + 8, x:x + 8], self.font[ty:ty + 8, tx:tx + 8]):
+                return False
+            x += 8
+        return True
+
+    def read(self, path):
+        import numpy as np
+        from PIL import Image
+        with Image.open(path) as png:
+            if png.size != (256, 240):
+                raise ValueError(f'Unexpected native PNG size: {png.size}')
+            image = np.all(np.asarray(png.convert('RGB')) > 220, axis=2)
+        for level in range(32):
+            if self.matches(image, level_name(level), 152, 24):
+                self.level = level
+                break
+        if self.level is None:
+            raise ValueError('Initial player image has no recognizable world HUD')
+        mode = (3 if self.matches(image, 'GAME OVER', 88, 120) else
+                2 if self.matches(image, 'YOUR QUEST IS OVER.', 48, 112) else 1)
+        return dict(level=self.level, mode=mode, x=None)
+
+
 class Lab:
-    def __init__(self, launcher, rom, output):
-        self.p = subprocess.Popen([launcher, '--rom', rom, '--output', output, '--diagnostics'],
+    def __init__(self, launcher, rom, output, font=None):
+        self.observer = HudObserver(font) if font else None
+        self.last = None
+        command = [launcher, '--rom', rom]
+        command += ['--screenshots', output] if font else ['--output', output, '--diagnostics']
+        self.p = subprocess.Popen(command,
                                   stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True, bufsize=1)
 
     def call(self, **req):
         self.p.stdin.write(json.dumps(req) + '\n')
+        self.p.stdin.flush()
         line = self.p.stdout.readline()
         if not line:
             raise RuntimeError(f'reference lab closed on {req}')
         r = json.loads(line)
         if not r.get('ok'):
             raise RuntimeError(f'{req}: {r.get("error")}')
+        if r.get('image'):
+            self.last = r
         return r
 
     def close(self):
@@ -61,6 +108,8 @@ class Lab:
 
 
 def state(lab):
+    if lab.observer:
+        return lab.observer.read(lab.last['image']['path'])
     d = lab.call(op='diagnostics')['decoded_existing_observer']
     return dict(level=(d['world'] - 1) * 4 + d['stage'] - 1, mode=d['mode_raw'], x=d['player_x_raw'])
 
@@ -68,10 +117,12 @@ def state(lab):
 def play(args, lab_dir):
     """One full run. Returns ticks: [{mask, frames, png, level, mode, x}] (level etc. after the tick)."""
     route = json.loads(ROUTE.read_text())['actions']
-    lab = Lab(args.reference_lab, args.rom, lab_dir)
+    lab = Lab(args.pixel_player or args.reference_lab, args.rom, lab_dir, args.hud_font if args.pixel_player else None)
     ticks = []
     try:
-        r = lab.call(op='reset', start='standard')
+        r = lab.call(op='reset') if args.pixel_player else lab.call(op='reset', start='standard')
+        journal = Path(lab_dir) / 'ticks.jsonl'
+        journal.parent.mkdir(parents=True, exist_ok=True)
         first = dict(mask=None, frames=0, png=r['image']['path'], **state(lab))
         for t in range(args.max_ticks):
             if args.replay_route:
@@ -83,6 +134,10 @@ def play(args, lab_dir):
             s = state(lab)
             ticks.append(dict(mask=int(r['applied_masks'][-1]), frames=int(r['frames_advanced']),
                               png=r['image']['path'], **s))
+            with journal.open('a') as f:
+                f.write(json.dumps(ticks[-1]) + '\n')
+            if t % 250 == 0 or (len(ticks) > 1 and ticks[-2]['level'] != s['level']):
+                print(f'[record-v1] tick {t + 1}: {level_name(s["level"])}', flush=True)
             if r['terminal'] or s['mode'] == 3 or (s['mode'] == 2 and s['level'] // 4 == 7):
                 break
     finally:
@@ -103,6 +158,8 @@ def write_video(path, ticks):
 
 def record(args):
     out = Path(args.out) / 'v1'
+    if out.exists() and any(out.iterdir()):
+        raise FileExistsError(f'Refusing to overwrite existing capture: {out}')
     out.mkdir(parents=True, exist_ok=True)
     keep = args.keep_lab_output
     lab_dir = str(out / 'reference-lab') if keep else tempfile.mkdtemp(prefix='ghostrun-v1-lab-')
@@ -136,7 +193,7 @@ def record(args):
             frames = [v1_to_nes(t['mask']) for t in seg['ticks'] for _ in range(t['frames'])]
             nxt = max(segs) > lv
             result = dict(cleared=nxt or (lv == 31 and won), ticks=len(seg['ticks']), frames=len(frames),
-                          max_x_px=max(t['x'] for t in seg['ticks']))
+                          max_x_px=max((t['x'] for t in seg['ticks'] if t['x'] is not None), default=None))
             log = make_log(level=lv, model=args.model_name, mode=mode, frames=frames,
                            start='reference_lab_standard_reset', clock=CLOCK, result=result,
                            route_offset_frames=seg['offset'],
@@ -150,6 +207,8 @@ def record(args):
         missing = [level_name(lv) for lv in sorted(wanted - set(segs))]
         (out / 'summary.json').write_text(json.dumps(dict(
             model=args.model_name, mode=mode, ticks=len(ticks), won=won, levels=summary, levels_not_reached=missing,
+            observation='white HUD glyphs from player PNGs' if args.pixel_player else 'reference diagnostics',
+            video_sampling='one final PNG per 7/8-frame decision, held for frames_advanced; silent',
             route_ticks=len(route), first_divergence_from_route_tick=diverge,
             reproduced_route=diverge is None and len(masks) == len(route)), indent=1))
         print(f'[record-v1] {len(ticks)} ticks, won={won}, reproduced bundled route: '
@@ -177,7 +236,7 @@ def route_log(out_dir):
 
 
 def dry_run(args):
-    lab = args.reference_lab
+    lab = args.pixel_player or args.reference_lab
     checks = {
         'reference lab launcher': (lab, bool(lab) and Path(lab).exists()),
         'rom': (args.rom, bool(args.rom) and Path(args.rom).exists()),
@@ -195,6 +254,8 @@ def dry_run(args):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument('--pixel-player', help='documented pixel-player launcher; requires --hud-font')
+    ap.add_argument('--hud-font', help='supplied background-tiles-22-30-21-0f.png atlas for exact visible HUD matching')
     ap.add_argument('--reference-lab', default=os.environ.get('GHOSTRUN_REFERENCE_LAB', ''))
     ap.add_argument('--rom', default=os.environ.get('GHOSTRUN_SMB_ROM', ''))
     ap.add_argument('--out', default='recordings')
@@ -208,8 +269,10 @@ def main():
     if a.dry_run:
         dry_run(a)
         return
-    if not (a.reference_lab and a.rom):
-        raise SystemExit('--reference-lab and --rom are required (or GHOSTRUN_REFERENCE_LAB / GHOSTRUN_SMB_ROM)')
+    if a.pixel_player and not a.hud_font:
+        raise SystemExit('--pixel-player requires --hud-font')
+    if not ((a.reference_lab or a.pixel_player) and a.rom):
+        raise SystemExit('--reference-lab or --pixel-player, and --rom are required')
     record(a)
 
 

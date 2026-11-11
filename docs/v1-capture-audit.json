@@ -1,0 +1,206 @@
+{
+  "ticks": 10626,
+  "frames": 79824,
+  "ordered_levels": [
+    "1-1",
+    "1-2",
+    "1-3",
+    "1-4",
+    "2-1",
+    "2-2",
+    "2-3",
+    "2-4",
+    "3-1",
+    "3-2",
+    "3-3",
+    "3-4",
+    "4-1",
+    "4-2",
+    "4-3",
+    "4-4",
+    "5-1",
+    "5-2",
+    "5-3",
+    "5-4",
+    "6-1",
+    "6-2",
+    "6-3",
+    "6-4",
+    "7-1",
+    "7-2",
+    "7-3",
+    "7-4",
+    "8-1",
+    "8-2",
+    "8-3",
+    "8-4"
+  ],
+  "mask_and_duration_route_match": true,
+  "ending_text_observed": false,
+  "won": false,
+  "final_image": "reference-lab/session-5jzptfij/frame-010627.png",
+  "final_image_sha256": "65f8110e401d27cf02f21e33c93f6b252da2312167fe74b14ccaf34fccac6098",
+  "limitation": "Fixed-route-assisted policy. Terminal in Princess room before ending text; silent tick-sampled video (~8 unique images/s held at60fps); legacy CPU-slice clock, not PPU frames.",
+  "videos": [
+    {
+      "level": "1-1",
+      "frames": 1983,
+      "sha256": "eed38b256d31364d8270c6ded25d4cf22feba2a0cf584a04612b3beb2379bfdc"
+    },
+    {
+      "level": "1-2",
+      "frames": 2794,
+      "sha256": "eaab9c51fe4d12f4b895bae595a523b9afb171edc784fb6c0c784d070d215ede"
+    },
+    {
+      "level": "1-3",
+      "frames": 1931,
+      "sha256": "16835de83bd3a69f74c04a72e02d3efe093d904aa2498855504d44c96c4c4616"
+    },
+    {
+      "level": "1-4",
+      "frames": 2013,
+      "sha256": "3303fb35d78ece5f057d00f0ce6c3fbad4504803955025f643a08ef4f11d508e"
+    },
+    {
+      "level": "2-1",
+      "frames": 3155,
+      "sha256": "f744d32885f00c999d3f05721d28ecc1192c7584f171fddd76b2a4f8313a83f8"
+    },
+    {
+      "level": "2-2",
+      "frames": 4816,
+      "sha256": "13defb23ff9a27fd9e2de6117b457d7c91f64a31bf168fd8a76b40cabdc7b5e2"
+    },
+    {
+      "level": "2-3",
+      "frames": 2141,
+      "sha256": "1de1445901a0930a1d282f5e869b444a5636f82c24f6440dad463fe89def441e"
+    },
+    {
+      "level": "2-4",
+      "frames": 1848,
+      "sha256": "37fc5754d0f7c29a24c0aee7f89d5190a3abc1bc1dc05f3605584bd16804f22e"
+    },
+    {
+      "level": "3-1",
+      "frames": 2268,
+      "sha256": "94c2a03612245dd672239d89bc1198ac6e3658c3bac77bd4a8085b2fa0eae9bb"
+    },
+    {
+      "level": "3-2",
+      "frames": 2141,
+      "sha256": "a6f0b6f3494a10f57c36d1d95d7536de3913cab40c35d88aee91adc493062b5f"
+    },
+    {
+      "level": "3-3",
+      "frames": 1871,
+      "sha256": "c79c155cfc1188ac6c09b33c4cdcbf1905e088d1c5b4707e21a1d55a9774f259"
+    },
+    {
+      "level": "3-4",
+      "frames": 1848,
+      "sha256": "f872fb287435445e0ff1f44a38b12f084a3f090ebea20d90a4cb6c74230b8ddb"
+    },
+    {
+      "level": "4-1",
+      "frames": 2314,
+      "sha256": "00c16601228415cb6e1ae0315f4b0c59ab23501feaa3b02403696e9aad860526"
+    },
+    {
+      "level": "4-2",
+      "frames": 3260,
+      "sha256": "c9319411fcdc1101616f44bfc0de8ed4de0d461d46e4b794b6fd4d27a6fed706"
+    },
+    {
+      "level": "4-3",
+      "frames": 1720,
+      "sha256": "7b45315235b088626e1475ecdc9dc771549131f2f62752b08a5ae137a7e083de"
+    },
+    {
+      "level": "4-4",
+      "frames": 2186,
+      "sha256": "b6c9f648e44cfcf8c5ee1e1323ab45f734aed6e57b440d5fc78aa72f78027628"
+    },
+    {
+      "level": "5-1",
+      "frames": 2059,
+      "sha256": "d9f7458c2d49579cdeb86179f728c8bef9183c4f04f420a09cf7ecada496cbe9"
+    },
+    {
+      "level": "5-2",
+      "frames": 2148,
+      "sha256": "5be01c3101470eb69f24bcd4560084e8051349c72b27de5ae6d2111cd1f131e3"
+    },
+    {
+      "level": "5-3",
+      "frames": 1931,
+      "sha256": "acf612a09dcb3daf6978c80b1529ac3e0346a7f8a7def293f3a79740ab905326"
+    },
+    {
+      "level": "5-4",
+      "frames": 2186,
+      "sha256": "91314f93aedfa8aedabfed10eadd990c566044dfe49b794308ef72be661184c8"
+    },
+    {
+      "level": "6-1",
+      "frames": 2058,
+      "sha256": "8fd81663613bd440e8ce1d9301aa23d9a41df5a2ef7f5a3774167c9b5cacc319"
+    },
+    {
+      "level": "6-2",
+      "frames": 2479,
+      "sha256": "33414c524f5b9cb25c94bd77998bc0772e9528ad8a1db3aff595d78841755c99"
+    },
+    {
+      "level": "6-3",
+      "frames": 2645,
+      "sha256": "fa7235eb719b4982772b5e4b6e965d97ae2ec6737e349503751e5f0c349b9ef4"
+    },
+    {
+      "level": "6-4",
+      "frames": 1893,
+      "sha256": "7e65d7b31d5b86282b3babbe48c51615fe86729ba3341796737658cd427a799b"
+    },
+    {
+      "level": "7-1",
+      "frames": 2058,
+      "sha256": "60029cfdf4d5cda24507225221ea9d680c1d3aedbc65715ea722535ebc0dfd96"
+    },
+    {
+      "level": "7-2",
+      "frames": 3576,
+      "sha256": "3f4f7dd2398029c0c5c2bd870d7bbca3caea66ea52ec821c0cfdc2117b195878"
+    },
+    {
+      "level": "7-3",
+      "frames": 2186,
+      "sha256": "a9ee4a2602915808a5b5d612c217530bdf658753f16da3e52e210186f099ace5"
+    },
+    {
+      "level": "7-4",
+      "frames": 2261,
+      "sha256": "aa1a6307f58943d9d54382ef92fb9a87359de1ac7f62b96edd9c7a1e04ae0eb6"
+    },
+    {
+      "level": "8-1",
+      "frames": 3704,
+      "sha256": "a4adcf8a3fa9c26f568e668ac97c41f90342ae519e6fd5c35303b6c0040d32a9"
+    },
+    {
+      "level": "8-2",
+      "frames": 3252,
+      "sha256": "bc07399e22bd5eeb5b28c90f08c6a102569a333e87f7e7ae8be3e2726959abd4"
+    },
+    {
+      "level": "8-3",
+      "frames": 2186,
+      "sha256": "d66b4ffd34053328fc86bf4e71ad78e1d72e596c7a98fa4af17d11b5cec37cfa"
+    },
+    {
+      "level": "8-4",
+      "frames": 4913,
+      "sha256": "3d256b14e95a1c040d3f66ed0130ff5a243ca85efbbdc453e04a71bcff27ba14"
+    }
+  ]
+}
