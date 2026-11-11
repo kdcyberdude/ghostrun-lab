@@ -1,0 +1,13 @@
+iteration,game,mood,level_reached,level_name,end,deaths,decisions,return
+176,smb,,0,1-1,running,0,1500,0.2373
+176,pacman,,0,L0,game_over,3,1268,-2.718
+176,excitebike,,0,L0,running,0,1500,0.1456
+176,contra,,0,L0,running,0,1500,0.0
+176,castlevania,,0,L0,running,0,1500,1.4267
+176,gradius,,0,L0,running,0,1500,-1.1261
+176,zelda,,0,L0,running,0,1500,0.058
+176,tetris,,0,L0,game_over,1,1297,-1.0
+176,tecmobowl,,0,L0,running,0,1500,-4.0
+176,kage,,0,L0,running,0,1500,-0.0978
+176,finalmission,,0,L0,game_over,1,344,-1.0431
+176,punchout,,0,L0,game_over,1,1052,-1.0642

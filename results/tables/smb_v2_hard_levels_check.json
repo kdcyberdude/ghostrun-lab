@@ -1,0 +1,277 @@
+{
+  "created_utc": "2026-11-11T10:10:19.103823+00:00",
+  "verdict": "Limited 4-4 progress improvement; no demonstrated target-level wins or causal proof of Go-Explore efficacy.",
+  "comparison": {
+    "gpu_before_places": {
+      "iteration": 2841,
+      "model_sha256": "37a25d0f5311794eb720cbdec4133c042af14c7dda678a37e8be12d381e8268a",
+      "archive_sha256": "b8a0d2316606be9b608f5d739cb5ab8f8d93abc226ea539a3247e0b031a54f4a",
+      "seconds": 109.51565146446228,
+      "levels": {
+        "4-4": {
+          "clears": 0,
+          "rollouts": 8,
+          "ends": {
+            "stall": 8
+          },
+          "max_signed_x_px": 1027,
+          "positions_px_by_mood": [
+            1027,
+            1027,
+            1027,
+            1027,
+            1027,
+            1027,
+            1027,
+            1027
+          ]
+        },
+        "7-4": {
+          "clears": 0,
+          "rollouts": 8,
+          "ends": {
+            "stall": 8
+          },
+          "max_signed_x_px": 1283,
+          "positions_px_by_mood": [
+            1283,
+            1283,
+            1282,
+            1282,
+            1283,
+            1283,
+            1283,
+            1282
+          ]
+        },
+        "8-3": {
+          "clears": 0,
+          "rollouts": 8,
+          "ends": {
+            "game_over": 8
+          },
+          "max_signed_x_px": 3367,
+          "positions_px_by_mood": [
+            1966,
+            1970,
+            1971,
+            1977,
+            3367,
+            1978,
+            1968,
+            1968
+          ]
+        },
+        "8-4": {
+          "clears": 0,
+          "rollouts": 8,
+          "ends": {
+            "game_over": 7,
+            "stall": 1
+          },
+          "max_signed_x_px": 2568,
+          "positions_px_by_mood": [
+            2568,
+            2435,
+            1314,
+            1855,
+            1316,
+            2565,
+            2036,
+            1272
+          ]
+        }
+      }
+    },
+    "gpu_after_only4": {
+      "iteration": 2877,
+      "model_sha256": "94537416b7add1b81d9e32c53c19bac8b80fd0f12416a60ab3449501396264d3",
+      "archive_sha256": "b8a0d2316606be9b608f5d739cb5ab8f8d93abc226ea539a3247e0b031a54f4a",
+      "seconds": 107.95920419692993,
+      "levels": {
+        "4-4": {
+          "clears": 0,
+          "rollouts": 8,
+          "ends": {
+            "cap": 4,
+            "stall": 4
+          },
+          "max_signed_x_px": 2060,
+          "positions_px_by_mood": [
+            1078,
+            1083,
+            1043,
+            1041,
+            2060,
+            1070,
+            1038,
+            1979
+          ]
+        },
+        "7-4": {
+          "clears": 0,
+          "rollouts": 8,
+          "ends": {
+            "cap": 2,
+            "stall": 6
+          },
+          "max_signed_x_px": 1291,
+          "positions_px_by_mood": [
+            1287,
+            1282,
+            1282,
+            1282,
+            1282,
+            1291,
+            1282,
+            1282
+          ]
+        },
+        "8-3": {
+          "clears": 0,
+          "rollouts": 8,
+          "ends": {
+            "game_over": 8
+          },
+          "max_signed_x_px": 2021,
+          "positions_px_by_mood": [
+            2007,
+            2014,
+            2015,
+            2013,
+            2014,
+            2021,
+            2012,
+            2013
+          ]
+        },
+        "8-4": {
+          "clears": 0,
+          "rollouts": 8,
+          "ends": {
+            "stall": 4,
+            "game_over": 4
+          },
+          "max_signed_x_px": 1301,
+          "positions_px_by_mood": [
+            1276,
+            1282,
+            1281,
+            1282,
+            901,
+            1301,
+            1281,
+            1276
+          ]
+        }
+      }
+    }
+  },
+  "final_full_iteration": 2877,
+  "final_full_decisions": 417988608,
+  "new_decisions_since_before_places": 18874368,
+  "new_decisions_since_only4": 9961472,
+  "correct_weighted_clear_counts_at_pause": {
+    "15": 0.0,
+    "27": 0.0,
+    "30": 2.803814451463871,
+    "31": 0.0
+  },
+  "limitations": [
+    "Eight deterministic moods at one fixed entrance per level; not eight independent random seeds.",
+    "No-dropout greedy evaluation; sampled/noisy gameplay not evaluated in the completed tests.",
+    "Six latest-policy rollouts hit the 6000-decision cap; they are not native terminal failures.",
+    "Max signed x is a debug coordinate, not percentage of level completion; multi-room levels can reset it.",
+    "Continued training, focus restriction and cell-key revision changed together; this is not a controlled archive-on/off ablation.",
+    "Archived entrances include the previously constructed later-level starts; no all-32 power-on completion claim."
+  ],
+  "findings": [
+    {
+      "source": "rl/places.py:130",
+      "finding": "Full archive can replace within an existing level but cannot reclaim inactive-level places to grow target allocation.",
+      "evidence": "archive-audit.json; full-archive-regression-probe.json"
+    },
+    {
+      "source": "rl/places.py:156",
+      "finding": "At iteration 2867, 98.317% of planned reset weight is on mid-level places; only 1.683% on true level entrances.",
+      "evidence": "archive-audit.json"
+    },
+    {
+      "source": "rl/train.py:927",
+      "finding": "Episode-summary/by_start mislabels a terminal 8-4 win as a failed start-level clear; count_levels separately handles wins correctly.",
+      "evidence": "final-level-summary-probe.json"
+    }
+  ],
+  "focused_training_level_clear_events": {
+    "15": 0,
+    "27": 0,
+    "30": 4,
+    "31": 0
+  },
+  "resume": {
+    "time_utc": "2026-11-11T10:09:02.591910+00:00",
+    "pid": 354658,
+    "resume_iteration": 2877,
+    "full": "runs/rl/smb-20261110c-moods/ckpt_rank0_latest.pt",
+    "immutable_full": "reports/rl-go-explore-20261111/FULL_it002877.pt",
+    "command": [
+      ".cache/multigame-prior-runtime-v1/bin/python",
+      "rl/train.py",
+      "--run",
+      "runs/rl/smb-20261110c-moods",
+      "--games",
+      "smb",
+      "--envs-per-game",
+      "8192",
+      "--obs-slots",
+      "2",
+      "--infer-chunk",
+      "512",
+      "--compile-mode",
+      "max-autotune-no-cudagraphs",
+      "--steps",
+      "64",
+      "--minibatch-envs",
+      "32",
+      "--lam",
+      "0.98",
+      "--ret-beta",
+      "0.98",
+      "--time-limit",
+      "0",
+      "--eval-every-minutes",
+      "15",
+      "--adv-norm",
+      "game",
+      "--moods",
+      "8",
+      "--div-coef",
+      "1e-3",
+      "--div-margin",
+      "0.1",
+      "--mood-kick",
+      "0.07",
+      "--int-coef",
+      "0",
+      "--level-starts",
+      "1.0",
+      "--places",
+      "2048",
+      "--place-k",
+      "4",
+      "--place-per-level",
+      "128",
+      "--only-levels",
+      "15,27,30,31"
+    ],
+    "env": {
+      "RL_CUDA_LIB": "rl/build/librlenv_cuda_sm120_pl2.so",
+      "PYTORCH_CUDA_ALLOC_CONF": "expandable_segments:True"
+    },
+    "status": "verified authentic FULL resume and completed first update",
+    "first_iteration": 2878,
+    "first_decisions": 418512896,
+    "first_kl0": 3.87823092751205e-06,
+    "first_explained_variance": 0.9842177629470825
+  }
+}

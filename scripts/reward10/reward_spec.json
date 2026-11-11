@@ -1,0 +1,933 @@
+{
+ "contract": "scripts/reward10/contract.py (module shape, trainer API); generated, do not edit by hand",
+ "shared": {
+  "progress": 1.0,
+  "next_level": 1.0,
+  "death": -0.1,
+  "stall": -0.1,
+  "waiting_per_stall_limit": -1.8,
+  "damage": -0.25,
+  "rollback": -0.02,
+  "rollback_drop_fraction": 0.25,
+  "score": 0.02,
+  "score_cap_per_step": 0.1,
+  "score_cap_per_level": 0.2,
+  "win": 5.0,
+  "stall_seconds_default": 120.0,
+  "start_select": "blocked after boot unless the game lists them (pausing before a death dodges the death penalty)"
+ },
+ "win_status": {
+  "verified": "seen in a genuine run in this emulator",
+  "provisional": "detector seen only with help (RAM poke or another emulator)",
+  "unverified": "detector written but never observed",
+  "none": "no detector: the episode ends only on game over or the stall limit"
+ },
+ "games": [
+  {
+   "game": "castlevania",
+   "title": "Castlevania",
+   "genre": "platformer",
+   "rom": {
+    "file": "Castlevania (U) (PRG 0).nes",
+    "sha256": "55bcab0d9efc33a9d9efc90f2c3c4ab12f3221a44b1f357e6c6202a456399aa8"
+   },
+   "start": "fresh standard 1-player game, first controllable frame (boot)",
+   "controller": {
+    "after_boot": [
+     "A",
+     "B",
+     "DOWN",
+     "LEFT",
+     "RIGHT",
+     "UP"
+    ],
+    "start": "blocked after boot",
+    "select": "blocked after boot"
+   },
+   "levels": {
+    "meaning": "stage 0-18 (0 = courtyard)",
+    "count": 19
+   },
+   "rewards": {
+    "progress": {
+     "value": 1.0,
+     "per": "3000 units = one level",
+     "units": "32 per new (32 px column, floor) cell visited in the stage, + 1500 x boss damage on boss stages",
+     "rule": "new high-water progress in the current level only"
+    },
+    "next_level": {
+     "value": 1.0,
+     "rule": "reaching the next level in order; a skip ends the episode with no bonus"
+    },
+    "death": {
+     "value": -0.1,
+     "when": "Simon dies (health 0, time-out, pit or water)"
+    },
+    "damage": {
+     "value": -0.25,
+     "per": "full health bar lost",
+     "health": "Simon health bar"
+    },
+    "score": {
+     "value": 0.02,
+     "per": "300 points",
+     "score": "game score",
+     "cap_per_step": 0.1,
+     "cap_per_level": 0.2
+    },
+    "win": {
+     "value": 5.0,
+     "when": "none (Dracula not reached)",
+     "status": "none"
+    },
+    "waiting": {
+     "value": -1.8,
+     "per": "120 s in play without moving forward"
+    },
+    "rollback": {
+     "value": -0.02,
+     "drop_fraction": 0.25,
+     "rule": "one abrupt progress drop in valid same-level play, excluding death/transition/win"
+    }
+   },
+   "episode_ends": {
+    "game_over": "all lives lost (GAME OVER)",
+    "won": null,
+    "skip": "a level is skipped (no bonus)",
+    "stall": "120 s of game time without new progress, a new level or a death (penalty -0.1, same as a death)"
+   },
+   "no_reward_when": "not in play (title, menus, demo, pause, transitions)",
+   "limits": [
+    "boss bar verified on the stage-3 Phantom Bat only"
+   ]
+  },
+  {
+   "game": "contra",
+   "title": "Contra",
+   "genre": "run-and-gun shooter",
+   "rom": {
+    "file": "Contra (U).nes",
+    "sha256": "26541a5550ee22deeb3d5484e4a96130219b58cff74d068fb1eb6567fa5e5519"
+   },
+   "start": "fresh standard 1-player game, first controllable frame (boot)",
+   "controller": {
+    "after_boot": [
+     "A",
+     "B",
+     "DOWN",
+     "LEFT",
+     "RIGHT",
+     "UP"
+    ],
+    "start": "blocked after boot",
+    "select": "blocked after boot"
+   },
+   "levels": {
+    "meaning": "stage 1-8 in order",
+    "count": 8
+   },
+   "rewards": {
+    "progress": {
+     "value": 1.0,
+     "per": "6000 units = one level",
+     "units": "scroll pixels (the waterfall counts upward); base stages: rooms x 1000 + 500 x wall-core damage; stage 1 adds 3000 x Defense Wall core damage",
+     "rule": "new high-water progress in the current level only"
+    },
+    "next_level": {
+     "value": 1.0,
+     "rule": "reaching the next level in order; a skip ends the episode with no bonus"
+    },
+    "death": {
+     "value": -0.1,
+     "when": "a life lost"
+    },
+    "damage": null,
+    "score": {
+     "value": 0.02,
+     "per": "200 points",
+     "score": "game score",
+     "cap_per_step": 0.1,
+     "cap_per_level": 0.2
+    },
+    "win": {
+     "value": 5.0,
+     "when": "none (the ending was not reached; after the last stage the game loops)",
+     "status": "none"
+    },
+    "waiting": {
+     "value": -1.8,
+     "per": "120 s in play without moving forward"
+    },
+    "rollback": {
+     "value": -0.02,
+     "drop_fraction": 0.25,
+     "rule": "one abrupt progress drop in valid same-level play, excluding death/transition/win"
+    }
+   },
+   "episode_ends": {
+    "game_over": "all lives lost (GAME OVER)",
+    "won": null,
+    "skip": "a level is skipped (no bonus)",
+    "stall": "120 s of game time without new progress, a new level or a death (penalty -0.1, same as a death)"
+   },
+   "no_reward_when": "not in play (title, menus, demo, pause, transitions)",
+   "limits": [
+    "bosses of stages 2-8 (incl. the last base room) have no damage term: the reward is flat during them"
+   ]
+  },
+  {
+   "game": "excitebike",
+   "title": "Excitebike",
+   "genre": "racing",
+   "rom": {
+    "file": "Excitebike (JU).nes",
+    "sha256": "372654d4c62d214d92200288611ff176ae1727949c6f012e2fc95bf2452a33d7"
+   },
+   "start": "fresh standard 1-player game, first controllable frame (boot)",
+   "controller": {
+    "after_boot": [
+     "A",
+     "B",
+     "DOWN",
+     "LEFT",
+     "RIGHT",
+     "UP"
+    ],
+    "start": "blocked after boot",
+    "select": "blocked after boot"
+   },
+   "levels": {
+    "meaning": "race: 0 = track-1 challenge race, 1-5 = main races 1-5",
+    "count": 6
+   },
+   "rewards": {
+    "progress": {
+     "value": 1.0,
+     "per": "11000 units = one level",
+     "units": "track distance (camera pixels) in the current race",
+     "rule": "new high-water progress in the current level only"
+    },
+    "next_level": {
+     "value": 1.0,
+     "rule": "reaching the next level in order; a skip ends the episode with no bonus"
+    },
+    "death": {
+     "value": -0.1,
+     "when": "crash (rider thrown off the bike)"
+    },
+    "damage": {
+     "value": -0.25,
+     "per": "full health bar lost",
+     "health": "engine temperature: each OVER HEAT costs one full bar"
+    },
+    "score": null,
+    "win": {
+     "value": 5.0,
+     "when": "main race 5 qualified (completion counter $03F3)",
+     "status": "provisional"
+    },
+    "waiting": {
+     "value": -1.8,
+     "per": "120 s in play without moving forward"
+    },
+    "rollback": {
+     "value": -0.02,
+     "drop_fraction": 0.25,
+     "rule": "one abrupt progress drop in valid same-level play, excluding death/transition/win"
+    }
+   },
+   "episode_ends": {
+    "game_over": "not qualifying (time slower than 3rd place)",
+    "won": "main race 5 qualified (completion counter $03F3)",
+    "skip": "a level is skipped (no bonus)",
+    "stall": "120 s of game time without new progress, a new level or a death (penalty -0.1, same as a death)"
+   },
+   "no_reward_when": "not in play (title, menus, demo, pause, transitions)",
+   "limits": [
+    "distance ignores time: nothing rewards racing faster, though qualifying needs a fast time (the search finished main race 5 in 1:49.95; 1:14.00 was needed)"
+   ]
+  },
+  {
+   "game": "finalmission",
+   "title": "Final Mission (S.C.A.T.)",
+   "genre": "shooter (horizontal and vertical scrolling)",
+   "rom": {
+    "file": "Final Mission (J) [p1][!].nes",
+    "sha256": "3519782dc8b9e665f5cd7ae153fb5f84c7cd8cf98e5acf25fe3058ea4a31e9ff"
+   },
+   "start": "fresh standard 1-player game, first controllable frame (boot)",
+   "controller": {
+    "after_boot": [
+     "A",
+     "B",
+     "DOWN",
+     "LEFT",
+     "RIGHT",
+     "UP"
+    ],
+    "start": "blocked after boot",
+    "select": "blocked after boot"
+   },
+   "levels": {
+    "meaning": "stage 1-5",
+    "count": 5
+   },
+   "rewards": {
+    "progress": {
+     "value": 1.0,
+     "per": "976 units = one level",
+     "units": "auto-scroll columns (horizontal and vertical sections) + 300 x boss damage while the scroll is halted",
+     "rule": "new high-water progress in the current level only"
+    },
+    "next_level": {
+     "value": 1.0,
+     "rule": "reaching the next level in order; a skip ends the episode with no bonus"
+    },
+    "death": {
+     "value": -0.1,
+     "when": "life reaches 0"
+    },
+    "damage": {
+     "value": -0.25,
+     "per": "full health bar lost",
+     "health": "life pips (the HUD shows up to 4)"
+    },
+    "score": {
+     "value": 0.02,
+     "per": "1000 points",
+     "score": "game score",
+     "cap_per_step": 0.1,
+     "cap_per_level": 0.2
+    },
+    "win": {
+     "value": 5.0,
+     "when": "none (ending not reached)",
+     "status": "none"
+    },
+    "waiting": {
+     "value": -1.8,
+     "per": "120 s in play without moving forward"
+    },
+    "rollback": {
+     "value": -0.02,
+     "drop_fraction": 0.25,
+     "rule": "one abrupt progress drop in valid same-level play, excluding death/transition/win"
+    }
+   },
+   "episode_ends": {
+    "game_over": "the first death (single life: GAME OVER)",
+    "won": null,
+    "skip": "a level is skipped (no bonus)",
+    "stall": "120 s of game time without new progress, a new level or a death (penalty -0.1, same as a death)"
+   },
+   "no_reward_when": "not in play (title, menus, demo, pause, transitions)",
+   "limits": [
+    "progress pays for surviving, not for moving (auto-scroll)",
+    "hits are free while life > 4",
+    "bosses after stage 2 unverified"
+   ]
+  },
+  {
+   "game": "gradius",
+   "title": "Gradius",
+   "genre": "horizontal shooter",
+   "rom": {
+    "file": "Gradius (U).nes",
+    "sha256": "cda334d473ae84fbda5df431e6618b46d9541da9fc572bd9035dccfb0df4e33d"
+   },
+   "start": "fresh standard 1-player game, first controllable frame (boot)",
+   "controller": {
+    "after_boot": [
+     "A",
+     "B",
+     "DOWN",
+     "LEFT",
+     "RIGHT",
+     "UP"
+    ],
+    "start": "blocked after boot",
+    "select": "blocked after boot"
+   },
+   "levels": {
+    "meaning": "stage 1-7 in order",
+    "count": 7
+   },
+   "rewards": {
+    "progress": {
+     "value": 1.0,
+     "per": "3328 units = one level",
+     "units": "auto-scroll counter (+1 per 2 frames, halts at bosses): survival distance, not movement",
+     "rule": "new high-water progress in the current level only"
+    },
+    "next_level": {
+     "value": 1.0,
+     "rule": "reaching the next level in order; a skip ends the episode with no bonus"
+    },
+    "death": {
+     "value": -0.1,
+     "when": "the ship is hit (a life lost)"
+    },
+    "damage": null,
+    "score": {
+     "value": 0.02,
+     "per": "2000 points",
+     "score": "game score",
+     "cap_per_step": 0.1,
+     "cap_per_level": 0.2
+    },
+    "win": {
+     "value": 5.0,
+     "when": "none (the stage-7 brain was reached but not beaten)",
+     "status": "none"
+    },
+    "waiting": {
+     "value": -1.8,
+     "per": "120 s in play without moving forward"
+    },
+    "rollback": {
+     "value": -0.02,
+     "drop_fraction": 0.25,
+     "rule": "one abrupt progress drop in valid same-level play, excluding death/transition/win"
+    }
+   },
+   "episode_ends": {
+    "game_over": "all lives lost (GAME OVER)",
+    "won": null,
+    "skip": "a level is skipped (no bonus)",
+    "stall": "120 s of game time without new progress, a new level or a death (penalty -0.1, same as a death)"
+   },
+   "no_reward_when": "not in play (title, menus, demo, pause, transitions)",
+   "limits": [
+    "progress pays for surviving, not for moving (auto-scroll)",
+    "bosses have no damage term"
+   ]
+  },
+  {
+   "game": "kage",
+   "title": "Kage (Shadow of the Ninja)",
+   "genre": "action platformer",
+   "rom": {
+    "file": "Kage (Japan).nes",
+    "sha256": "ee3a87feddf45ec99034cd4f4a7e34224c8eb0e0d3c881665f796aa184e1c78b"
+   },
+   "start": "fresh standard 1-player game, first controllable frame (boot)",
+   "controller": {
+    "after_boot": [
+     "A",
+     "B",
+     "DOWN",
+     "LEFT",
+     "RIGHT",
+     "UP"
+    ],
+    "start": "blocked after boot",
+    "select": "blocked after boot"
+   },
+   "levels": {
+    "meaning": "stage 1-1 .. 5-2 in play order",
+    "count": 15
+   },
+   "rewards": {
+    "progress": {
+     "value": 1.0,
+     "per": "1000 units = one level",
+     "units": "camera position along the stage route (from a full-game replay); boss stages: route then boss damage",
+     "rule": "new high-water progress in the current level only"
+    },
+    "next_level": {
+     "value": 1.0,
+     "rule": "reaching the next level in order; a skip ends the episode with no bonus"
+    },
+    "death": {
+     "value": -0.1,
+     "when": "health reaches 0"
+    },
+    "damage": {
+     "value": -0.25,
+     "per": "full health bar lost",
+     "health": "health bar (16)"
+    },
+    "score": null,
+    "win": {
+     "value": 5.0,
+     "when": "the game's ending (one-frame ending signature)",
+     "status": "provisional"
+    },
+    "waiting": {
+     "value": -1.8,
+     "per": "120 s in play without moving forward"
+    },
+    "rollback": {
+     "value": -0.02,
+     "drop_fraction": 0.25,
+     "rule": "one abrupt progress drop in valid same-level play, excluding death/transition/win"
+    }
+   },
+   "episode_ends": {
+    "game_over": "the first death (no lives: GAME OVER / CONTINUE)",
+    "won": "the game's ending (one-frame ending signature)",
+    "skip": "a level is skipped (no bonus)",
+    "stall": "120 s of game time without new progress, a new level or a death (penalty -0.1, same as a death)"
+   },
+   "no_reward_when": "not in play (title, menus, demo, pause, transitions)",
+   "limits": [
+    "routes of stages 7-14 and the win come from the native-emulator replay only"
+   ]
+  },
+  {
+   "game": "pacman",
+   "title": "Pac-Man",
+   "genre": "maze",
+   "rom": {
+    "file": "Pac-Man (U) (Namco).nes",
+    "sha256": "254fb93e16d0db63b36ffa3ef1bc5a9e6cf9e9b1de347712d9936fe2ab7b690d"
+   },
+   "start": "fresh standard 1-player game, first controllable frame (boot)",
+   "controller": {
+    "after_boot": [
+     "A",
+     "B",
+     "DOWN",
+     "LEFT",
+     "RIGHT",
+     "UP"
+    ],
+    "start": "blocked after boot",
+    "select": "blocked after boot"
+   },
+   "levels": {
+    "meaning": "maze (round) number",
+    "count": null
+   },
+   "rewards": {
+    "progress": {
+     "value": 1.0,
+     "per": "192 units = one level",
+     "units": "dots and energizers eaten in the current maze (192 per maze)",
+     "rule": "new high-water progress in the current level only"
+    },
+    "next_level": {
+     "value": 1.0,
+     "rule": "reaching the next level in order; a skip ends the episode with no bonus"
+    },
+    "death": {
+     "value": -0.1,
+     "when": "caught by a ghost"
+    },
+    "damage": null,
+    "score": {
+     "value": 0.02,
+     "per": "1000 points",
+     "score": "game score (dots, ghosts, fruit)",
+     "cap_per_step": 0.1,
+     "cap_per_level": 0.2
+    },
+    "win": {
+     "value": 5.0,
+     "when": "none (endless)",
+     "status": "none"
+    },
+    "waiting": {
+     "value": -1.8,
+     "per": "120 s in play without moving forward"
+    },
+    "rollback": {
+     "value": -0.02,
+     "drop_fraction": 0.25,
+     "rule": "one abrupt progress drop in valid same-level play, excluding death/transition/win"
+    }
+   },
+   "episode_ends": {
+    "game_over": "all lives lost (GAME OVER)",
+    "won": null,
+    "skip": "a level is skipped (no bonus)",
+    "stall": "120 s of game time without new progress, a new level or a death (penalty -0.1, same as a death)"
+   },
+   "no_reward_when": "not in play (title, menus, demo, pause, transitions)",
+   "limits": [
+    "the round counter $0068 stops at 22: from maze 24 on there is no level or progress reward, so a long episode ends at the stall limit"
+   ]
+  },
+  {
+   "game": "punchout",
+   "title": "Mike Tyson's Punch-Out!!",
+   "genre": "boxing",
+   "rom": {
+    "file": "Mike Tyson's Punch-Out!! (U) (PRG 0).nes",
+    "sha256": "0435f6d9bcfeb474a592c3a950530a99c03a6f6cacff793dc88f822bb8cc6952"
+   },
+   "start": "fresh standard 1-player game, first controllable frame (boot)",
+   "controller": {
+    "after_boot": [
+     "A",
+     "B",
+     "DOWN",
+     "LEFT",
+     "RIGHT",
+     "SELECT",
+     "START",
+     "UP"
+    ],
+    "start": "star punch in the ring (needs a star); next round in the corner",
+    "select": "in the corner between rounds: rest to recover some health"
+   },
+   "levels": {
+    "meaning": "opponent: fight 0 Glass Joe .. 13 Mike Tyson",
+    "count": 14
+   },
+   "rewards": {
+    "progress": {
+     "value": 1.0,
+     "per": "288 units = one level",
+     "units": "damage dealt to the current opponent (sum of his health decreases)",
+     "rule": "new high-water progress in the current level only"
+    },
+    "next_level": {
+     "value": 1.0,
+     "rule": "reaching the next level in order; a skip ends the episode with no bonus"
+    },
+    "death": {
+     "value": -0.1,
+     "when": "Little Mac knocked down"
+    },
+    "damage": {
+     "value": -0.25,
+     "per": "full health bar lost",
+     "health": "Little Mac health bar"
+    },
+    "score": {
+     "value": 0.02,
+     "per": "100 points",
+     "score": "points (reset every fight)",
+     "cap_per_step": 0.1,
+     "cap_per_level": 0.2
+    },
+    "win": {
+     "value": 5.0,
+     "when": "beating Mike Tyson (fight 14)",
+     "status": "unverified"
+    },
+    "waiting": {
+     "value": -1.8,
+     "per": "120 s in play without moving forward"
+    },
+    "rollback": {
+     "value": -0.02,
+     "drop_fraction": 0.25,
+     "rule": "one abrupt progress drop in valid same-level play, excluding death/transition/win"
+    }
+   },
+   "episode_ends": {
+    "game_over": "losing a fight (KO, TKO or decision)",
+    "won": "beating Mike Tyson (fight 14)",
+    "skip": "a level is skipped (no bonus)",
+    "stall": "120 s of game time without new progress, a new level or a death (penalty -0.1, same as a death)"
+   },
+   "no_reward_when": "not in play (title, menus, demo, pause, transitions)",
+   "limits": [
+    "chip damage keeps paying, so a long decision loss can out-earn a quick KO (bounded by the fight)"
+   ]
+  },
+  {
+   "game": "smb",
+   "title": "Super Mario Bros.",
+   "genre": "platformer",
+   "rom": {
+    "file": "Super Mario Bros (JU) (PRG 0).nes",
+    "sha256": "f61548fdf1670cffefcc4f0b7bdcdd9eaba0c226e3b74f8666071496988248de"
+   },
+   "start": "fresh standard 1-player game, first controllable frame (boot)",
+   "controller": {
+    "after_boot": [
+     "A",
+     "B",
+     "DOWN",
+     "LEFT",
+     "RIGHT",
+     "UP"
+    ],
+    "start": "blocked after boot",
+    "select": "blocked after boot"
+   },
+   "levels": {
+    "meaning": "world-level 1-1 .. 8-4 in order (world*4 + stage)",
+    "count": 32
+   },
+   "rewards": {
+    "progress": {
+     "value": 1.0,
+     "per": "3000 units = one level",
+     "units": "pixels moved right in the level (page*256 + x)",
+     "rule": "new high-water progress in the current level only"
+    },
+    "next_level": {
+     "value": 1.0,
+     "rule": "reaching the next level in order; a skip ends the episode with no bonus"
+    },
+    "death": {
+     "value": -0.1,
+     "when": "Mario loses a life (enemy, pit or time-out)"
+    },
+    "damage": null,
+    "score": {
+     "value": 0.02,
+     "per": "200 points",
+     "score": "game score (enemies, coins, flagpole, time bonus)",
+     "cap_per_step": 0.1,
+     "cap_per_level": 0.2
+    },
+    "win": {
+     "value": 5.0,
+     "when": "reaching the axe of 8-4 (OperMode 2 in world 8)",
+     "status": "provisional"
+    },
+    "waiting": {
+     "value": -1.8,
+     "per": "120 s in play without moving forward"
+    },
+    "rollback": {
+     "value": -0.02,
+     "drop_fraction": 0.25,
+     "rule": "one abrupt progress drop in valid same-level play, excluding death/transition/win"
+    }
+   },
+   "episode_ends": {
+    "game_over": "all lives lost (GAME OVER)",
+    "won": "reaching the axe of 8-4 (OperMode 2 in world 8)",
+    "skip": "a level is skipped (no bonus)",
+    "stall": "120 s of game time without new progress, a new level or a death (penalty -0.1, same as a death)"
+   },
+   "no_reward_when": "not in play (title, menus, demo, pause, transitions)",
+   "limits": [
+    "pause is not detected (in_play stays True); harmless: nothing is paid while paused and the stall limit ends it"
+   ]
+  },
+  {
+   "game": "tecmobowl",
+   "title": "Tecmo Bowl",
+   "genre": "American football",
+   "rom": {
+    "file": "Tecmo Bowl (U) (PRG 0).nes",
+    "sha256": "48ea5218ee75db7262cf3d50659d2e76e00578b47d149c96b66540c232da44ad"
+   },
+   "start": "fresh standard 1-player game, first controllable frame (boot)",
+   "controller": {
+    "after_boot": [
+     "A",
+     "B",
+     "DOWN",
+     "LEFT",
+     "RIGHT",
+     "UP"
+    ],
+    "start": "blocked after boot",
+    "select": "blocked after boot"
+   },
+   "levels": {
+    "meaning": "games won this season (week 0-10)",
+    "count": 11
+   },
+   "rewards": {
+    "progress": {
+     "value": 1.0,
+     "per": "100 units = one level",
+     "units": "own points x 100/7 + yards of the current drive past the best drive since the last own score",
+     "rule": "new high-water progress in the current level only"
+    },
+    "next_level": {
+     "value": 1.0,
+     "rule": "reaching the next level in order; a skip ends the episode with no bonus"
+    },
+    "death": {
+     "value": -0.1,
+     "when": "the opponent scores (TD, FG or safety)"
+    },
+    "damage": null,
+    "score": {
+     "value": 0.02,
+     "per": "7 points",
+     "score": "own points",
+     "cap_per_step": 0.1,
+     "cap_per_level": 0.2
+    },
+    "win": {
+     "value": 5.0,
+     "when": "winning the 11th game (WORLD CHAMPION)",
+     "status": "provisional"
+    },
+    "waiting": {
+     "value": -1.8,
+     "per": "300 s in play without moving forward"
+    },
+    "rollback": {
+     "value": -0.02,
+     "drop_fraction": 0.25,
+     "rule": "one abrupt progress drop in valid same-level play, excluding death/transition/win"
+    }
+   },
+   "episode_ends": {
+    "game_over": "losing a game",
+    "won": "winning the 11th game (WORLD CHAMPION)",
+    "skip": "a level is skipped (no bonus)",
+    "stall": "300 s of game time without new progress, a new level or a death (penalty -0.1, same as a death)"
+   },
+   "no_reward_when": "not in play (title, menus, demo, pause, transitions)",
+   "limits": [
+    "defense and failed drives earn nothing, so quiet stretches are long: STALL_SECONDS is 300"
+   ]
+  },
+  {
+   "game": "tetris",
+   "title": "Tetris",
+   "genre": "puzzle",
+   "rom": {
+    "file": "Tetris (U) [!].nes",
+    "sha256": "fdb764dce8175c15f5198648b119905ef2caf0a5c51fae329ebf1be9e3c035d4"
+   },
+   "start": "fresh standard 1-player game, first controllable frame (boot)",
+   "controller": {
+    "after_boot": [
+     "A",
+     "B",
+     "DOWN",
+     "LEFT",
+     "RIGHT",
+     "UP"
+    ],
+    "start": "blocked after boot",
+    "select": "blocked after boot"
+   },
+   "levels": {
+    "meaning": "speed level (A-type from level 0, +1 every 10 lines)",
+    "count": null
+   },
+   "rewards": {
+    "progress": {
+     "value": 1.0,
+     "per": "10 units = one level",
+     "units": "lines cleared in the current level",
+     "rule": "new high-water progress in the current level only"
+    },
+    "next_level": {
+     "value": 1.0,
+     "rule": "reaching the next level in order; a skip ends the episode with no bonus"
+    },
+    "death": {
+     "value": -0.1,
+     "when": "top-out (the stack reaches the top)"
+    },
+    "damage": null,
+    "score": {
+     "value": 0.02,
+     "per": "40 points",
+     "score": "game score (line clears, soft drops)",
+     "cap_per_step": 0.1,
+     "cap_per_level": 0.2
+    },
+    "win": {
+     "value": 5.0,
+     "when": "none (endless)",
+     "status": "none"
+    },
+    "waiting": {
+     "value": -1.8,
+     "per": "120 s in play without moving forward"
+    },
+    "rollback": {
+     "value": -0.02,
+     "drop_fraction": 0.25,
+     "rule": "one abrupt progress drop in valid same-level play, excluding death/transition/win"
+    }
+   },
+   "episode_ends": {
+    "game_over": "top-out curtain complete",
+    "won": null,
+    "skip": "a level is skipped (no bonus)",
+    "stall": "120 s of game time without new progress, a new level or a death (penalty -0.1, same as a death)"
+   },
+   "no_reward_when": "not in play (title, menus, demo, pause, transitions)",
+   "limits": [
+    "lines of a multi-line clear past a level boundary earn no progress"
+   ]
+  },
+  {
+   "game": "zelda",
+   "title": "The Legend of Zelda",
+   "genre": "action-adventure (non-linear)",
+   "rom": {
+    "file": "Legend of Zelda, The (U) (PRG 0).nes",
+    "sha256": "8f72dc2e98572eb4ba7c3a902bca5f69c448fc4391837e5f8f0d4556280440ac"
+   },
+   "start": "fresh standard 1-player game, first controllable frame (boot)",
+   "controller": {
+    "after_boot": [
+     "A",
+     "B",
+     "DOWN",
+     "LEFT",
+     "RIGHT",
+     "START",
+     "UP"
+    ],
+    "start": "opens the item screen to choose the B item; the game is frozen while it is open, so it can also be used to pause",
+    "select": "blocked after boot"
+   },
+   "levels": {
+    "meaning": "Triforce pieces held (one per dungeon completed)",
+    "count": 9
+   },
+   "rewards": {
+    "progress": {
+     "value": 1.0,
+     "per": "20 units = one level",
+     "units": "discovery points: +1 per new room, +0.02 per new 32x32 cell in a room, +10 per permanent item tier, +10 per heart container",
+     "rule": "new high-water progress in the current level only"
+    },
+    "next_level": {
+     "value": 1.0,
+     "rule": "reaching the next level in order; a skip ends the episode with no bonus"
+    },
+    "death": {
+     "value": -0.1,
+     "when": "Link dies"
+    },
+    "damage": {
+     "value": -0.25,
+     "per": "full health bar lost",
+     "health": "hearts / heart containers"
+    },
+    "score": {
+     "value": 0.02,
+     "per": "5 points",
+     "score": "rupees",
+     "cap_per_step": 0.1,
+     "cap_per_level": 0.2
+    },
+    "win": {
+     "value": 5.0,
+     "when": "none (Ganon / the ending not reached)",
+     "status": "none"
+    },
+    "waiting": {
+     "value": -1.8,
+     "per": "120 s in play without moving forward"
+    },
+    "rollback": {
+     "value": -0.02,
+     "drop_fraction": 0.25,
+     "rule": "one abrupt progress drop in valid same-level play, excluding death/transition/win"
+    }
+   },
+   "episode_ends": {
+    "game_over": "the first death (no extra lives in this setup)",
+    "won": null,
+    "skip": "a level is skipped (no bonus)",
+    "stall": "120 s of game time without new progress, a new level or a death (penalty -0.1, same as a death)"
+   },
+   "no_reward_when": "not in play (title, menus, demo, pause, transitions)",
+   "limits": [
+    "non-linear: progress rewards exploring new rooms; the search never got the sword or finished dungeon 1"
+   ]
+  }
+ ]
+}

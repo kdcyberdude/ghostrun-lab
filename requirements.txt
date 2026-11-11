@@ -1,0 +1,13 @@
+# Training and recording (Linux, NVIDIA GPU with CUDA for training; nvcc and a C++20 compiler build the environment)
+torch>=2.5,<3
+numpy>=1.26,<3
+Pillow>=10,<13
+# reward10 research tools and tests (CPU emulator for reward work)
+stable-retro>=1.0,<2
+pytest>=8,<10
+# ONNX export of a policy (rl/player/)
+onnx>=1.16,<2
+onnxruntime>=1.18,<2
+# plots (rl/plot_run.py)
+matplotlib>=3.8,<4
+# ffmpeg must be on PATH for videos (rl/evaluate.py, scripts/recording/)

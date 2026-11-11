@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Builds and fetched sources (scripts/setup_nesle.sh, rl/rlenv.py)
+.cache/
+rl/build/
+*.so
+
+# Never commit game files or anything made from them
+roms/
+*.nes
+*.fds
+*.fcs
+*.fm2
+
+# Training and recording outputs
+runs/
+recordings/
+artifacts/
+*.pt
+*.pth
+*.onnx
+*.npz
+*.npy
+*.bin
+*.mp4
+*.gif

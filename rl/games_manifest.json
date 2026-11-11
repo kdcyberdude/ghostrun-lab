@@ -1,0 +1,62 @@
+{
+ "smb": {
+  "rom": "Super Mario Bros (JU) (PRG 0).nes",
+  "sha256": "f61548fdf1670cffefcc4f0b7bdcdd9eaba0c226e3b74f8666071496988248de",
+  "boot_frames": 216
+ },
+ "pacman": {
+  "rom": "Pac-Man (U) (Namco).nes",
+  "sha256": "254fb93e16d0db63b36ffa3ef1bc5a9e6cf9e9b1de347712d9936fe2ab7b690d",
+  "boot_frames": 613
+ },
+ "excitebike": {
+  "rom": "Excitebike (JU).nes",
+  "sha256": "372654d4c62d214d92200288611ff176ae1727949c6f012e2fc95bf2452a33d7",
+  "boot_frames": 733
+ },
+ "contra": {
+  "rom": "Contra (U).nes",
+  "sha256": "26541a5550ee22deeb3d5484e4a96130219b58cff74d068fb1eb6567fa5e5519",
+  "boot_frames": 822
+ },
+ "castlevania": {
+  "rom": "Castlevania (U) (PRG 0).nes",
+  "sha256": "55bcab0d9efc33a9d9efc90f2c3c4ab12f3221a44b1f357e6c6202a456399aa8",
+  "boot_frames": 811
+ },
+ "gradius": {
+  "rom": "Gradius (U).nes",
+  "sha256": "cda334d473ae84fbda5df431e6618b46d9541da9fc572bd9035dccfb0df4e33d",
+  "boot_frames": 266
+ },
+ "zelda": {
+  "rom": "Legend of Zelda, The (U) (PRG 0).nes",
+  "sha256": "8f72dc2e98572eb4ba7c3a902bca5f69c448fc4391837e5f8f0d4556280440ac",
+  "boot_frames": 528
+ },
+ "tetris": {
+  "rom": "Tetris (U) [!].nes",
+  "sha256": "fdb764dce8175c15f5198648b119905ef2caf0a5c51fae329ebf1be9e3c035d4",
+  "boot_frames": 402
+ },
+ "tecmobowl": {
+  "rom": "Tecmo Bowl (U) (PRG 0).nes",
+  "sha256": "48ea5218ee75db7262cf3d50659d2e76e00578b47d149c96b66540c232da44ad",
+  "boot_frames": 780
+ },
+ "kage": {
+  "rom": "Kage (Japan).nes",
+  "sha256": "ee3a87feddf45ec99034cd4f4a7e34224c8eb0e0d3c881665f796aa184e1c78b",
+  "boot_frames": 1021
+ },
+ "finalmission": {
+  "rom": "Final Mission (J) [p1][!].nes",
+  "sha256": "3519782dc8b9e665f5cd7ae153fb5f84c7cd8cf98e5acf25fe3058ea4a31e9ff",
+  "boot_frames": 668
+ },
+ "punchout": {
+  "rom": "Mike Tyson's Punch-Out!! (U) (PRG 0).nes",
+  "sha256": "0435f6d9bcfeb474a592c3a950530a99c03a6f6cacff793dc88f822bb8cc6952",
+  "boot_frames": 1950
+ }
+}

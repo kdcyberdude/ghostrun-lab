@@ -1,0 +1,7 @@
+iteration,game,mood,level_reached,level_name,end,deaths,decisions,return
+63,smb,,0,1-1,running,0,1500,0.1313
+125,smb,,0,1-1,running,0,1500,0.302
+185,smb,,0,1-1,running,0,1500,0.312
+246,smb,,0,1-1,running,0,1500,2.612
+307,smb,,0,1-1,running,0,1500,1.2387
+366,smb,,0,1-1,running,0,1500,3.305
