@@ -30,10 +30,11 @@ while [[ $# -gt 0 ]]; do
 done
 mkdir -p "$OUT"
 status=0
+# Bash 3.2 treats empty arrays as unset under nounset; expand optional arguments only when present.
 if [[ -z "$ONLY" || "$ONLY" == v2 ]]; then
-    "$PY" -u scripts/recording/record_v2.py --out "$OUT" "${DRY[@]}" "${EXTRA[@]}" || status=$?
+    "$PY" -u scripts/recording/record_v2.py --out "$OUT" ${DRY[@]+"${DRY[@]}"} ${EXTRA[@]+"${EXTRA[@]}"} || status=$?
 fi
 if [[ -z "$ONLY" || "$ONLY" == v1 ]]; then
-    "$PY" -u scripts/recording/record_v1.py --out "$OUT" "${DRY[@]}" "${EXTRA[@]}" || status=$?
+    "$PY" -u scripts/recording/record_v1.py --out "$OUT" ${DRY[@]+"${DRY[@]}"} ${EXTRA[@]+"${EXTRA[@]}"} || status=$?
 fi
 exit "$status"
