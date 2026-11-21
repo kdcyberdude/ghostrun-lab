@@ -25,6 +25,7 @@ This lab is where that trainer was developed, and it is newer than the plugin's 
 | Live terminal dashboard of per-level clear rates | `rl/watch.py` |
 | Emulator speed benchmarks and NeSLE-vs-FCEUmm parity tools | `rl/bench/`, `scripts/nesle_check/` |
 | Per-level recording of trained players, with replayable controller logs | `scripts/recording/` |
+| Route finder (Go-Explore search on the GPU consoles, no network) and a backward curriculum over the routes it finds, for levels plain RL does not solve (mazes) | `rl/explore.py`, `rl/routes.py` |
 
 The plugin has one trainer feature this lab lacks: `--restart-from`. It starts a new run from a checkpoint's weights only, for example after a reward change.
 
@@ -95,6 +96,20 @@ configs/smb_v2_moods.sh       # the v2 player: moods, level starts, then the har
 configs/twelve_games.sh       # all 12 games in one network
 ```
 
+### Hard levels: routes and the backward curriculum
+
+Plain RL from a level's entrance did not solve the maze castles (4-4, 7-4, 8-4), whatever the reward. Two parts fix where episodes start instead:
+
+1. `rl/explore.py` searches every level with save-states and semi-random buttons until a console clears it, and keeps the saved states along that play as the level's *route*. It needs only a game's notion of a place (for SMB: room and 32-pixel position). On one RTX 5090 it cleared all 32 SMB levels in about 6 minutes.
+2. `rl/train.py --routes DIR` starts each level's episodes near the end of its route and moves the start towards the entrance as the policy clears the level from there (`rl/routes.py`). Every episode is one attempt at one level. A level's share of episodes is its failure rate from the entrance.
+
+```bash
+python rl/explore.py --entrances ENTRANCES.npy --out runs/routes/smb    # ENTRANCES.npy: a run's saved level entrances
+python rl/train.py --run runs/rl/NAME --games smb --level-starts 1.0 \
+    --routes runs/routes/smb --entrances runs/routes/smb/entrances.npy --init-from CHECKPOINT.pt   # plus the usual flags
+python rl/scripts/routes_status.py runs/rl/NAME                         # per level: curriculum position, entrance clear rate
+```
+
 To follow a run:
 
 ```bash
@@ -152,7 +167,7 @@ The full model cards are in [models/README.md](models/README.md). `scripts/uploa
 ## Layout
 
 ```
-rl/                 trainer, model, environment (csrc/ CUDA + CPU), evaluation, ONNX player export, tests
+rl/                 trainer, model, environment (csrc/ CUDA + CPU), route finder, evaluation, ONNX player export, tests
 scripts/reward10/   reward functions for the 12 games, contract checker, reward_spec.json
 scripts/nesle_check NeSLE host wrapper and parity tools against FCEUmm
 scripts/recording/  per-level recording of the Mario players
