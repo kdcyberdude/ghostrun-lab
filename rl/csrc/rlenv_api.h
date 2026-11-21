@@ -12,6 +12,25 @@ void* rlenv_create(int ngames, const int* game_ids, const std::uint8_t* const* r
 int rlenv_num_envs(void* h);
 // Optional curriculum terminal at this native level transition; -1 keeps ordinary whole-game episodes.
 void rlenv_set_episode_level_end(void* h, int level);
+void rlenv_set_guide_discount(void* h, double discount);  // shaping discount; must match the learner's gamma
+void rlenv_grid_attempts(void* h, std::int64_t* cells, int decision_limit, int cell_size);
+// Attempts (rlenv_core.cuh Common::attempt_limit): decision_limit > 0 turns them on for episodes started from a saved
+// slot; kill ([N] uint8 input) and cur_start_out ([N] int32 output) are optional. rlenv_bind_cells: the SMB world-grid
+// cell output ([N] int64, reward/search data only) without the grid reward.
+void rlenv_set_attempts(void* h, int decision_limit, const std::uint8_t* kill, std::int32_t* cur_start_out);
+// Optional output [N] int32: the slot the current episode started from (-1 = power-on), without attempts.
+void rlenv_bind_cur_start(void* h, std::int32_t* cur_start_out);
+void rlenv_bind_cells(void* h, std::int64_t* cells, int cell_size);
+// on != 0: attempts do not end at level events (a single life through the whole game; rl/explore.py --whole-game)
+void rlenv_set_attempt_through(void* h, int on);
+void rlenv_set_only_kill(void* h, int on);
+void rlenv_set_allow_skip(void* h, int on);
+// Table game gi: copy its rl10::TableSpec (bytes = sizeof check); 0 = ok, 1 = not a table game / bad size
+int rlenv_set_table(void* h, int gi, const void* spec, std::size_t bytes);
+// on != 0: a start from a saved slot plays no restart frames (exact restore; search and route replay)
+void rlenv_set_restore_exact(void* h, int on);
+// Search data: after every decision out[env * n + k] = RAM[addr[k]] (CPU RAM, 0x000-0x7FF; device memory on the GPU build)
+void rlenv_bind_ram(void* h, std::uint8_t* out, const std::int32_t* addr, int n);
 void rlenv_bind(void* h, const std::int16_t* actions, std::uint8_t* obs, std::uint8_t* emph, float* reward,
                 std::uint8_t* done, std::uint8_t* masks, std::uint8_t* timeline, std::uint8_t* pads,
                 std::uint32_t* events, float* info);

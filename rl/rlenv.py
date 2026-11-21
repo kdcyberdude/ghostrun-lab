@@ -28,14 +28,21 @@ BUILD = Path(os.environ.get('RL_BUILD', RL / 'build'))
 BOOT_DIR = Path(os.environ.get('RL_BOOT_DIR', ROOT / '.cache/rl/boot'))
 
 MANIFEST = __import__('json').loads((RL / 'games_manifest.json').read_text())
-GAMES = list(MANIFEST)  # same order as rl/scripts/gen_reward_consts.py GAMES (rl10 game ids)
+# Table games (opt-in): RL_TABLE_GAMES=rl/games_table.json (rl/scripts/export_games.py) adds every ROM it lists after the
+# 12 hand-read games; their rl10 ids are 12, 13, ... and their signals come from the file (rl/csrc/reward10.cuh
+# TableSpec). Unset: GAMES is the 12 games, exactly as before.
+TABLE = (__import__('json').loads(Path(os.environ['RL_TABLE_GAMES']).read_text())
+         if os.environ.get('RL_TABLE_GAMES') else {})
+TABLE_ROM_DIR = Path(os.environ.get('NES_ROM_DIR', '/home/kd/Desktop/roms'))
+GAMES = list(MANIFEST) + [g for g in TABLE if g not in MANIFEST]  # first 12: rl/scripts/gen_reward_consts.py order
 SOURCES = ['rlenv_core.cuh', 'rlenv_build.hpp', 'nes_machine.cuh', 'reward10.cuh', 'reward10_consts.h',
            'controller.cuh', 'rlenv_api.h']
 OBS_H, OBS_W, FRAMES = 224, 240, 4
 MASK_BYTES, TIMELINE, INFO = 19, 8 * 45, 8
 PART_NAMES = ('progress', 'level', 'death', 'damage', 'score', 'win', 'stall')  # rlenv.parts columns
 NUM_PARTS = len(PART_NAMES)
-END_NAMES = {0: 'none', 1: 'game_over', 2: 'won', 3: 'skip', 4: 'stall', 5: 'fault', 6: 'level_clear'}
+END_NAMES = {0: 'none', 1: 'game_over', 2: 'won', 3: 'skip', 4: 'stall', 5: 'fault', 6: 'level_clear',
+             7: 'death', 8: 'limit'}
 
 
 def _newer(out: Path, srcs) -> bool:
@@ -43,6 +50,9 @@ def _newer(out: Path, srcs) -> bool:
 
 
 def build_cpu() -> Path:
+    """Host build. RL_CPU_LIB=path uses a prebuilt library instead (as RL_CUDA_LIB for the GPU build)."""
+    if os.environ.get('RL_CPU_LIB'):
+        return Path(os.environ['RL_CPU_LIB'])
     out = BUILD / 'librlenv_cpu.so'
     srcs = [RL / 'csrc' / s for s in SOURCES] + [RL / 'csrc/rlenv_cpu.cpp']
     if _newer(out, srcs):
@@ -90,6 +100,19 @@ def _load(path: Path):
     lib.rlenv_load.argtypes = [P, P, P]
     lib.rlenv_error.restype = ctypes.c_char_p
     lib.rlenv_destroy.argtypes = [P]
+    lib.rlenv_set_guide_discount.argtypes = [P, ctypes.c_double]
+    lib.rlenv_grid_attempts.argtypes = [P, P, I, I]
+    lib.rlenv_set_attempts.argtypes = [P, I, P, P]
+    lib.rlenv_bind_cur_start.argtypes = [P, P]
+    lib.rlenv_bind_cells.argtypes = [P, P, I]
+    lib.rlenv_set_no_render.argtypes = [P, I]
+    lib.rlenv_set_attempt_through.argtypes = [P, I]
+    lib.rlenv_set_only_kill.argtypes = [P, I]
+    lib.rlenv_set_allow_skip.argtypes = [P, I]
+    lib.rlenv_set_restore_exact.argtypes = [P, I]
+    lib.rlenv_bind_ram.argtypes = [P, P, P, I]
+    if hasattr(lib, 'rlenv_set_table'):
+        lib.rlenv_set_table.argtypes = [P, I, P, SZ]
     if hasattr(lib, 'rlenv_set_episode_level_end'):
         lib.rlenv_set_episode_level_end.argtypes = [P, I]
     if hasattr(lib, 'rlenv_enable_level_starts'):
@@ -126,6 +149,11 @@ def _load(path: Path):
 def rom_path(slug: str) -> str:
     """ROM of a game: RL_ROM_DIR/<manifest file name> when RL_ROM_DIR is set (e.g. a private Kaggle dataset), else the
     reward10 module's path. The SHA-256 must match the manifest."""
+    if slug in TABLE and slug not in MANIFEST:
+        p = TABLE_ROM_DIR / TABLE[slug]['rom']
+        if hashlib.sha256(p.read_bytes()).hexdigest() != TABLE[slug]['sha256']:
+            raise RuntimeError(f'{p}: not the ROM in {os.environ["RL_TABLE_GAMES"]}')
+        return str(p)
     d = os.environ.get('RL_ROM_DIR')
     p = Path(d) / MANIFEST[slug]['rom'] if d else Path(game_module(slug).ROM)
     if hashlib.sha256(p.read_bytes()).hexdigest() != MANIFEST[slug]['sha256']:
@@ -141,7 +169,10 @@ def game_module(slug):
 
 def boot_pads(slug: str, rom_path: str | None = None) -> bytes:
     """Pad byte of every frame of the game's reward10 boot(), recorded on NeSLE (CPU) from power-on. Cached by ROM
-    hash; the cache file is all a machine without the CPU harness needs (e.g. Kaggle)."""
+    hash; the cache file is all a machine without the CPU harness needs (e.g. Kaggle). A table game's boot is in its
+    table entry (scripts/romlib readers boot, checked on NeSLE by train_check.py)."""
+    if slug in TABLE and slug not in MANIFEST:
+        return bytes.fromhex(TABLE[slug]['boot_pads'])
     rom_file = rom_path or globals()['rom_path'](slug)
     rom = Path(rom_file).read_bytes()
     key = hashlib.sha256(rom).hexdigest()[:16]
@@ -169,16 +200,42 @@ def boot_pads(slug: str, rom_path: str | None = None) -> bytes:
     return bytes(n.pads)
 
 
+class TableSpec(ctypes.Structure):
+    """rl/csrc/reward10.cuh rl10::TableSpec (same field order; ctypes applies the same alignment)."""
+    _fields_ = [('in_play_addr', ctypes.c_int), ('in_play_n', ctypes.c_int), ('in_play_values', ctypes.c_int * 8),
+                ('level_addr', ctypes.c_int), ('lives_addr', ctypes.c_int), ('game_over_addr', ctypes.c_int),
+                ('game_over_value', ctypes.c_int), ('score_addr', ctypes.c_int), ('score_n', ctypes.c_int),
+                ('score_kind', ctypes.c_int), ('x_addr', ctypes.c_int), ('y_addr', ctypes.c_int),
+                ('scene_addr', ctypes.c_int), ('cell_shift', ctypes.c_int), ('progress_unit', ctypes.c_double),
+                ('score_unit', ctypes.c_double), ('stall_frames', ctypes.c_double), ('idle_per_frame', ctypes.c_double)]
+
+
+def table_spec(t: dict) -> TableSpec:
+    s = TableSpec()
+    for name, _ in TableSpec._fields_:
+        if name == 'in_play_values':
+            vals = t['in_play_values'][:8]
+            s.in_play_n = len(vals)
+            for i, v in enumerate(vals):
+                s.in_play_values[i] = v
+        elif name != 'in_play_n':
+            setattr(s, name, t[name])
+    return s
+
+
 class RlEnv:
     def __init__(self, counts: dict, device='cuda', seed=0, sticky=True, idle_max=30, dropout=True, roms=None,
-                 lib_path=None, level_cap=0, level_slots=None):
+                 lib_path=None, level_cap=0, level_slots=None, guide_discount=1.0, pictures=True):
         """counts: game slug -> number of envs (any order; envs are laid out in GAMES order).
         roms: optional slug -> ROM path (default: the reward10 module's ROM).
+        guide_discount: shaping discount per decision; must match the learner's gamma (1 for undiscounted search).
         level_cap > 0: save level starts (levels 0..level_cap-1 of each game; rlenv_core.cuh), used by new episodes
         with the probability set by set_level_prob (default 0). self.start_level: level a finished episode started
         from, -1 = power-on (valid where done).
         level_slots < level_cap: only slots 0..level_slots-1 are level starts; the rest are places (rl/places.py), saved
-        by place_save; start_level is then a slot (a place's level: rl/places.py)."""
+        by place_save; start_level is then a slot (a place's level: rl/places.py).
+        pictures=False: no picture outputs at all (search envs, rl/stucksearch.py: drawing is off from the start and
+        the [N, 4, 224, 240] buffer, 215 KB per env, is never allocated)."""
         self.device = torch.device(device)
         self.games = [g for g in GAMES if counts.get(g, 0) > 0]
         self.counts = [int(counts[g]) for g in self.games]
@@ -205,10 +262,18 @@ class RlEnv:
             arr(ctypes.c_int, self.counts), seed, int(sticky), int(idle_max), int(dropout), dev_index)
         if not self.h:
             raise RuntimeError(f'rlenv_create: {self.lib.rlenv_error().decode()}')
+        self.lib.rlenv_set_guide_discount(self.h, guide_discount)
+        for gi, g in enumerate(self.games):
+            if GAMES.index(g) >= len(MANIFEST):
+                spec = table_spec(TABLE[g]['table'])
+                if self.lib.rlenv_set_table(self.h, gi, ctypes.byref(spec), ctypes.sizeof(spec)) != 0:
+                    raise RuntimeError(f'rlenv_set_table({g}) failed (library without table games?)')
         N, d = self.n, self.device
         self.actions = torch.zeros(N, dtype=torch.int16, device=d)
-        self.obs = torch.zeros(N, FRAMES, OBS_H, OBS_W, dtype=torch.uint8, device=d)
-        self.emph = torch.zeros(N, FRAMES, OBS_H, dtype=torch.uint8, device=d)
+        self.obs = torch.zeros(N, FRAMES, OBS_H, OBS_W, dtype=torch.uint8, device=d) if pictures else \
+            torch.zeros(1, dtype=torch.uint8, device=d)
+        self.emph = torch.zeros(N, FRAMES, OBS_H, dtype=torch.uint8, device=d) if pictures else \
+            torch.zeros(1, dtype=torch.uint8, device=d)
         self.reward = torch.zeros(N, dtype=torch.float32, device=d)
         self.done = torch.zeros(N, dtype=torch.uint8, device=d)
         self.masks = torch.zeros(N, MASK_BYTES, dtype=torch.uint8, device=d)
@@ -219,9 +284,12 @@ class RlEnv:
         p = lambda t: ctypes.c_void_p(t.data_ptr())  # noqa: E731
         self.lib.rlenv_bind(self.h, p(self.actions), p(self.obs), p(self.emph), p(self.reward), p(self.done),
                             p(self.masks), p(self.timeline), p(self.pads), p(self.events), p(self.info))
+        if not pictures:
+            self.lib.rlenv_set_no_render(self.h, 1)
         # the reward split by source (progress, level, death, damage, score, win, stall); never an actor input
         self.parts = torch.zeros(N, NUM_PARTS, dtype=torch.float32, device=d)
         self.lib.rlenv_bind_parts(self.h, p(self.parts))
+        self.cells = torch.full((N,), -1, dtype=torch.int64, device=d)
         self.level_cap = int(level_cap)
         self.level_slots = int(level_slots if level_slots is not None else level_cap)
         self.start_level = torch.full((N,), -1, dtype=torch.int32, device=d)
@@ -236,6 +304,61 @@ class RlEnv:
             # current within-level progress / one level's PROGRESS_UNIT, NaN = not valid now; never an actor input
             self.progress_now = torch.full((N,), float('nan'), dtype=torch.float32, device=d)
             self.lib.rlenv_bind_progress(self.h, p(self.progress_now))
+
+    def set_grid_attempts(self, decision_limit=4000, cell_size=32):
+        """Opt-in SMB grid reward: native clear / first death / limit, no horizontal reward or stall end."""
+        if self.games != ['smb'] or decision_limit <= 0 or cell_size not in (8,32):
+            raise ValueError('grid attempts need SMB, a positive decision limit and cell_size 8 or 32')
+        self.lib.rlenv_grid_attempts(self.h, ctypes.c_void_p(self.cells.data_ptr()), decision_limit, cell_size)
+
+    def set_attempts(self, decision_limit, kill=False):
+        """Episodes started from a saved slot become single attempts at their level: they end at the level event
+        (clear), the first death or after decision_limit decisions; the reward is unchanged. self.cur_start: the slot
+        the current episode started from (-1 power-on). kill=True adds self.kill ([N] uint8): != 0 ends that env's
+        attempt at the next decision."""
+        assert self.level_cap > 0 and decision_limit > 0
+        self.cur_start = torch.full((self.n,), -1, dtype=torch.int32, device=self.device)
+        self.kill = torch.zeros(self.n, dtype=torch.uint8, device=self.device) if kill else None
+        self.lib.rlenv_set_attempts(self.h, int(decision_limit),
+                                    None if self.kill is None else ctypes.c_void_p(self.kill.data_ptr()),
+                                    ctypes.c_void_p(self.cur_start.data_ptr()))
+
+    def bind_cur_start(self):
+        """self.cur_start [N] int32: the slot the current episode started from (-1 power-on), kept up to date."""
+        self.cur_start = torch.full((self.n,), -1, dtype=torch.int32, device=self.device)
+        self.lib.rlenv_bind_cur_start(self.h, ctypes.c_void_p(self.cur_start.data_ptr()))
+
+    def bind_cells(self, cell_size=32):
+        """SMB world-grid cell of every env after each decision in self.cells (-1 = no valid position)."""
+        assert self.games == ['smb'] and cell_size in (8, 32)
+        self.lib.rlenv_bind_cells(self.h, ctypes.c_void_p(self.cells.data_ptr()), cell_size)
+
+    def bind_ram(self, addrs):
+        """self.ram [N, len(addrs)] uint8: those CPU RAM bytes after every decision (search data, never an actor input)."""
+        self.ram_addr = torch.tensor(list(addrs), dtype=torch.int32, device=self.device)
+        self.ram = torch.zeros(self.n, len(addrs), dtype=torch.uint8, device=self.device)
+        self.lib.rlenv_bind_ram(self.h, ctypes.c_void_p(self.ram.data_ptr()), ctypes.c_void_p(self.ram_addr.data_ptr()),
+                                len(addrs))
+
+    def set_restore_exact(self, on=True):
+        """Starts from a saved slot play no restart frames: the first decision acts on the saved state itself."""
+        self.lib.rlenv_set_restore_exact(self.h, int(on))
+
+    def set_attempt_through(self, on=True):
+        """Attempts (set_attempts) go on through level events: one life across the whole game."""
+        self.lib.rlenv_set_attempt_through(self.h, int(on))
+
+    def set_allow_skip(self, on=True):
+        """Skipping levels (SMB warp zones) is a plain level change instead of the episode's end."""
+        self.lib.rlenv_set_allow_skip(self.h, int(on))
+
+    def set_only_kill(self, on=True):
+        """Attempts (set_attempts) end only by their limit or kill: they play on through deaths, game overs and wins."""
+        self.lib.rlenv_set_only_kill(self.h, int(on))
+
+    def set_no_render(self, on=True):
+        """Skip drawing the pictures (search only: the observation outputs are then stale)."""
+        self.lib.rlenv_set_no_render(self.h, int(on))
 
     def set_level_prob(self, prob: float):
         """Chance that a new episode starts from a saved level start (uniform over the game's saved levels)."""
@@ -291,8 +414,8 @@ class RlEnv:
         return dict(stride=int(out[0]), key_cap=int(out[1]), st=int(out[2]), cap=int(out[3]), levels=int(out[4]))
 
     def _grow_archive(self, buf, old_cap, need):
-        """A state saved with old_cap slots per game -> this env's level_cap (new slots empty); None if buf is not
-        such a state."""
+        """A state saved with old_cap slots per game -> this env's level_cap (new slots empty, or the last ones
+        dropped); None if buf is not such a state."""
         lay = [self.level_layout(gi) for gi in range(len(self.games))]
         sizes = lambda cap, l: [cap * l['stride'], cap * l['st'], cap * l['key_cap'] * 4, cap * 8, cap * 4, cap * 4]  # noqa: E731
         old_tail = sum(sum(sizes(old_cap, l)) for l in lay)
@@ -304,8 +427,8 @@ class RlEnv:
             for k, (a, b) in enumerate(zip(sizes(old_cap, l), sizes(self.level_cap, l))):
                 part = tail[o:o + a]
                 o += a
-                fill = np.full(b - a, 0xFF, np.uint8) if k == 5 else np.zeros(b - a, np.uint8)   # deaths -1 = empty
-                out += [part, fill]
+                fill = np.full(max(b - a, 0), 0xFF, np.uint8) if k == 5 else np.zeros(max(b - a, 0), np.uint8)   # deaths -1 = empty
+                out += [part[:b], fill]     # fewer slots: the last ones are dropped
         return np.concatenate(out)
 
     def drop_obs_buffers(self):
@@ -360,7 +483,7 @@ class RlEnv:
             torch.cuda.synchronize(self.device)
         if self.lib.rlenv_save(self.h, buf.ctypes.data_as(ctypes.c_void_p), self._stream()) != 0:
             raise RuntimeError(self.lib.rlenv_error().decode())
-        outs = {k: getattr(self, k).cpu() for k in ('obs', 'emph', 'masks', 'timeline', 'done', 'reward')
+        outs = {k: getattr(self, k).cpu() for k in ('obs', 'emph', 'masks', 'timeline', 'done', 'reward', 'cells')
                 if getattr(self, k) is not None}
         return dict(env=buf, outputs=outs, games=self.games, counts=self.counts, level_cap=self.level_cap)
 
@@ -369,7 +492,7 @@ class RlEnv:
         buf = np.ascontiguousarray(sd['env'])
         need = self.lib.rlenv_state_bytes(self.h)
         old_cap = sd.get('level_cap', 64)
-        if len(buf) < need and self.level_cap > old_cap > 0:
+        if len(buf) != need and old_cap > 0 and self.level_cap > 0 and old_cap != self.level_cap:
             grown = self._grow_archive(buf, old_cap, need)
             buf = buf if grown is None else grown
         if len(buf) < need and self.level_cap > 0:

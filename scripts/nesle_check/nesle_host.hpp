@@ -139,6 +139,7 @@ public:
             b.mapper.mirroring = alloc<std::uint8_t>();
             b.mapper.regs = alloc<std::uint8_t>(kMapperRegBytes);
         }
+        if (layout.ext_ram_bytes != 0) b.mapper.ext_ram = alloc<std::uint8_t>(layout.ext_ram_bytes);  // MMC5
         b.apu.dmc_event = alloc<std::uint64_t>();  // DMC sample channel ($4015 status, fetch cycles)
         b.apu.dmc = alloc<DmcState>();
         b.action_masks = alloc<std::uint8_t>();
@@ -183,8 +184,13 @@ public:
         b.cart.prg_fixed_mask = layout.fixed_bytes == 0 ? 0u : layout.fixed_bytes - 1u;
         b.cart.prg_page_mask = layout.prg_page_mask;
         b.cart.chr_page_mask = layout.chr_page_mask;
+        b.cart.ext_ram_bytes = layout.ext_ram_bytes;
 
         cold_reset_console_env(b, 0);
+        // FCEUmm iNES_ExecPower writes a trainer to $7000 on every board (they all map WRAM at $6000-$7FFF there)
+        if (rom_.trainer.size() == 512) {
+            std::memcpy(b.cpu.prg_ram + 0x1000, rom_.trainer.data(), 512);
+        }
         if (fill != "zero") {
             for (int i = 0; i < kCpuRamBytes; ++i) {
                 b.cpu.ram[i] = fill == "ff" ? 0xFF : ((i & 4) ? 0xFF : 0x00);

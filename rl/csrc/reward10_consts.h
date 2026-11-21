@@ -218,4 +218,53 @@ __constant__ int d_kZeldaItemCap[] = {3, 2, 1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 
 #endif
 constexpr int kZeldaNumItems = 16;
 
+struct SmbGuideSeg { int start, tx, ty, pipe, vx, vy; };
+struct SmbGuideLevel { int level, area, first, count; };
+constexpr int kSmbGuideNumLevels = 3;
+constexpr SmbGuideSeg kSmbGuideSegs[11] = {
+    {0, 1024, 64, 0, 0, 0},
+    {1024, 2048, 176, 0, 0, 0},
+    {0, 768, 176, 0, 0, 0},
+    {768, 1024, 128, 0, 0, 0},
+    {1024, 1280, 64, 0, 0, 0},
+    {1280, 1792, 64, 0, 0, 0},
+    {1792, 2048, 128, 0, 0, 0},
+    {2048, 2304, 64, 0, 0, 0},
+    {0, 288, 96, 1, 0, 0},
+    {1792, 2448, 64, 1, 2408, 112},
+    {3072, 3656, 96, 1, 3600, 128},
+};
+#ifdef __CUDACC__
+__constant__ SmbGuideSeg d_kSmbGuideSegs[11] = {
+    {0, 1024, 64, 0, 0, 0},
+    {1024, 2048, 176, 0, 0, 0},
+    {0, 768, 176, 0, 0, 0},
+    {768, 1024, 128, 0, 0, 0},
+    {1024, 1280, 64, 0, 0, 0},
+    {1280, 1792, 64, 0, 0, 0},
+    {1792, 2048, 128, 0, 0, 0},
+    {2048, 2304, 64, 0, 0, 0},
+    {0, 288, 96, 1, 0, 0},
+    {1792, 2448, 64, 1, 2408, 112},
+    {3072, 3656, 96, 1, 3600, 128},
+};
+#endif
+constexpr SmbGuideLevel kSmbGuideLevels[3] = {
+    {15, 0x61, 0, 2},
+    {27, 0x64, 2, 6},
+    {31, 0x65, 8, 3},
+};
+#ifdef __CUDACC__
+__constant__ SmbGuideLevel d_kSmbGuideLevels[3] = {
+    {15, 0x61, 0, 2},
+    {27, 0x64, 2, 6},
+    {31, 0x65, 8, 3},
+};
+#endif
+constexpr double kSmbGuideW = 0x1.0000000000000p-2;
+constexpr double kSmbGuideYSpan = 0x1.0000000000000p+7;
+constexpr double kSmbGuidePipePast = 0x1.0000000000000p+7;
+constexpr int kSmb84WaterBase = 4096;
+constexpr int kSmb84FinalShift = 1280;
+
 }  // namespace rl10

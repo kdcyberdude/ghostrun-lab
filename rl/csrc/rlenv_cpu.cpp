@@ -134,6 +134,38 @@ void rlenv_set_level_plan(void* h, int gi, double p, const std::uint32_t* cdf) {
 void rlenv_bind_start(void* h, std::int32_t* start_out) { static_cast<Env*>(h)->e.common.start_out = start_out; }
 void rlenv_bind_level(void* h, std::int32_t* level_out) { static_cast<Env*>(h)->e.common.level_out = level_out; }
 void rlenv_bind_progress(void* h, float* progress_out) { static_cast<Env*>(h)->e.common.progress_out = progress_out; }
+void rlenv_set_guide_discount(void* h, double discount) { static_cast<Env*>(h)->e.common.guide_discount = discount; }
+void rlenv_grid_attempts(void* h, std::int64_t* cells, int decision_limit, int cell_size) {
+    auto& c = static_cast<Env*>(h)->e.common;
+    c.cell_out = cells; c.grid_limit = decision_limit; c.grid_cell_size = cell_size;
+}
+void rlenv_set_attempts(void* h, int decision_limit, const std::uint8_t* kill, std::int32_t* cur_start_out) {
+    auto& c = static_cast<Env*>(h)->e.common;
+    c.attempt_limit = decision_limit; c.kill = kill; c.cur_start_out = cur_start_out;
+}
+void rlenv_bind_cur_start(void* h, std::int32_t* cur_start_out) {
+    static_cast<Env*>(h)->e.common.cur_start_out = cur_start_out;
+}
+void rlenv_bind_ram(void* h, std::uint8_t* out, const std::int32_t* addr, int n) {
+    auto& c = static_cast<Env*>(h)->e.common;
+    c.ram_out = out; c.ram_addr = addr; c.ram_n = n;
+}
+void rlenv_set_restore_exact(void* h, int on) { static_cast<Env*>(h)->e.common.restore_exact = on != 0; }
+void rlenv_set_attempt_through(void* h, int on) { static_cast<Env*>(h)->e.common.attempt_through = on != 0; }
+void rlenv_set_only_kill(void* h, int on) { static_cast<Env*>(h)->e.common.only_kill = on != 0; }
+void rlenv_set_allow_skip(void* h, int on) { static_cast<Env*>(h)->e.common.allow_skip = on != 0; }
+// Table game gi (game id >= rl10::kNumGames): its signal addresses (rl10::TableSpec, from rl/scripts/export_games.py).
+int rlenv_set_table(void* h, int gi, const void* spec, std::size_t bytes) {
+    auto& games = static_cast<Env*>(h)->e.games;
+    if (gi < 0 || gi >= static_cast<int>(games.size()) || bytes != sizeof(rl10::TableSpec) ||
+        games[static_cast<std::size_t>(gi)].game < rl10::kNumGames) return 1;
+    games[static_cast<std::size_t>(gi)].table = *static_cast<const rl10::TableSpec*>(spec);
+    return 0;
+}
+void rlenv_bind_cells(void* h, std::int64_t* cells, int cell_size) {
+    auto& c = static_cast<Env*>(h)->e.common;
+    c.cell_out = cells; c.grid_cell_size = cell_size;
+}
 int rlenv_level_deaths(void* h, int gi, std::int32_t* out, void*) {
     const auto& g = static_cast<Env*>(h)->e.games[static_cast<std::size_t>(gi)];
     if (g.lv_cap) std::memcpy(out, g.lv_deaths, g.lv_cap * 4);

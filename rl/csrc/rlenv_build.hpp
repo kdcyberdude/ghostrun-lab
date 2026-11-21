@@ -31,6 +31,7 @@ struct HostMachine {
     std::vector<std::uint8_t> prg, chr;
     int mode = 0;
     bool chr_ram = false, paged = false;
+    std::uint32_t ext_bytes = 0;  // MMC5's extra per-env memory (layout.ext_ram_bytes), 0 for every other board
     std::uint64_t target = 0;
 
     HostMachine(const std::vector<std::uint8_t>& rom_bytes) {
@@ -40,12 +41,13 @@ struct HostMachine {
         chr_ram = rom.chr_rom.empty();
         paged = layout.bank_kind >= kBankingFirstPaged;
         mode = layout.bank_kind == kBankingNone ? 0 : paged ? 2 : 1;
+        ext_bytes = layout.ext_ram_bytes;
         rlm::bind_arrays(b, chr_ram, paged, [&](std::size_t elem, int count) -> void* {
             const std::uint32_t n = static_cast<std::uint32_t>(elem * count);
             arrays.emplace_back(n, 0);
             bytes.push_back(n);
             return arrays.back().data();
-        });
+        }, ext_bytes);
         // re-point: emplace_back may have moved inner vectors' owners, but their data buffers stay in place
         // (std::vector move keeps the heap buffer), so the pointers above remain valid.
         const std::size_t real_prg = rom.prg_rom.size();
@@ -82,7 +84,12 @@ struct HostMachine {
         c.prg_fixed_mask = layout.fixed_bytes == 0 ? 0u : layout.fixed_bytes - 1u;
         c.prg_page_mask = layout.prg_page_mask;
         c.chr_page_mask = layout.chr_page_mask;
+        c.ext_ram_bytes = layout.ext_ram_bytes;
         cold_reset_console_env(b, 0);
+        // FCEUmm iNES_ExecPower writes a trainer to $7000 on every board (they all map WRAM at $6000-$7FFF there)
+        if (rom.trainer.size() == 512) {
+            std::memcpy(b.cpu.prg_ram + 0x1000, rom.trainer.data(), 512);
+        }
         for (int i = 0; i < kCpuRamBytes; ++i) b.cpu.ram[i] = 0xFF;  // power-on RAM 0xFF
         b.ppu.frame_dot[0] = 0;
         target = rlm::kVblankDot;
@@ -136,8 +143,16 @@ Built<Mem> build(Mem& mem, const std::vector<GameSpec>& specs, std::uint64_t run
         g.e1 = s.n;
         g.offset = offset;
         offset += s.n;
-        g.start_ok = rl10::kGameConsts[s.game].start_ok;
-        g.select_ok = rl10::kGameConsts[s.game].select_ok;
+        const bool table = s.game >= rl10::kNumGames;   // a table game: no START/SELECT, spec set by rlenv_set_table
+        g.start_ok = table ? 0 : rl10::kGameConsts[s.game].start_ok;
+        g.select_ok = table ? 0 : rl10::kGameConsts[s.game].select_ok;
+        g.table = rl10::TableSpec{};
+        g.table.in_play_addr = g.table.level_addr = g.table.lives_addr = g.table.game_over_addr = -1;
+        g.table.score_addr = g.table.x_addr = g.table.y_addr = g.table.scene_addr = -1;
+        g.table.cell_shift = 3;
+        g.table.progress_unit = g.table.score_unit = 1.0;
+        g.table.stall_frames = -1.0;
+        g.table.idle_per_frame = 0.0;
         g.key_cap = rl10::keyset_capacity(s.game);
         g.keys = g.key_cap ? alloc_n<std::uint32_t>(mem, static_cast<std::size_t>(s.n) * g.key_cap) : nullptr;
         g.tmpl_target = hm.target;
@@ -155,7 +170,7 @@ Built<Mem> build(Mem& mem, const std::vector<GameSpec>& specs, std::uint64_t run
             items.push_back(CopyItem{base, n, idle});
             ++idx;
             return base;
-        });
+        }, hm.ext_bytes);
         // the idle-frame snapshots: the boot snapshot after k = 1..idle_tmpl frames with no buttons
         for (int k = 1; k <= g.idle_tmpl; ++k) {
             if (hm.frame(0) != 0) throw std::runtime_error("emulator fault in idle frames of game " + std::to_string(s.game));

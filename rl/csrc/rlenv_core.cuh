@@ -36,6 +36,32 @@ constexpr int kTimelineBytes = rlc::kDropInputs * rlc::kTimeline;
 constexpr int kInfo = 8;  // per finished episode: return, length, end reason, deaths, max level, overflow, idle, episode
 constexpr int kEndFault = 5;
 constexpr int kEndLevelClear = 6;
+constexpr int kEndDeath = 7;
+constexpr int kEndLimit = 8;
+
+// Reward/debug only: a stable world grid, not camera-relative and never an actor input.
+// 32px: level(5), room/type(9), phase(4), x(9), y(3). 8px needs x(11), y(5): 34 bits total.
+RLM_HD inline std::int64_t smb_grid_cell(const std::uint8_t* r, int cell_size = 32) {
+    if (r[0x770] != 1 || r[0x772] != 3 || r[0x0e] != 8 || r[0xb5] >= 2) return -1;
+    const int page = r[0x6d] > 127 ? static_cast<int>(r[0x6d]) - 256 : r[0x6d];
+    const int x = page * 256 + r[0x86] + 1024;
+    if (x < 0 || x >= 16384) return -1;
+    const int level = r[0x75f] * 4 + r[0x75c];
+    const int room = (r[0x750] & 0x7f) | ((r[0x74e] & 3) << 7);
+    int phase = 0;
+    if (level == 15) {
+        // Accepted native checks, independent of the desired corridor height.
+        phase = (r[0x725] > 5 || (r[0x725] == 5 && !r[0x745])) +
+                (r[0x725] > 9 || (r[0x725] == 9 && !r[0x745]));
+    } else if (level == 27) {
+        phase = (r[0x6da] & 3) * 4 + (r[0x6d9] & 3);
+    }
+    if (cell_size == 8)
+        return (static_cast<std::int64_t>(level) << 29) | (room << 20) | (phase << 16) |
+               ((x / 8) << 5) | (r[0xce] / 8);
+    return (static_cast<std::int64_t>(level) << 25) | (room << 16) | (phase << 12) |
+           ((x / 32) << 3) | (r[0xce] / 32);
+}
 
 struct CopyItem {
     std::uint8_t* base;     // array for n + 1 envs; slot n is the boot snapshot
@@ -45,7 +71,8 @@ struct CopyItem {
 
 struct GameCtx {
     nesle::cuda::BatchBuffers b;
-    int game;            // rl10 game id (rl10::kGame_*)
+    int game;            // rl10 game id (rl10::kGame_*); >= rl10::kNumGames: a table game, signals from `table`
+    rl10::TableSpec table;   // table games only (rlenv_set_table)
     int bank_mode;       // 0 NROM, 1 banked, 2 paged
     int n, offset;       // envs of this game and their first global index
     int start_ok, select_ok;
@@ -110,10 +137,31 @@ struct Common {
     int dropout;     // 1: button dropout schedule on
     int no_render;   // benchmark only: 1 = skip drawing pictures
     int episode_level_end = -1;  // optional curriculum: end after this level's native transition
+    double guide_discount = 1.0;
     std::int32_t* ep_start = nullptr;  // [N] level the current episode started from, -1 = power-on (with lv_cap)
     std::int32_t* start_out = nullptr; // [N] output: ep_start of the episode that just finished (valid where done)
     std::int32_t* level_out = nullptr; // [N] output: level this env is on after the decision's update, -1 = not yet known
     float* progress_out = nullptr;     // [N] output: current within-level progress / PROGRESS_UNIT after the decision, NaN = not valid now
+    std::int64_t* cell_out = nullptr;   // optional [N], grid reward/debug only
+    int grid_limit = 0;                // opt-in SMB entrance attempts: first death, native clear, or decision limit
+    int grid_cell_size = 32;
+    // Attempts (rl/routes.py, rl/explore.py): with attempt_limit > 0 an episode started from a saved slot is one
+    // attempt at its level. It ends at the level event (clear), the first death, after attempt_limit decisions, or when
+    // kill[env] != 0; the reward stays reward10's. Power-on episodes are unchanged. A start from a place slot then
+    // skips the random idle frames (a saved mid-level state need not survive half a second without input).
+    int attempt_limit = 0;
+    const std::uint8_t* kill = nullptr;      // optional [N] input
+    std::int32_t* cur_start_out = nullptr;   // optional [N] output: slot the current episode started from, -1 = power-on
+    bool attempt_through = false;            // an attempt goes on through level events (one life across the whole game)
+    bool only_kill = false;                  // an attempt ends only by its limit or kill[] (not death / game over / win)
+    bool allow_skip = false;                 // skipping levels (SMB warp zones) does not end the episode
+    // exact restores (rl/explore.py --whole-game): a start from a saved slot plays no restart frames, so the first
+    // decision acts on the saved state itself (a death in those frames would otherwise go unnoticed by the tracker)
+    bool restore_exact = false;
+    // optional search data (rl/explore.py, never an actor input): ram_out[env * ram_n + k] = RAM[ram_addr[k]]
+    std::uint8_t* ram_out = nullptr;
+    const std::int32_t* ram_addr = nullptr;
+    int ram_n = 0;
 };
 
 RLM_HD inline void atomic_min_u64(unsigned long long* p, unsigned long long v) {
@@ -232,6 +280,7 @@ RLM_HD inline void reset_state(GameCtx& g, Common& c, int e) {
                 if (g.lv_deaths[s] >= 0 && pick-- == 0) lv = s;
         }
     }
+    if (c.attempt_limit > 0 && lv >= g.lv_levels) idle = 0;
     const int k = lv < 0 && idle <= g.idle_tmpl ? idle : 0;   // snapshot used; frames beyond it are emulated
     std::uint32_t off = 0;
     for (int i = 0; i < g.nitems; ++i) {
@@ -247,6 +296,7 @@ RLM_HD inline void reset_state(GameCtx& g, Common& c, int e) {
         c.target[ge] = g.lv_target[lv];
         c.ep_frame[ge] = g.lv_frame[lv];
         c.st[ge] = g.lv_st[lv];
+        if (c.grid_limit > 0) c.st[ge].deaths = 0;
         for (std::uint32_t q = 0; q < g.key_cap; ++q) keys[q] = g.lv_keys[static_cast<std::uint64_t>(lv) * g.key_cap + q];
     } else {
         c.target[ge] = g.tmpl_target + static_cast<std::uint64_t>(k) * rlm::kFrameDots;
@@ -255,6 +305,7 @@ RLM_HD inline void reset_state(GameCtx& g, Common& c, int e) {
         for (std::uint32_t q = 0; q < g.key_cap; ++q) keys[q] = 0;
     }
     if (c.ep_start != nullptr) c.ep_start[ge] = lv;
+    if (c.cur_start_out != nullptr) c.cur_start_out[ge] = lv;
     c.fault[ge] = 0;
     rlc::dropout_reset(c.drop[ge], seed, c.dropout != 0);
     c.prev_applied[ge] = 0;
@@ -269,16 +320,39 @@ RLM_HD inline void ph_finish(GameCtx& g, Common& c, int e) {
     const rl10::KeySet set{keys, g.key_cap};
     const rl10::Update u = rl10::update(
         g.game, g.b.cpu.ram + static_cast<std::uint64_t>(e) * nesle::cuda::kCpuRamBytes, kFramesPerDecision,
-        c.st[ge], set);
+        c.st[ge], set, c.guide_discount, c.grid_limit > 0, c.allow_skip, &g.table);
+    const std::uint8_t* ram = g.b.cpu.ram + static_cast<std::uint64_t>(e) * nesle::cuda::kCpuRamBytes;
+    const bool grid = c.grid_limit > 0;
+    const bool attempt = !grid && c.attempt_limit > 0 && c.ep_start != nullptr && c.ep_start[ge] >= 0;
+    const bool died = (grid || attempt) && (u.events & rl10::kEvDeath) != 0;
+    const bool castle_clear = grid && g.game == rl10::kGame_smb && ram[0x770] == 2;
+    const bool limit = (grid && c.ep_len[ge] + 1 >= c.grid_limit) ||
+        (attempt && (c.ep_len[ge] + 1 >= c.attempt_limit || (c.kill != nullptr && c.kill[ge] != 0)));
     const bool faulted = c.fault[ge] != 0;
-    const bool level_clear = !u.done && !faulted && c.episode_level_end >= 0 &&
-        (u.events & rl10::kEvLevel) != 0 && u.event_level == c.episode_level_end + 1;
-    const bool done = u.done || faulted || level_clear;
-    const float r = faulted ? 0.0f : static_cast<float>(u.reward);
+    const bool level_clear = !faulted && (castle_clear || (!u.done && (u.events & rl10::kEvLevel) != 0 &&
+        (grid || (attempt && !c.attempt_through) || (c.episode_level_end >= 0 && u.event_level == c.episode_level_end + 1))));
+    const bool done = attempt && c.only_kill ? faulted || limit : u.done || faulted || level_clear || died || limit;
+    // The SMB maze guide's potential is zero at every episode end (reward10.cuh). update() sees to that at its own
+    // endings and when the level is left; an attempt's first death or limit is an end it does not know of. Left
+    // unpaid there, a death kept the potential that a clear gives back, and dying at 7-4's Bowser beat clearing.
+    const double guide_end = attempt && g.game == rl10::kGame_smb && !u.done && !level_clear && c.st[ge].has_key
+        ? -c.guide_discount * c.st[ge].key_d : 0.0;
+    const float r = faulted ? 0.0f : grid ? -0.0001f + (level_clear ? 10.0f : died ? -0.5f : 0.0f)
+                                               : static_cast<float>(u.reward + (done ? guide_end : 0.0));
     c.reward[ge] = r;
     if (c.parts != nullptr)
         for (int k = 0; k < rl10::kNumParts; ++k)
-            c.parts[static_cast<std::uint64_t>(ge) * rl10::kNumParts + k] = faulted ? 0.0f : static_cast<float>(u.part[k]);
+            c.parts[static_cast<std::uint64_t>(ge) * rl10::kNumParts + k] = faulted ? 0.0f : static_cast<float>(
+                u.part[k] + (done && k == rl10::kPartProgress ? guide_end : 0.0));
+    if (grid && c.parts != nullptr) {
+        float* p = c.parts + static_cast<std::uint64_t>(ge) * rl10::kNumParts;
+        for (int k = 0; k < rl10::kNumParts; ++k) p[k] = 0.0f;
+        if (!faulted) {
+            p[rl10::kPartLevel] = level_clear ? 10.0f : 0.0f;
+            p[rl10::kPartDeath] = died && !level_clear ? -0.5f : 0.0f;
+            p[rl10::kPartStall] = -0.0001f;
+        }
+    }
     c.done[ge] = done ? 1 : 0;
     c.events[ge] = u.events;
     c.ep_ret[ge] += r;
@@ -292,13 +366,17 @@ RLM_HD inline void ph_finish(GameCtx& g, Common& c, int e) {
     if (c.level_out != nullptr) c.level_out[ge] = c.st[ge].has_best_level ? c.st[ge].best_level : -1;
     if (c.progress_out != nullptr)
         c.progress_out[ge] = c.st[ge].has_prev && c.st[ge].prev.progress_valid
-            ? static_cast<float>(c.st[ge].prev.progress / rl10::RL10_ARR(kGameConsts)[g.game].progress_unit) : NAN;
+            ? static_cast<float>(c.st[ge].prev.progress / (g.game >= rl10::kNumGames ? g.table.progress_unit
+                                 : rl10::RL10_ARR(kGameConsts)[g.game].progress_unit)) : NAN;
+    if (c.cell_out != nullptr) c.cell_out[ge] = g.game == rl10::kGame_smb ? smb_grid_cell(ram, c.grid_cell_size) : -1;
+    for (int k = 0; k < c.ram_n; ++k) c.ram_out[static_cast<std::uint64_t>(ge) * c.ram_n + k] = ram[c.ram_addr[k] & 0x7FF];
     if (done) {
         if (c.start_out != nullptr) c.start_out[ge] = c.ep_start != nullptr ? c.ep_start[ge] : -1;
         float* inf = c.info + static_cast<std::uint64_t>(ge) * kInfo;
         inf[0] = c.ep_ret[ge];
         inf[1] = static_cast<float>(c.ep_len[ge]);
-        inf[2] = static_cast<float>(faulted ? kEndFault : level_clear ? kEndLevelClear : c.st[ge].end_reason);
+        inf[2] = static_cast<float>(faulted ? kEndFault : level_clear ? kEndLevelClear : died ? kEndDeath :
+                                    limit ? kEndLimit : c.st[ge].end_reason);
         inf[3] = static_cast<float>(c.st[ge].deaths);
         inf[4] = static_cast<float>(c.ep_maxlvl[ge]);
         inf[5] = c.st[ge].overflow ? 1.0f : 0.0f;
@@ -321,6 +399,7 @@ template <nesle::cuda::BankMode Mode>
 RLM_HD inline void ph_reset_frame(GameCtx& g, Common& c, int e) {
     const int ge = g.offset + e;
     if (c.resetting[ge] == 0) return;
+    if (c.restore_exact && c.ep_start != nullptr && c.ep_start[ge] >= 0) return;
     emu_frame<Mode>(g, c, e, ge, 0, true);
 }
 
@@ -331,13 +410,20 @@ RLM_HD inline void ph_reset_finish_controls(GameCtx& g, Common& c, int e) {
         std::uint32_t* keys = g.keys + static_cast<std::uint64_t>(e) * g.key_cap;
         const rl10::KeySet set{keys, g.key_cap};
         (void)rl10::update(g.game, g.b.cpu.ram + static_cast<std::uint64_t>(e) * nesle::cuda::kCpuRamBytes,
-                           c.ep_idle[ge] + kFramesPerDecision, c.st[ge], set);
+                           c.ep_idle[ge] + kFramesPerDecision, c.st[ge], set, 1.0, false, c.allow_skip, &g.table);
         c.ep_ret[ge] = 0.0f;
         c.ep_len[ge] = 0;
         const int sl = c.ep_start != nullptr ? c.ep_start[ge] : -1;   // a place: its level is the tracker's
         c.ep_maxlvl[ge] = sl >= g.lv_levels ? (c.st[ge].has_best_level ? c.st[ge].best_level : 0) : sl > 0 ? sl : 0;
         c.resetting[ge] = 0;
     }
+    if (c.cell_out != nullptr)
+        c.cell_out[ge] = g.game == rl10::kGame_smb
+            ? smb_grid_cell(g.b.cpu.ram + static_cast<std::uint64_t>(e) * nesle::cuda::kCpuRamBytes, c.grid_cell_size) : -1;
+    // the RAM output after an episode start is the new episode's (like the picture), not the ended one's
+    for (int k = 0; k < c.ram_n; ++k)
+        c.ram_out[static_cast<std::uint64_t>(ge) * c.ram_n + k] =
+            g.b.cpu.ram[static_cast<std::uint64_t>(e) * nesle::cuda::kCpuRamBytes + (c.ram_addr[k] & 0x7FF)];
     write_controls(g, c, ge);
 }
 

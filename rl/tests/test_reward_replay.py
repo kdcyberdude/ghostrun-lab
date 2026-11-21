@@ -13,6 +13,7 @@ usage: python -m pytest rl/tests/test_reward_replay.py -q      (or run directly 
 """
 from __future__ import annotations
 
+import ctypes
 import subprocess
 import sys
 from pathlib import Path
@@ -39,22 +40,24 @@ def build_lib():
     return hostlib.load()
 
 
-def c_replay(lib, gid, rams, frames):
+def c_replay(lib, gid, rams, frames, guide_discount=1.0):
     n = len(rams)
     rams = np.ascontiguousarray(rams, np.uint8)
     frames = np.ascontiguousarray(frames, np.int32)
     out = dict(reward=np.zeros(n, np.float64), done=np.zeros(n, np.uint8), events=np.zeros(n, np.uint32),
                level=np.zeros(n, np.int32), deaths=np.zeros(n, np.int32), end=np.zeros(n, np.uint8))
     p = hostlib.ptr
-    overflow = lib.rl10_replay(gid, p(rams), n, p(frames), p(out['reward']), p(out['done']), p(out['events']),
-                               p(out['level']), p(out['deaths']), p(out['end']))
+    args = (gid, p(rams), n, p(frames), p(out['reward']), p(out['done']), p(out['events']),
+            p(out['level']), p(out['deaths']), p(out['end']))
+    overflow = (lib.rl10_replay(*args) if guide_discount == 1.0
+                else lib.rl10_replay_discount(ctypes.c_double(guide_discount), *args))
     assert overflow == 0, 'key set overflow'
     return out
 
 
-def py_episode(g, rams, frames):
+def py_episode(g, rams, frames, guide_discount=1.0):
     """Python RewardTracker over snapshots until done; returns per-step rows and the index after the episode."""
-    tr = RewardTracker(g)
+    tr = RewardTracker(g, guide_discount=guide_discount)
     rows = []
     for i in range(len(rams)):
         r, done, ev = tr.update(rams[i], i, frames=int(frames[i]))
@@ -169,3 +172,59 @@ if __name__ == '__main__':
                 tot[k] += s[k]
         print(f'{slug:13s} {path.parent.name[:12]:12s} {path.name:28s} identical: {tot["steps"]:7d} updates, {tot["episodes"]:4d} episodes, '
               f'{tot["events"]:5d} events, reward sum {tot["reward"]:.3f}')
+
+
+def test_smb_maze_guide_matches_python_and_cpp():
+    """The maze guide (smb.MAZE_GUIDE) on random walks through 4-4, 7-4 and 8-4: loops back, pipe jumps, other areas,
+    deaths and invalid positions; the port must pay the same doubles."""
+    lib = build_lib()
+    g = contract.load('smb')
+    rng = np.random.default_rng(7)
+    for level in sorted(g.MAZE_GUIDE) + [14]:
+        area = g.MAZE_GUIDE.get(level, (0x60,))[0]
+        rams, x = [], 40
+        for t in range(3000):
+            x = int(np.clip(x + rng.integers(-12, 25), -300, 5000))
+            if rng.random() < 0.01:
+                x -= 1024                     # a loop
+            if rng.random() < 0.005:
+                x += int(rng.integers(300, 1600))   # a pipe
+            r = np.zeros(2048, np.uint8)
+            r[0x770], r[0x772], r[0x75A] = 1, 3, 2
+            r[0x0E] = 8 if rng.random() > 0.03 else int(rng.choice([3, 6, 7, 0xB]))
+            r[0x75F], r[0x75C] = level // 4, level % 4
+            r[0x6D], r[0x86] = (x // 256) % 256, x % 256
+            r[0xCE] = int(rng.choice([64, 80, 96, 112, 128, 176, int(rng.integers(0, 256))]))
+            r[0x750] = (area | int(rng.choice([0, 0x80]))) if rng.random() > 0.05 else 0x02
+            r[0x74E] = 3 if rng.random() > 0.1 else int(rng.choice([0, 1, 2]))   # area type (8-4 water part = 0)
+            r[0x725], r[0x745] = int(rng.integers(0, 12)), int(rng.integers(0, 2))  # native 4-4 loop checks
+            passes = int(rng.integers(0, 3)); r[0x6DA], r[0x6D9] = passes, int(rng.integers(0, passes + 1))  # 7-4 group
+            rams.append(r)
+        rams = np.stack(rams)
+        frames = np.full(len(rams), 4, np.int32)
+        i = 0
+        while i < len(rams):
+            rows, j = py_episode(g, rams[i:], frames[i:])
+            c = c_replay(lib, GAMES.index('smb'), rams[i:i + j], frames[i:i + j])
+            for k, row in enumerate(rows):
+                assert c['reward'][k] == row[0], (level, i + k, c['reward'][k], row[0])
+            i += j
+
+
+def test_smb_discounted_guide_matches_cpp_through_loops_animations_and_win():
+    lib = build_lib()
+    rams = []
+    for x, routine, mode in ([(2608, 8, 1), (1536, 8, 1)] +
+                              [(x, 8, 1) for x in range(1548, 2557, 12)] +
+                              [(1536, 8, 1), (2448, 8, 1), (2448, 7, 1), (2448, 7, 1), (2448, 8, 1), (2448, 8, 2)]):
+        r = np.zeros(2048, np.uint8)
+        r[0x770], r[0x772], r[0x0E], r[0x75A] = mode, 3, routine, 2
+        r[0x75F], r[0x75C], r[0x750], r[0x74E] = 7, 3, 0xE5, 3
+        r[0x6D], r[0x86], r[0xCE] = x // 256, x % 256, 64
+        rams.append(r)
+    rams = np.stack(rams)
+    frames = np.full(len(rams), 4, np.int32)
+    for discount in (1.0, 0.995, 0.999):
+        rows, _ = py_episode(contract.load('smb'), rams, frames, discount)
+        c = c_replay(lib, GAMES.index('smb'), rams, frames, discount)
+        assert list(zip(*(c[k] for k in ('reward', 'done', 'events', 'level', 'deaths', 'end')))) == rows

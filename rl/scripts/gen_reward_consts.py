@@ -87,7 +87,23 @@ def build() -> str:
           f'constexpr double kPunchProgressUnit = {hx(p.PROGRESS_UNIT)};',
           'constexpr int kZeldaItemAddr[] = {' + ', '.join(f'0x{a:X}' for a in z.ITEMS) + '};',
           'constexpr int kZeldaItemCap[] = {' + ', '.join(str(v) for v in z.ITEMS.values()) + '};',
-          f'constexpr int kZeldaNumItems = {len(z.ITEMS)};',
+          f'constexpr int kZeldaNumItems = {len(z.ITEMS)};', '']
+    # SMB maze guide (smb.MAZE_GUIDE): per level its area pointer and a run of segments in kSmbGuideSegs
+    smb = mods['smb']
+    g_rows, g_index = [], []
+    for lv, (ptr, segs) in sorted(smb.MAZE_GUIDE.items()):
+        g_index.append(f'    {{{lv}, 0x{ptr:X}, {len(g_rows)}, {len(segs)}}},')
+        g_rows += [f'    {{{a}, {b}, {c}, {d}, {e}, {f}}},' for (a, b, c, d, e, f) in segs]
+    L += ['struct SmbGuideSeg { int start, tx, ty, pipe, vx, vy; };',
+          'struct SmbGuideLevel { int level, area, first, count; };',
+          f'constexpr int kSmbGuideNumLevels = {len(g_index)};',
+          f'constexpr SmbGuideSeg kSmbGuideSegs[{len(g_rows)}] = {{', *g_rows, '};',
+          f'constexpr SmbGuideLevel kSmbGuideLevels[{len(g_index)}] = {{', *g_index, '};',
+          f'constexpr double kSmbGuideW = {hx(smb.GUIDE_W)};',
+          f'constexpr double kSmbGuideYSpan = {hx(smb.GUIDE_Y_SPAN)};',
+          f'constexpr double kSmbGuidePipePast = {hx(smb.GUIDE_PIPE_PAST)};',
+          f'constexpr int kSmb84WaterBase = {smb.SMB84_WATER_BASE};',
+          f'constexpr int kSmb84FinalShift = {smb.SMB84_FINAL_SHIFT};',
           '', '}  // namespace rl10', '']
     return '\n'.join(device_copies(L))
 

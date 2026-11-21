@@ -33,8 +33,9 @@ constexpr int kObsPixels = kObsW * kObsH;
 
 // Every per-env array of a BatchBuffers in a fixed order. `alloc_raw(elem_bytes, count) -> void*` gives each array; the same order
 // is used for the host machine (1 env) and the device batch (n envs), so a host state can be uploaded slot by slot.
+// ext_bytes: the board's extra per-env memory (MMC5, cart.ext_ram_bytes); 0 = none, and the array list is unchanged.
 template <class Alloc>
-void bind_arrays(BatchBuffers& b, bool chr_ram, bool paged, Alloc&& alloc_raw) {
+void bind_arrays(BatchBuffers& b, bool chr_ram, bool paged, Alloc&& alloc_raw, std::uint32_t ext_bytes = 0) {
 #define RLM_A(field, count) \
     (field) = static_cast<std::remove_reference_t<decltype(field)>>(alloc_raw(sizeof(*(field)), (count)))
     RLM_A(b.cpu.pc, 1); RLM_A(b.cpu.a, 1); RLM_A(b.cpu.x, 1); RLM_A(b.cpu.y, 1); RLM_A(b.cpu.sp, 1); RLM_A(b.cpu.p, 1);
@@ -60,6 +61,7 @@ void bind_arrays(BatchBuffers& b, bool chr_ram, bool paged, Alloc&& alloc_raw) {
     RLM_A(b.action_masks, 1); RLM_A(b.done, 1); RLM_A(b.rewards, 1);
     RLM_A(b.previous_mario_x, 1); RLM_A(b.previous_mario_time, 1);
     b.frames_rgb = nullptr;  // pictures go to the env's own observation buffer
+    if (ext_bytes != 0) { RLM_A(b.mapper.ext_ram, ext_bytes); } else { b.mapper.ext_ram = nullptr; }
 #undef RLM_A
 }
 
