@@ -12,7 +12,11 @@
   -> ordered action heads: d-pad (9) -> A (3) -> B (3) -> Start (2) -> Select (2), each conditioned on the earlier
      choices and masked by the legal parts the env reports
   -> value: HL-Gauss categorical head (101 bins) over per-game normalised returns.
-No reward, game id or RAM is an input to the actor (the mood is a random number, not game data).
+No reward, game id or RAM is an input to the actor (the mood is a random number, not game data), except with
+ram=True (coverage experiment, 2026-11-16): the 2 KB CPU RAM after the last decision is an input too (its 16,384 bits
+-> Linear 32, ReLU, into the Linear before the SimBa blocks), and `ram_logits` predicts which RAM bits the chosen move
+will flip by the next decision (from the GRU output + the move; a low-rank bilinear readout: per address a learned
+64-vector, per bit position a 64-vector computed from the core), trained as an auxiliary loss.
 """
 from __future__ import annotations
 
@@ -92,8 +96,16 @@ class HLGauss:
 
 
 class Policy(nn.Module):
-    def __init__(self, core=512, mlp_mult=4, cnn=(32, 64, 64), stem=16, bins=101, moods=0):
+    def __init__(self, core=512, mlp_mult=4, cnn=(32, 64, 64), stem=16, bins=101, moods=0, ram=False):
         super().__init__()
+        self.ram = ram
+        RAM_IN, RAM_D = 32, 64
+        if ram:
+            self.register_buffer('bit_shift', torch.arange(8, dtype=torch.uint8), persistent=False)
+            self.ram_in = nn.Linear(2048 * 8, RAM_IN)
+            self.ram_q = nn.Linear(core + sum(SIZES), 8 * RAM_D)
+            self.ram_addr = nn.Parameter(torch.randn(2048, RAM_D) / RAM_D ** 0.5)
+            self.ram_bias = nn.Parameter(torch.full((2048, 8), -4.0))   # bits rarely flip: start near p = 0.02
         self.register_buffer('palette', torch.tensor(RGB, dtype=torch.float32) / 255.0, persistent=False)
         # (R, G, B, 0) per colour: 4 frames x 4 = 16 channels, the width the tensor-core convolutions want without
         # cuDNN's padding pass; the stem's weight gets a matching zero column, so the result is the same 12-channel conv
@@ -108,7 +120,7 @@ class Policy(nn.Module):
         self.cnn_out = c
         self.timeline = nn.Linear(8 * 45, 64)
         self.moods = moods
-        self.inp = nn.Linear(c + 64 + sum(SIZES) + moods, core)
+        self.inp = nn.Linear(c + 64 + sum(SIZES) + moods + (RAM_IN if ram else 0), core)
         self.blocks = nn.Sequential(SimbaBlock(core, mlp_mult), SimbaBlock(core, mlp_mult))
         self.ln = nn.LayerNorm(core)
         self.gru = nn.GRUCell(core, core)
@@ -148,8 +160,20 @@ class Policy(nn.Module):
         return F.conv2d(x, w4.contiguous(memory_format=torch.channels_last),
                         None if self.stem.bias is None else self.stem.bias.to(w4.dtype), stride=2)
 
-    def encode(self, obs, emph, timeline, prev_parts, mood=None):
-        """Everything before the GRU, for any batch of frames (no recurrence): -> [B, core]. mood [B] long (moods > 0)."""
+    def bits(self, ram):
+        """ram [B, 2048] uint8 -> [B, 2048, 8] 0/1 uint8 (bit k of each byte)."""
+        return (ram.unsqueeze(-1) >> self.bit_shift) & 1
+
+    def ram_logits(self, h, parts):
+        """h [B, core] GRU output, parts: the move taken -> [B, 2048, 8] logits that each RAM bit differs at the
+        next decision."""
+        a = torch.cat([h] + [F.one_hot(parts[k], n).to(h.dtype) for k, n in enumerate(SIZES)], 1)
+        q = self.ram_q(a).view(h.shape[0], 8, -1)
+        return torch.einsum('ad,bkd->bak', self.ram_addr.to(q.dtype), q) + self.ram_bias.to(q.dtype)
+
+    def encode(self, obs, emph, timeline, prev_parts, mood=None, ram=None):
+        """Everything before the GRU, for any batch of frames (no recurrence): -> [B, core]. mood [B] long (moods > 0).
+        ram [B, 2048] uint8 (ram=True models)."""
         dt = torch.get_autocast_dtype('cuda') if torch.is_autocast_enabled('cuda') else None
         if obs.is_cuda and dt == torch.bfloat16 and self.fused_stem:
             from fused import fused_stem
@@ -161,6 +185,8 @@ class Policy(nn.Module):
         t = F.relu(self.timeline(timeline.float().flatten(1)))
         p = torch.cat([F.one_hot(prev_parts[k], n) for k, n in enumerate(SIZES)], 1).to(x.dtype)
         extra = [F.one_hot(mood, self.moods).to(x.dtype)] if self.moods else []
+        if self.ram:
+            extra.append(F.relu(self.ram_in(self.bits(ram).flatten(1).to(x.dtype))))
         z = self.inp(torch.cat([x, t.to(x.dtype), p] + extra, 1))
         return self.ln(self.blocks(z))
 

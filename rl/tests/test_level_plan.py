@@ -21,6 +21,26 @@ N = 16
 KW = dict(seed=11, sticky=True, idle_max=30, dropout=True, level_cap=64)
 
 
+def test_saved_level_summary_counts_final_level_wins_and_reports_ends():
+    from types import SimpleNamespace
+    from train import Trainer
+
+    owner = SimpleNamespace(ddp=False, episodes=[
+        dict(game='smb', start=31, level=31, end='won'),
+        dict(game='smb', start=31, level=31, end='game_over'),
+        dict(game='smb', start=27, level=28, end='game_over'),
+        dict(game='smb', start=27, level=27, end='stall'),
+        dict(game='smb', start=15, level=16, end='level_clear'),
+    ])
+    power_on, levels = Trainer.episode_summary(owner)
+    assert power_on == {}
+    assert levels['smb']['n'] == 5
+    assert levels['smb']['cleared'] == 3
+    assert levels['smb']['by_start'] == {'31': [2, 1], '27': [2, 1], '15': [1, 1]}
+    assert levels['smb']['ends'] == {'won': 1, 'game_over': 2, 'stall': 1, 'level_clear': 1}
+    assert owner.episodes == []
+
+
 def rules():
     def plan_with(rows):
         """rows: level -> (visits, clears)."""

@@ -224,6 +224,151 @@ def gpu_check(m, n=16, steps=3000):
           f'progress valid {valid / (steps * n):.0%}')
 
 
+def test_equal_rarity_places_refresh_without_duplicate_destinations():
+    class Env:
+        def place_copy(self, gi, src, dst):
+            self.src, self.dst = src, dst
+
+    pl = Places(1, 1, 64, 2, 2, 1, 1, 2, 'cpu', seed=1)
+    pl.known = torch.tensor([10, 20, 30, 40])
+    pl.count = torch.ones(4, dtype=torch.float64)
+    pl.slot_key[0] = [10, 20]
+    pl.slot_level[0] = 27
+    pl.st_key[0] = torch.tensor([30, 40])
+    pl.st_level[0] = 27
+    pl.st_ok[0] = True
+    env = Env()
+    pl.end_rollout(env)
+    assert set(pl.slot_key[0]) == {30, 40}
+    assert len(env.dst) == len(set(env.dst)) == 2
+    assert env.src == [pl.stage0, pl.stage0 + 1]
+    assert pl.report(0) == {27: 2}
+
+
+def test_more_frequent_places_do_not_displace_rare_places():
+    class Env:
+        def place_copy(self, gi, src, dst):
+            assert src == dst == []
+
+    pl = Places(1, 1, 64, 2, 2, 1, 1, 2, 'cpu', seed=1)
+    pl.known = torch.tensor([10, 20, 30, 40])
+    pl.count = torch.tensor([1., 1., 2., 2.], dtype=torch.float64)
+    pl.slot_key[0] = [10, 20]
+    pl.slot_level[0] = 27
+    pl.st_key[0] = torch.tensor([30, 40])
+    pl.st_level[0] = 27
+    pl.st_ok[0] = True
+    pl.end_rollout(Env())
+    assert pl.slot_key[0].tolist() == [10, 20]
+
+
+
+def test_doors_come_from_explorers_new_jumps_and_close_on_learners_own_jumps():
+    """An explorer's try followed by a jump on in the level that no learner has made -> a door place (the try's start,
+    its move); walking, a death's restart, a jump back and a learner's jump while replaying a move do not count; the
+    learners' own jump closes it."""
+    from places import DOOR_SHARE, DOOR_WARMUP
+
+    class Env:
+        def __init__(self):
+            self.saves, self.copies = [], []
+
+        def place_save(self, gi, env_idx, slot_idx):
+            self.saves.append(slot_idx.tolist())
+
+        def place_copy(self, gi, src, dst):
+            self.copies.append((list(src), list(dst)))
+
+    def key(x, area=101, lvl=31, y=176):
+        return (((lvl * 128 + area) << 12 | x // 8) << 6) | y // 8
+
+    pl = Places(1, 3, 64, 8, 1, 4, 1, 4, 'cpu', seed=1, readmit=True, explorers=np.array([False, True, False]),
+                game_rows=[(0, 3)])
+    assert pl.tslot.tolist() == [-1, pl.stage0 + 4, -1] and pl.cap == pl.stage0 + 4 + 1
+    pl.rollouts = DOOR_WARMUP - 1      # one more rollout and the learners' jumps have been collected long enough
+    env, sl, lv = Env(), slice(0, 3), torch.full((3,), 31)
+    no, learners = torch.zeros(3, dtype=torch.bool), torch.tensor([True, False, True])
+
+    def step(t, xs, death=no, own=learners):
+        k = torch.tensor([key(x) for x in xs])
+        pl.step(env, t, 0, 0, 0, sl, None, None, lv, torch.tensor(xs) / 3000.0, no, k, learners, death, own)
+
+    step(0, [2400, 2400, 2400])
+    pl.save_tries(env, 0, sl, 0, torch.tensor([False, True, False]), torch.tensor([key(2400)] * 3), lv,
+                  torch.tensor([[5, 5, 5], [0, 0, 0], [0, 0, 0]]), torch.full((3,), 8))
+    assert env.saves[-1] == [-1, pl.stage0 + 4, -1]
+    step(1, [2600, 3128, 2400], death=torch.tensor([False, False, True]))   # walk / the explorer's jump / a death
+    step(2, [2700, 3200, 40])                                               # walk / walk / the death's restart
+    step(3, [2800, 3300, 60])
+    pl.end_rollout(env)
+    assert (pl.slot_door[0] >= 0).sum() == 0             # within the warm-up no door is kept
+    pl.rollouts = DOOR_WARMUP
+    pl.save_tries(env, 0, sl, 0, torch.tensor([False, True, False]), torch.tensor([key(2400)] * 3), lv,
+                  torch.tensor([[7, 7, 7], [0, 0, 0], [0, 0, 0]]), torch.full((3,), 8))
+    step(0, [2900, 3300, 80])
+    step(1, [3000, 1300, 90])                                               # the explorer's jump back
+    pl.end_rollout(env)
+    assert (pl.slot_door[0] >= 0).sum() == 0
+    pl.t_key.fill_(-1)                                                      # that try is over
+    step(0, [2400, 2400, 2400])
+    pl.save_tries(env, 0, sl, 0, torch.tensor([False, True, False]), torch.tensor([key(2400)] * 3), lv,
+                  torch.tensor([[5, 5, 5], [0, 0, 0], [0, 0, 0]]), torch.full((3,), 8))
+    step(1, [2600, 3128, 2400], death=torch.tensor([False, False, True]))
+    step(2, [2700, 3200, 40])
+    pl.end_rollout(env)
+    d = np.flatnonzero(pl.slot_door[0] >= 0)
+    assert len(d) == 1 and pl.t_key[1] == -1              # the try opened its door: it is used up and pl.slot_level[0, d[0]] == 31 and pl.slot_key[0, d[0]] == key(2400)
+    assert env.copies[-1] == ([pl.stage0 + 4], [64 + int(d[0])])
+    assert not bool((pl.ltrans == int(pl.slot_door[0, d[0]])).any()) and pl.last['door_added'] == 1
+    mv, ln = pl.door_of(torch.tensor([0, 0]), torch.tensor([64 + int(d[0]), 3]))
+    assert mv[0].tolist() == [5, 0, 0] and ln.tolist() == [8, 0]
+    w = pl.weights(0, np.eye(64)[31], np.zeros(64))
+    assert abs(w[64 + d[0]] - DOOR_SHARE) < 1e-9 and abs(w.sum() - 1) < 1e-9
+    # a learner makes the same jump while replaying the door's move: still a door; with its own moves: an ordinary place
+    step(0, [2400, 2400, 2400])
+    step(1, [3128, 2400, 2400], own=torch.tensor([False, False, True]))
+    pl.end_rollout(env)
+    assert (pl.slot_door[0] >= 0).sum() == 1
+    step(0, [2400, 2400, 2400])
+    step(1, [3128, 2400, 2400])
+    pl.end_rollout(env)
+    assert (pl.slot_door[0] >= 0).sum() == 0 and pl.last['door_opened'] == 1 and pl.slot_key[0, d[0]] == key(2400)
+
+
+
+def test_a_try_ends_with_its_game():
+    """A jump after the explorer's game ended (e.g. a new game started at a door place replaying its move) is not the
+    old try's doing."""
+    from places import DOOR_WARMUP
+
+    class Env:
+        def place_save(self, gi, env_idx, slot_idx):
+            pass
+
+        def place_copy(self, gi, src, dst):
+            pass
+
+    def key(x):
+        return (((31 * 128 + 101) << 12 | x // 8) << 6) | 22
+
+    pl = Places(1, 2, 64, 8, 1, 4, 1, 4, 'cpu', seed=1, readmit=True, explorers=np.array([False, True]),
+                game_rows=[(0, 2)])
+    pl.rollouts = DOOR_WARMUP
+    env, sl, lv, learners = Env(), slice(0, 2), torch.full((2,), 31), torch.tensor([True, False])
+
+    def step(t, xs, fresh):
+        pl.step(env, t, 0, 0, 0, sl, None, None, lv, torch.tensor(xs) / 3000.0, torch.tensor(fresh),
+                torch.tensor([key(x) for x in xs]), learners, torch.zeros(2, dtype=torch.bool), learners)
+
+    step(0, [100, 4800], [False, False])
+    pl.save_tries(env, 0, sl, 0, torch.tensor([False, True]), torch.tensor([key(4800)] * 2), lv,
+                  torch.tensor([[2, 2], [1, 1], [0, 0]]), torch.full((2,), 8))
+    step(1, [110, 2400], [False, True])          # the explorer's game ends; the next starts near the pipe
+    step(2, [120, 3128], [False, False])         # ... and goes through it
+    pl.end_rollout(env)
+    assert (pl.slot_door[0] >= 0).sum() == 0
+
+
 if __name__ == '__main__':
     torch.set_num_threads(8)
     model = policy(sys.argv[1])
@@ -233,3 +378,35 @@ if __name__ == '__main__':
         exact_replay(model)
         grow_old_state(model)
         bookkeeping(model)
+
+
+def test_full_archive_shares_slots_with_a_level_that_has_none():
+    """Every slot held by level 15 (trained first); a new place of level 27 takes level 15's most seen place."""
+    class Env:
+        def place_copy(self, gi, src, dst):
+            self.last = (list(src), list(dst))
+
+    pl = Places(1, 2, 64, 8, 1, 4, 1, 8, 'cpu', seed=1, share=True)
+    pl.slot_level[0, :] = 15
+    pl.slot_key[0, :] = np.arange(8) + 1000
+    pl.known = torch.tensor(np.arange(8) + 1000, dtype=torch.int64)
+    pl.count = torch.tensor([5., 9., 1., 1., 1., 1., 1., 1.], dtype=torch.float64)
+    pl.st_key[0, 0], pl.st_level[0, 0], pl.st_ok[0, 0] = 77, 27, True
+    env = Env()
+    pl.end_rollout(env)
+    assert pl.slot_level[0].tolist().count(27) == 1 and pl.slot_key[0, 1] == 77      # the most seen (count 9) gave way
+    assert env.last[1] == [pl.L + 1]
+
+
+def test_level_start_keeps_half_the_failure_share():
+    """A failing level with many fresh places is still practised from its start: start = cleared + half the failure."""
+    from places import START_SHARE
+    pl = Places(1, 2, 64, 8, 1, 4, 1, 8, 'cpu', seed=1, share=True)
+    pl.slot_level[0, :] = 27
+    pl.slot_key[0, :] = np.arange(8) + 1000
+    w = np.zeros(64)
+    w[27] = 1.0
+    rate = np.full(64, 0.2)
+    full = pl.weights(0, w, rate)
+    assert abs(full[27] - (0.2 + 0.8 * START_SHARE)) < 1e-9
+    assert abs(full[pl.L:pl.L + 8].sum() - 0.8 * (1 - START_SHARE)) < 1e-9 and abs(full.sum() - 1) < 1e-9
