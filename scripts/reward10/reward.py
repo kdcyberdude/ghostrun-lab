@@ -17,6 +17,8 @@ What is optimized (identical for every game, weights below):
   + small score tiebreaker, capped per step and per level (so farming respawning enemies or
     end-of-level tallies cannot outweigh progress)
   + large bonus for finishing the game; episode ends on game over or win.
+  + optional shaping potential (Signals.guide, SMB maze castles): gamma * next potential - previous potential.
+    Gamma must match the learner's discount (1 for undiscounted search); terminal potential is zero.
   The episode also ends, with penalty W_STALL (same as a death), after STALL_SECONDS of game time (in play or not, so pausing
   or idling on a menu counts) without new progress, a new level or a death (deaths restart the clock
   because respawning behind the high-water mark is normal). A module may set its own STALL_SECONDS
@@ -61,6 +63,7 @@ class Signals:
     score: int | None = None
     game_over: bool = False
     won: bool = False
+    guide: float | None = None  # optional shaping potential; held through invalid positions, zero at termination
     extra: dict | None = None   # game-specific debug values (not used by the reward)
 
 
@@ -71,8 +74,9 @@ def idle_per_frame(game):
 
 
 class RewardTracker:
-    def __init__(self, game):
+    def __init__(self, game, guide_discount=1.0):
         self.game = game
+        self.guide_discount = guide_discount
         self.reader = game.Reader()
         stall = getattr(game, 'STALL_SECONDS', STALL_SECONDS)
         self.stall_frames = None if stall is None else stall * NES_FPS
@@ -87,6 +91,8 @@ class RewardTracker:
         self.deaths = 0
         self.idle_frames = 0    # game frames since new progress, a new level or a death
         self.score_used = 0.0   # score reward paid in the current level
+        self.guide_level = None  # level of the last valid guide potential, and that potential
+        self.guide_prev = 0.0
         self.done = False
         self.end_reason = None  # 'game_over' | 'won' | 'skip' | 'stall' once done
         self.events = []
@@ -158,6 +164,18 @@ class RewardTracker:
             r += W_STALL
             ev.append(('stall', self.idle_frames / NES_FPS))
             self.done, self.end_reason = True, 'stall'
+        guide_valid = s.in_play and s.progress_valid and s.guide is not None
+        if guide_valid or self.guide_level is not None:
+            gv = self.guide_prev if self.guide_level == s.level else 0.0
+            if guide_valid:
+                gv = s.guide
+            if self.done:
+                gv = 0.0
+            if p is not None:
+                r += self.guide_discount * gv - self.guide_prev
+            # Holding the potential through an animation still incurs its discount correction every update.
+            self.guide_level = s.level if not self.done and (guide_valid or self.guide_level == s.level) else None
+            self.guide_prev = gv
         for e in ev:
             self.events.append((t, *e))
         return r, self.done, ev
@@ -172,5 +190,6 @@ class RewardTracker:
     def state(self):
         return {'best_level': self.best_level, 'best_progress': self.best_progress,
                 'deaths': self.deaths, 'score_used': self.score_used, 'idle_frames': self.idle_frames,
+                'guide_level': self.guide_level, 'guide_prev': self.guide_prev,
                 'done': self.done, 'end_reason': self.end_reason,
                 'signals': asdict(self.prev) if self.prev else None}

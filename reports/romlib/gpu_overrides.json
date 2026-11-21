@@ -1,0 +1,1655 @@
+{
+ "Action in New York (E).nes": {
+  "gpu": "pass_ntsc",
+  "why": "RAM matches fceumm once fceumm runs it at NTSC speed (it picked PAL from the (E) in the name)"
+ },
+ "Asterix (E).nes": {
+  "gpu": "pass_ntsc",
+  "why": "RAM matches fceumm once fceumm runs it at NTSC speed (it picked PAL from the (E) in the name)"
+ },
+ "Battletoads Double Dragon (E).nes": {
+  "gpu": "pass_ntsc",
+  "why": "RAM matches fceumm once fceumm runs it at NTSC speed (it picked PAL from the (E) in the name)"
+ },
+ "Cobra Triangle (E).nes": {
+  "gpu": "pass_ntsc",
+  "why": "RAM matches fceumm once fceumm runs it at NTSC speed (it picked PAL from the (E) in the name)"
+ },
+ "Castelian (E).nes": {
+  "gpu": "pass_ntsc",
+  "why": "RAM matches fceumm once fceumm runs it at NTSC speed (it picked PAL from the (E) in the name)"
+ },
+ "Mach Rider (E) [!].nes": {
+  "gpu": "pass_ntsc",
+  "why": "RAM matches fceumm once fceumm runs it at NTSC speed (it picked PAL from the (E) in the name)"
+ },
+ "Aladdin (E) [!].nes": {
+  "gpu": "pass_ntsc",
+  "why": "RAM matches fceumm once fceumm runs it at NTSC speed (it picked PAL from the (E) in the name)"
+ },
+ "Castlevania 2 - Simon's Quest (E).nes": {
+  "gpu": "pass_ntsc",
+  "why": "RAM matches fceumm once fceumm runs it at NTSC speed (it picked PAL from the (E) in the name)"
+ },
+ "Hammerin' Harry (E) [!].nes": {
+  "gpu": "pass_ntsc",
+  "why": "RAM matches fceumm once fceumm runs it at NTSC speed (it picked PAL from the (E) in the name)"
+ },
+ "Battletoads (E).nes": {
+  "gpu": "pass_ntsc",
+  "why": "RAM matches fceumm once fceumm runs it at NTSC speed (it picked PAL from the (E) in the name)"
+ },
+ "Kirby's Adventure (E).nes": {
+  "gpu": "pass_ntsc",
+  "why": "RAM matches fceumm once fceumm runs it at NTSC speed (it picked PAL from the (E) in the name)"
+ },
+ "Kick Off (E).nes": {
+  "gpu": "pass_ntsc",
+  "why": "RAM matches fceumm once fceumm runs it at NTSC speed (it picked PAL from the (E) in the name)"
+ },
+ "F-1 Sensation (E) [!].nes": {
+  "gpu": "pass_ntsc",
+  "why": "RAM matches fceumm once fceumm runs it at NTSC speed (it picked PAL from the (E) in the name)"
+ },
+ "Adventures of Bayou Billy, The (E).nes": {
+  "gpu": "pass_ntsc",
+  "why": "RAM matches fceumm once fceumm runs it at NTSC speed (it picked PAL from the (E) in the name)"
+ },
+ "Maniac Mansion (E).nes": {
+  "gpu": "pass_ntsc",
+  "why": "RAM matches fceumm once fceumm runs it at NTSC speed (it picked PAL from the (E) in the name)"
+ },
+ "Mega Man (E) [!].nes": {
+  "gpu": "pass_ntsc",
+  "why": "RAM matches fceumm once fceumm runs it at NTSC speed (it picked PAL from the (E) in the name)"
+ },
+ "Over Horizon (E) [!].nes": {
+  "gpu": "pass_ntsc",
+  "why": "RAM matches fceumm once fceumm runs it at NTSC speed (it picked PAL from the (E) in the name)"
+ },
+ "Pinbot (E).nes": {
+  "gpu": "pass_ntsc",
+  "why": "RAM matches fceumm once fceumm runs it at NTSC speed (it picked PAL from the (E) in the name)"
+ },
+ "Mega Man 4 (E).nes": {
+  "gpu": "pass_ntsc",
+  "why": "RAM matches fceumm once fceumm runs it at NTSC speed (it picked PAL from the (E) in the name)"
+ },
+ "Smurfs, The (E) [!].nes": {
+  "gpu": "pass_ntsc",
+  "why": "RAM matches fceumm once fceumm runs it at NTSC speed (it picked PAL from the (E) in the name)"
+ },
+ "Shadow Warriors (E).nes": {
+  "gpu": "pass_ntsc",
+  "why": "RAM matches fceumm once fceumm runs it at NTSC speed (it picked PAL from the (E) in the name)"
+ },
+ "Solar Jetman - Hunt for the Golden Warpship (E).nes": {
+  "gpu": "pass_ntsc",
+  "why": "RAM matches fceumm once fceumm runs it at NTSC speed (it picked PAL from the (E) in the name)"
+ },
+ "Solstice (E) [!].nes": {
+  "gpu": "pass_ntsc",
+  "why": "RAM matches fceumm once fceumm runs it at NTSC speed (it picked PAL from the (E) in the name)"
+ },
+ "Solomon's Key (E) [!].nes": {
+  "gpu": "pass_ntsc",
+  "why": "RAM matches fceumm once fceumm runs it at NTSC speed (it picked PAL from the (E) in the name)"
+ },
+ "Goonies 2, The (E).nes": {
+  "gpu": "pass_ntsc",
+  "why": "RAM matches fceumm once fceumm runs it at NTSC speed (it picked PAL from the (E) in the name)"
+ },
+ "Super Off-Road (E) [!].nes": {
+  "gpu": "pass_ntsc",
+  "why": "RAM matches fceumm once fceumm runs it at NTSC speed (it picked PAL from the (E) in the name)"
+ },
+ "Super Sports Challenge (Aladdin) (E).nes": {
+  "gpu": "pass_ntsc",
+  "why": "RAM matches fceumm once fceumm runs it at NTSC speed (it picked PAL from the (E) in the name)"
+ },
+ "Super Turrican (E).nes": {
+  "gpu": "pass_ntsc",
+  "why": "RAM matches fceumm once fceumm runs it at NTSC speed (it picked PAL from the (E) in the name)"
+ },
+ "Terminator 2 - Judgement Day (E) [!].nes": {
+  "gpu": "pass_ntsc",
+  "why": "RAM matches fceumm once fceumm runs it at NTSC speed (it picked PAL from the (E) in the name)"
+ },
+ "Adventures of Lolo 2 (U).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "ASO - Armored Scrum Object (J) [p1].nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "4 Nin Uchi Mahjong (J) [h1].nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   3,
+   5,
+   5,
+   5
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Alpha Mission (U).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Arabian Dream Sherazaado (J) [hFFE].nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Danny Sullivan's Indy Heat (U).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   3,
+   6,
+   6,
+   5
+  ],
+  "fceumm_vs_fceux": [
+   1,
+   1,
+   1,
+   0
+  ]
+ },
+ "Big Nose Freaks Out (Aladdin) (U).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   4
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   10
+  ]
+ },
+ "Arabian Dream Sharezaado (J) [hFFE][a1].nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Bee 52 (U).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   3
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Airwolf (E).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   1
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Devil World (E) [!].nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   1,
+   1,
+   1,
+   1
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   1,
+   1,
+   1
+  ]
+ },
+ "Arkanoid 2 (J) [hFFE].nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   1,
+   1,
+   1
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   1,
+   1,
+   1
+  ]
+ },
+ "Blaster Master (E).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   2,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Challenger (J) [p1].nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   1,
+   1,
+   1,
+   1
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Bram Stoker's Dracula (U).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   1,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Doki! Doki! Yuuenchi (J) [T-Eng1.0].nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   1,
+   4,
+   4,
+   5
+  ],
+  "fceumm_vs_fceux": [
+   1,
+   4,
+   3,
+   4
+  ]
+ },
+ "Donald Land (J) [hFFE].nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   1,
+   1,
+   4
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   1,
+   3,
+   2
+  ]
+ },
+ "Double Moon Densetsu (J) [T-Eng_Partial].nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   5,
+   6,
+   6,
+   6
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Door Door (J) [p1].nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   5,
+   5,
+   6,
+   6
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Dusty Diamond's All-Star Softball (U).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   1,
+   1,
+   1
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   1,
+   1
+  ]
+ },
+ "Dough Boy (J) [p1].nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   1,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Family Feud (U).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Facemaker (Dr. PC. Jr.) (Chinese).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Final Fantasy 2 Special Edition v1.03 (Hack).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   2,
+   0,
+   0
+  ]
+ },
+ "Final Fantasy 2 Special Edition v1.02 (Hack).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   2,
+   0,
+   0
+  ]
+ },
+ "Frankenstein - The Monster Returns (U).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   1,
+   0,
+   1
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   1,
+   1,
+   1
+  ]
+ },
+ "Gumshoe (UE).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   4,
+   4,
+   4
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   1,
+   4,
+   4
+  ]
+ },
+ "Galaxy 5000 (E).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Galaxy 5000 (U).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Adventures of Bayou Billy, The (U).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   2,
+   2,
+   2
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   2,
+   2
+  ]
+ },
+ "Jajamaru no Dai Bouken (J) [hM03].nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Jovial Race (Sachen) [!].nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   2,
+   2,
+   1,
+   2
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   2,
+   2,
+   2
+  ]
+ },
+ "King Fuher (Kung Fu Heroes Hack).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Kamen Rider Kurabu (J) [hFFE].nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Little Red Hood (Xiao Hong Mao) (Joy Van).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   2,
+   4,
+   4,
+   4
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   4,
+   4,
+   4
+  ]
+ },
+ "Indora no Hikari (J) [hM02].nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   2,
+   2,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Metal Storm (U).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Joy Mecha Fight (J) [T-Eng1.0].nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Mario & Yoshi (E) [!].nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Mig-29 Soviet Fighter (U).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   10,
+   0,
+   3
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   2
+  ]
+ },
+ "Might and Magic (U).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   1,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   1,
+   0,
+   0,
+   0
+  ]
+ },
+ "Millipede (J) [p1].nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   9,
+   9,
+   8
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   8,
+   8,
+   9
+  ]
+ },
+ "Mito Koumon (J) [hFFE].nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   1,
+   1
+  ]
+ },
+ "Nintendo World Cup (E) (REV 3).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   3,
+   3
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   10,
+   10
+  ]
+ },
+ "Nintendo World Cup (E).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   2,
+   3,
+   3
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   10,
+   10,
+   10
+  ]
+ },
+ "Operation Wolf (U).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   1,
+   1,
+   1
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   3,
+   3,
+   3
+  ]
+ },
+ "Punisher, The (U).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Parasol Stars - The Story of Bubble Bobble 3 (E) [!].nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   1,
+   1,
+   2
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   1,
+   1,
+   2
+  ]
+ },
+ "Pirates! (U).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   5,
+   7,
+   7,
+   7
+  ],
+  "fceumm_vs_fceux": [
+   5,
+   4,
+   4,
+   4
+  ]
+ },
+ "Silent Service (U).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Popeye (JU) (PRG 0).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   2,
+   2,
+   2
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   3,
+   2,
+   2
+  ]
+ },
+ "Pictionary (U).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Pro Yakyuu - Family Stadium '85 PAL ('87 Hack).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Simpsons - Bart Vs the Space Mutants, The (E) [!].nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Snake's Revenge (E) [!].nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   1,
+   1,
+   1,
+   3
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   1,
+   1,
+   1
+  ]
+ },
+ "Shin Samurai Spirits 2 - Haoumaru Jigoku Hen.nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   1,
+   1,
+   0,
+   1
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   1,
+   1,
+   1
+  ]
+ },
+ "RoadBlasters (U).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Softball Tengoku (J) [T-Eng1.0].nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   1,
+   1,
+   0,
+   1
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   1,
+   1,
+   1
+  ]
+ },
+ "Shui Guo Li.nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   3,
+   3
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   3,
+   4
+  ]
+ },
+ "Spy Vs Spy (E) [!].nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   4,
+   4
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Street Fighter Alpha Zero 97 [!].nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   7,
+   1,
+   1,
+   1
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   1,
+   1,
+   1
+  ]
+ },
+ "Super Chinese (J) [hM03].nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Swords and Serpents (E) [!].nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Street Fighter Zero 2.nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   7,
+   1,
+   1,
+   1
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   1,
+   1,
+   1
+  ]
+ },
+ "VS Castlevania (VS).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Terminator 2 - Judgement Day (U).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   2,
+   2,
+   2,
+   2
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Time Lord (E).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   7,
+   3,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Top Gun (VS).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Treasure Master (U).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   2,
+   2,
+   2,
+   2
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Three Stooges (U) (Prototype).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Ultimate Stuntman (U).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Wurm (U).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "World Heroes 2.nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   1,
+   1,
+   1,
+   1
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   1,
+   1,
+   1
+  ]
+ },
+ "Vindicators (U).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Yoshi (U).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "ZZZ_UNK_Jajamaru.nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "ZZZ_UNK_Predator (Bad CHR 820203f0) (J) (245776).nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (5 s, no input); they drift apart only under button presses",
+  "nesle_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ "Bakushou Jinsei Gekijoh 3 (J) [p1][hM04].nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once the iNES trainer is copied to $7000 on every board (was FFE only)",
+  "was": "fault"
+ },
+ "Dragon Unit (J) [p1].nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once the iNES trainer is copied to $7000 on every board (was FFE only)",
+  "was": "suspect"
+ },
+ "Dragon Spirit - Aratanaru Densetsu (J) [hM04].nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once the iNES trainer is copied to $7000 on every board (was FFE only)",
+  "was": "suspect"
+ },
+ "Famista '92 (J) [hM04].nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once the iNES trainer is copied to $7000 on every board (was FFE only)",
+  "was": "suspect"
+ },
+ "Bio Senshi Dan - Increaser tono Tatakai (J) [hM34].nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once the iNES trainer is copied to $7000 on every board (was FFE only)",
+  "was": "suspect"
+ },
+ "Famista '91 (J) [hM04].nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once the iNES trainer is copied to $7000 on every board (was FFE only)",
+  "was": "suspect"
+ },
+ "Crisis Force (J) [hM04].nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once the iNES trainer is copied to $7000 on every board (was FFE only)",
+  "was": "fault"
+ },
+ "Chibi Maruko Chan - Uki Uki Shopping (J) [hM04].nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once the iNES trainer is copied to $7000 on every board (was FFE only)",
+  "was": "matches_ref"
+ },
+ "Digital Devil Story - Megami Tensei (J) [hM04].nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once the iNES trainer is copied to $7000 on every board (was FFE only)",
+  "was": "matches_ref"
+ },
+ "Famista '93 (J) [hM04].nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once the iNES trainer is copied to $7000 on every board (was FFE only)",
+  "was": "suspect"
+ },
+ "Ganbare Goemon 2 (J) [hM04].nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once the iNES trainer is copied to $7000 on every board (was FFE only)",
+  "was": "fault"
+ },
+ "Gradius 2 (J) [hM04].nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once the iNES trainer is copied to $7000 on every board (was FFE only)",
+  "was": "matches_ref"
+ },
+ "Jajamaru Ninpou Chou (J) [hM04].nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once the iNES trainer is copied to $7000 on every board (was FFE only)",
+  "was": "matches_ref"
+ },
+ "Kyuukyoku Harikiri Stadium (J) [hM04].nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once the iNES trainer is copied to $7000 on every board (was FFE only)",
+  "was": "fault"
+ },
+ "Mario Different Levels (SMB1 Hack) [a1].nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once the iNES trainer is copied to $7000 on every board (was FFE only)",
+  "was": "suspect"
+ },
+ "Mario Different Levels (Hack).nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once the iNES trainer is copied to $7000 on every board (was FFE only)",
+  "was": "suspect"
+ },
+ "Mario's Adventure (SMB1 Hack).nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once the iNES trainer is copied to $7000 on every board (was FFE only)",
+  "was": "suspect"
+ },
+ "Mario Nasubi 3 (SMB1 Hack).nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once the iNES trainer is copied to $7000 on every board (was FFE only)",
+  "was": "suspect"
+ },
+ "Mushroom Dreams (V1.1) (SMB1 Hack).nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once the iNES trainer is copied to $7000 on every board (was FFE only)",
+  "was": "suspect"
+ },
+ "Mississippi Satsujin Jiken (J) [hM34].nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once the iNES trainer is copied to $7000 on every board (was FFE only)",
+  "was": "suspect"
+ },
+ "Peach's Nightmare - No Mercy (SMB1 Hack).nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once the iNES trainer is copied to $7000 on every board (was FFE only)",
+  "was": "suspect"
+ },
+ "Super Mario Adventure (SMB1 Hack).nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once the iNES trainer is copied to $7000 on every board (was FFE only)",
+  "was": "suspect"
+ },
+ "Parodius da! (J) [p1][hM04].nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once the iNES trainer is copied to $7000 on every board (was FFE only)",
+  "was": "matches_ref"
+ },
+ "Super Yoshi (SMB1 Hack).nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once the iNES trainer is copied to $7000 on every board (was FFE only)",
+  "was": "suspect"
+ },
+ "Takeshi no Sengoku Fuuunji (J) [hM04].nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once the iNES trainer is copied to $7000 on every board (was FFE only)",
+  "was": "suspect"
+ },
+ "Takahashi Meijin no Bugutte Honey (J) [hM34].nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once the iNES trainer is copied to $7000 on every board (was FFE only)",
+  "was": "natural"
+ },
+ "YY-SMB2 B1 vx.xx (SMB1 Hack).nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once the iNES trainer is copied to $7000 on every board (was FFE only)",
+  "was": "natural"
+ },
+ "Aladdin (Unl).nes": {
+  "gpu": "seed_drift",
+  "why": "a small, steady RAM difference from the first frames (a power-on cycle count that seeds the random numbers differs); the game plays the same way",
+  "nesle_vs_fceux": [
+   0,
+   17,
+   21,
+   14
+  ]
+ },
+ "Conan (U).nes": {
+  "gpu": "seed_drift",
+  "why": "a small, steady RAM difference from the first frames (a power-on cycle count that seeds the random numbers differs); the game plays the same way",
+  "nesle_vs_fceux": [
+   58,
+   58,
+   58,
+   58
+  ]
+ },
+ "Dirty Harry (U).nes": {
+  "gpu": "seed_drift",
+  "why": "a small, steady RAM difference from the first frames (a power-on cycle count that seeds the random numbers differs); the game plays the same way",
+  "nesle_vs_fceux": [
+   58,
+   58,
+   58,
+   58
+  ]
+ },
+ "Donkey Kong (JU).nes": {
+  "gpu": "seed_drift",
+  "why": "a small, steady RAM difference from the first frames (a power-on cycle count that seeds the random numbers differs); the game plays the same way",
+  "nesle_vs_fceux": [
+   9,
+   8,
+   9,
+   9
+  ]
+ },
+ "Excitebike Unicycle (Hack).nes": {
+  "gpu": "seed_drift",
+  "why": "a small, steady RAM difference from the first frames (a power-on cycle count that seeds the random numbers differs); the game plays the same way",
+  "nesle_vs_fceux": [
+   9,
+   8,
+   8,
+   9
+  ]
+ },
+ "Gauntlet 2 (E).nes": {
+  "gpu": "seed_drift",
+  "why": "a small, steady RAM difference from the first frames (a power-on cycle count that seeds the random numbers differs); the game plays the same way",
+  "nesle_vs_fceux": [
+   58,
+   58,
+   58,
+   58
+  ]
+ },
+ "Low G Man (E).nes": {
+  "gpu": "seed_drift",
+  "why": "a small, steady RAM difference from the first frames (a power-on cycle count that seeds the random numbers differs); the game plays the same way",
+  "nesle_vs_fceux": [
+   1,
+   32,
+   6,
+   15
+  ]
+ },
+ "King Koopa Arcade (Donkey Kong Hack).nes": {
+  "gpu": "seed_drift",
+  "why": "a small, steady RAM difference from the first frames (a power-on cycle count that seeds the random numbers differs); the game plays the same way",
+  "nesle_vs_fceux": [
+   9,
+   8,
+   9,
+   9
+  ]
+ },
+ "Paperboy (U).nes": {
+  "gpu": "seed_drift",
+  "why": "a small, steady RAM difference from the first frames (a power-on cycle count that seeds the random numbers differs); the game plays the same way",
+  "nesle_vs_fceux": [
+   61,
+   58,
+   58,
+   58
+  ]
+ },
+ "Papergirl (Paperboy Hack).nes": {
+  "gpu": "seed_drift",
+  "why": "a small, steady RAM difference from the first frames (a power-on cycle count that seeds the random numbers differs); the game plays the same way",
+  "nesle_vs_fceux": [
+   61,
+   58,
+   58,
+   58
+  ]
+ },
+ "Rainbow Islands - The Story of Bubble Bobble 2 (E) [!].nes": {
+  "gpu": "seed_drift",
+  "why": "a small, steady RAM difference from the first frames (a power-on cycle count that seeds the random numbers differs); the game plays the same way",
+  "nesle_vs_fceux": [
+   14,
+   11,
+   11,
+   11
+  ]
+ },
+ "Knife Boy (Paperboy Hack).nes": {
+  "gpu": "seed_drift",
+  "why": "a small, steady RAM difference from the first frames (a power-on cycle count that seeds the random numbers differs); the game plays the same way",
+  "nesle_vs_fceux": [
+   61,
+   58,
+   58,
+   58
+  ]
+ },
+ "AD&D Hillsfar (U) [!].nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once read-modify-write instructions make their first (dummy) write to the cartridge and MMC1 ignores the write right after a reset (was a CPU jam)",
+  "was": "fault"
+ },
+ "Bill & Ted's Excellent Video Game Adventure (U).nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once read-modify-write instructions make their first (dummy) write to the cartridge and MMC1 ignores the write right after a reset (was a CPU jam)",
+  "was": "fault"
+ },
+ "Rocket Ranger (U) [!].nes": {
+  "gpu": "input_drift",
+  "why": "no longer jams with the read-modify-write fix; NeSLE, fceumm and FCEUX agree at power-on and drift apart only under button presses",
+  "was": "fault"
+ },
+ "Akira (J) [hM04].nes": {
+  "gpu": "input_drift",
+  "why": "NeSLE, fceumm and FCEUX agree at power-on (within a frame) and drift apart only under button presses",
+  "was": "fault"
+ },
+ "Dragon Ball - Dragon Mystery (Hack).nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once the board check accepts a trainer on every board (the host copies it to $7000)",
+  "was": "no_mapper"
+ },
+ "Dragon Ball - Dragon Tricks (Hack).nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once the board check accepts a trainer on every board (the host copies it to $7000)",
+  "was": "no_mapper"
+ },
+ "Erika to Satoru no Yume Bouken (J) [h1].nes": {
+  "gpu": "pass",
+  "why": "original-mapper dump restored in place of the [hM04] dump that jams; RAM identical to fceumm",
+  "was": "new"
+ },
+ "Mobile Suit Z Gundam - Hot Scramble (J) [p1].nes": {
+  "gpu": "pass",
+  "why": "original-mapper dump restored in place of the [hM15] dump; RAM identical to fceumm",
+  "was": "new"
+ },
+ "Ike Ike! Nekketsu Hockey Bu - Subette Koronde Dai Rantou (J) [T-Eng1.0_BRC].nes": {
+  "gpu": "pass",
+  "why": "newer translation restored in place of T-Eng0.99, which jams on NeSLE; RAM matches fceumm",
+  "was": "new"
+ },
+ "Sesame Street 123 (U).nes": {
+  "gpu": "pass",
+  "why": "RAM matches fceumm once read-modify-write instructions make their first (dummy) write to the cartridge",
+  "was": "natural"
+ }
+}

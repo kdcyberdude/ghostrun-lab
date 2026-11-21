@@ -29,3 +29,11 @@ artifacts/
 *.bin
 *.mp4
 *.gif
+
+# Per-ROM pipeline outputs (scripts/romlib): large, regenerable, and the pictures show commercial games;
+# the summaries (*.md, *.csv) and the small inputs export_games.py reads (*.json) are kept
+reports/romlib/*.jsonl
+reports/romlib/*.log
+reports/romlib/*.png
+reports/romlib/screen_png*/
+reports/romlib/games_table_before_camera.json

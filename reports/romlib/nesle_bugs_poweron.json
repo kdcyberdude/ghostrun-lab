@@ -1,0 +1,162 @@
+[
+ {
+  "rom": "Bard's Tale - Tales of the Unknown, The (U) [!].nes",
+  "nesle_vs_fceux": [
+   0,
+   280,
+   293,
+   279
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "kind": "NeSLE alone differs"
+ },
+ {
+  "rom": "Cosmo Genesis (J) [T-Eng1.0].nes",
+  "nesle_vs_fceux": [
+   0,
+   10,
+   35,
+   75
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   10,
+   35,
+   75
+  ],
+  "kind": "all differ"
+ },
+ {
+  "rom": "Bloody Warriors - Shan-Go no Gyakushuu (J) [p1][hM02].nes",
+  "nesle_vs_fceux": [
+   0,
+   783,
+   272,
+   275
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "kind": "NeSLE alone differs"
+ },
+ {
+  "rom": "Addams Family - Pugsley's Scavenger Hunt, The (U).nes",
+  "nesle_vs_fceux": [
+   0,
+   2,
+   6,
+   172
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "kind": "NeSLE alone differs"
+ },
+ {
+  "rom": "Dr Mario (VS).nes",
+  "nesle_vs_fceux": [
+   1,
+   116,
+   116,
+   117
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "kind": "NeSLE alone differs"
+ },
+ {
+  "rom": "Snow Brothers (USA).nes",
+  "nesle_vs_fceux": [
+   50,
+   496,
+   518,
+   517
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   9,
+   8,
+   9
+  ],
+  "kind": "all differ"
+ },
+ {
+  "rom": "Star Voyager (U).nes",
+  "nesle_vs_fceux": [
+   0,
+   10,
+   40,
+   74
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   10,
+   40,
+   74
+  ],
+  "kind": "all differ"
+ },
+ {
+  "rom": "Thunder Warrior.nes",
+  "nesle_vs_fceux": [
+   1,
+   3,
+   9,
+   9
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "kind": "NeSLE alone differs"
+ },
+ {
+  "rom": "Super Xevious (VS).nes",
+  "nesle_vs_fceux": [
+   3,
+   438,
+   438,
+   441
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "kind": "NeSLE alone differs"
+ },
+ {
+  "rom": "VS Super Mario Bros (VS).nes",
+  "nesle_vs_fceux": [
+   7,
+   140,
+   66,
+   66
+  ],
+  "fceumm_vs_fceux": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "kind": "NeSLE alone differs"
+ }
+]

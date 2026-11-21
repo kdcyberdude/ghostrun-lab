@@ -1,0 +1,166 @@
+rom,mapper,ram_check,verdict,header_fixed_since,frames_identical,worst_frame,fceux_vs_fceumm,fceux_vs_nesle,image
+CMC Wavy Demo (PD).nes,0,pass,nesle_bad,False,0.415,2750,0.9981,0.6299,reports/romlib/screen_png/CMC Wavy Demo (PD).png
+Devil World (E) [!].nes,0,suspect,nesle_bad,False,0.8182,1140,1.0,0.8861,reports/romlib/screen_png/Devil World (E) [!].png
+Gyruss (U).nes,0,matches_ref,nesle_bad,True,0.1277,590,1.0,0.7297,reports/romlib/screen_png/Gyruss (U).png
+Mario Mixed Fruit (SMB1 Hack).nes,0,pass,nesle_bad,False,0.0529,1320,0.9971,0.7515,reports/romlib/screen_png/Mario Mixed Fruit (SMB1 Hack).png
+Mouser (Beta 1.0) (PD).nes,0,pass,nesle_bad,False,0.0167,160,0.9935,0.7708,reports/romlib/screen_png/Mouser (Beta 1.0) (PD).png
+Mystery Quest (U).nes,0,pass,nesle_bad,True,0.0139,10,1.0,0.9711,reports/romlib/screen_png/Mystery Quest (U).png
+NES Tutor 101 (PD).nes,0,pass,nesle_bad,False,0.0,170,1.0,0.7057,reports/romlib/screen_png/NES Tutor 101 (PD).png
+PasoFami Demo 2 (TwinBee) (PD).nes,0,pass,nesle_bad,False,0.0,1450,0.9979,0.6878,reports/romlib/screen_png/PasoFami Demo 2 (TwinBee) (PD).png
+Pipe Dream (U).nes,0,pass,nesle_bad,True,0.727,610,1.0,0.3588,reports/romlib/screen_png/Pipe Dream (U).png
+Raster Chroma Luma Test (PD).nes,0,pass,nesle_bad,False,0.0,280,1.0,0.7233,reports/romlib/screen_png/Raster Chroma Luma Test (PD).png
+Raster Test 1 (PD).nes,0,pass,nesle_bad,False,0.0,840,0.9826,0.7819,reports/romlib/screen_png/Raster Test 1 (PD).png
+Raster Test 2 (PD).nes,0,pass,nesle_bad,False,0.0,20,1.0,0.9559,reports/romlib/screen_png/Raster Test 2 (PD).png
+Raster Test 3 (PD).nes,0,pass,nesle_bad,False,0.0,10,1.0,0.8407,reports/romlib/screen_png/Raster Test 3 (PD).png
+Raster Test 3a (PD).nes,0,pass,nesle_bad,False,0.0,10,1.0,0.7583,reports/romlib/screen_png/Raster Test 3a (PD).png
+Raster Test 3b (PD).nes,0,pass,nesle_bad,False,0.0,10,1.0,0.7487,reports/romlib/screen_png/Raster Test 3b (PD).png
+Raster Test 3c (PD).nes,0,pass,nesle_bad,False,0.0,10,1.0,0.9083,reports/romlib/screen_png/Raster Test 3c (PD).png
+Raster Test 3d (PD).nes,0,pass,nesle_bad,False,0.0,10,1.0,0.6708,reports/romlib/screen_png/Raster Test 3d (PD).png
+Raster Test 3e (PD).nes,0,pass,nesle_bad,False,0.0,10,1.0,0.7636,reports/romlib/screen_png/Raster Test 3e (PD).png
+Wall Demo (PD).nes,0,pass,nesle_bad,False,0.0,2360,1.0,0.7945,reports/romlib/screen_png/Wall Demo (PD).png
+ZZZ_UNK_Trackandfield (40976).nes,0,matches_ref,nesle_bad,False,0.0317,490,1.0,0.9895,reports/romlib/screen_png/ZZZ_UNK_Trackandfield (40976).png
+Bigfoot (U).nes,1,natural,nesle_bad,False,0.8736,340,1.0,0.7984,reports/romlib/screen_png/Bigfoot (U).png
+Caffeine Bros (SMB1 Hack).nes,1,pass,nesle_bad,False,0.0279,2430,1.0,0.9838,reports/romlib/screen_png/Caffeine Bros (SMB1 Hack).png
+Corvette ZR-1 Challenge (E) [!].nes,1,pass,nesle_bad,False,0.8412,3030,1.0,0.9637,reports/romlib/screen_png/Corvette ZR-1 Challenge (E) [!].png
+Dark Cecil Bros (Mario Bros Hack).nes,1,pass,nesle_bad,False,0.0056,420,1.0,0.8431,reports/romlib/screen_png/Dark Cecil Bros (Mario Bros Hack).png
+Day Dreamin' Davey (U).nes,1,pass,nesle_bad,False,0.3844,1160,1.0,0.9831,reports/romlib/screen_png/Day Dreamin' Davey (U).png
+Demon Sword (U).nes,1,suspect,nesle_bad,True,0.5385,80,1.0,0.7646,reports/romlib/screen_png/Demon Sword (U).png
+EZ Hell (Mario Bros Hack).nes,1,pass,nesle_bad,False,0.0056,1140,1.0,0.8949,reports/romlib/screen_png/EZ Hell (Mario Bros Hack).png
+Excitebike Mario (Hack).nes,1,matches_ref,nesle_bad,False,0.1818,2280,1.0,0.5422,reports/romlib/screen_png/Excitebike Mario (Hack).png
+Facemaker (Dr. PC. Jr.) (Chinese).nes,1,suspect,nesle_bad,False,0.0,2960,1.0,0.6213,reports/romlib/screen_png/Facemaker (Dr. PC. Jr.) (Chinese).png
+Ferrari - Grand Prix Challenge (U) [!].nes,1,pass,nesle_bad,False,0.3621,1650,1.0,0.8044,reports/romlib/screen_png/Ferrari - Grand Prix Challenge (U) [!].png
+Fish Bros (Mario Bros Hack).nes,1,pass,nesle_bad,False,0.0056,1140,1.0,0.8418,reports/romlib/screen_png/Fish Bros (Mario Bros Hack).png
+"Great Adventures of Weiny, The (Mario Bros Hack).nes",1,pass,nesle_bad,False,0.0056,420,1.0,0.8535,"reports/romlib/screen_png/Great Adventures of Weiny, The (Mario Bros Hack).png"
+Ice Vs Joe Don Baker (Warpman Hack).nes,1,pass,nesle_bad,False,0.0,670,1.0,0.6983,reports/romlib/screen_png/Ice Vs Joe Don Baker (Warpman Hack).png
+Motor (Excitebike Hack).nes,1,matches_ref,nesle_bad,False,0.2222,20,1.0,0.833,reports/romlib/screen_png/Motor (Excitebike Hack).png
+Mushroom Bros (Mario Bros Hack).nes,1,pass,nesle_bad,False,0.0056,1140,1.0,0.8418,reports/romlib/screen_png/Mushroom Bros (Mario Bros Hack).png
+Parasol Stars - The Story of Bubble Bobble 3 (E) [!].nes,1,suspect,nesle_bad,False,0.3415,150,1.0,0.9766,reports/romlib/screen_png/Parasol Stars - The Story of Bubble Bobble 3 (E) [!].png
+Sesame Street 123 (U).nes,1,natural,nesle_bad,False,0.02,450,1.0,0.6087,reports/romlib/screen_png/Sesame Street 123 (U).png
+Skeleton Bike (Excitebike Hack).nes,1,matches_ref,nesle_bad,False,0.2222,20,1.0,0.8921,reports/romlib/screen_png/Skeleton Bike (Excitebike Hack).png
+Time Conquest.nes,1,pass,nesle_bad,False,0.0,2070,1.0,0.9027,reports/romlib/screen_png/Time Conquest.png
+Wrecking Crew (JUE).nes,1,pass,nesle_bad,False,0.0167,3170,1.0,0.5729,reports/romlib/screen_png/Wrecking Crew (JUE).png
+Zelda 2 - The Adventure of Link (E) (PRG 0).nes,1,matches_ref,nesle_bad,False,0.0,40,1.0,0.866,reports/romlib/screen_png/Zelda 2 - The Adventure of Link (E) (PRG 0).png
+Zelda 2 - The Adventure of Link (E) (PRG 2).nes,1,matches_ref,nesle_bad,False,0.0,40,1.0,0.866,reports/romlib/screen_png/Zelda 2 - The Adventure of Link (E) (PRG 2).png
+Galactic Crusader (Sachen) (U).nes,11,natural,nesle_bad,False,0.8889,160,1.0,0.8903,reports/romlib/screen_png/Galactic Crusader (Sachen) (U).png
+16 Mahjang [!].nes,113,natural,nesle_bad,True,0.7818,130,0.9981,0.9796,reports/romlib/screen_png/16 Mahjang [!].png
+AV Soccer [!].nes,113,natural,nesle_bad,False,0.0,50,1.0,0.9191,reports/romlib/screen_png/AV Soccer [!].png
+Deathbots (U).nes,113,pass,nesle_bad,True,0.0168,3530,0.9997,0.7003,reports/romlib/screen_png/Deathbots (U).png
+Mind Blower Pak.nes,113,matches_ref,nesle_bad,False,0.8476,990,1.0,0.5852,reports/romlib/screen_png/Mind Blower Pak.png
+Flight of the Intruder (U).nes,2,pass,nesle_bad,False,0.2507,1330,0.9985,0.9493,reports/romlib/screen_png/Flight of the Intruder (U).png
+Gilligan's Island (U).nes,2,pass,nesle_bad,True,0.1142,340,0.9873,0.7821,reports/romlib/screen_png/Gilligan's Island (U).png
+Indiana Jones and the Last Crusade (UBI Soft) (U).nes,2,pass,nesle_bad,False,0.8524,520,1.0,0.9865,reports/romlib/screen_png/Indiana Jones and the Last Crusade (UBI Soft) (U).png
+Indora no Hikari (J) [hM02].nes,2,suspect,nesle_bad,False,0.4872,110,1.0,0.9786,reports/romlib/screen_png/Indora no Hikari (J) [hM02].png
+Super Mario Bros. - Two Player (World).nes,24,pass,nesle_bad,False,0.5209,1980,0.9986,0.8528,reports/romlib/screen_png/Super Mario Bros. - Two Player (World).png
+Ying Lie Qun Xia Zhuan (Chinese).nes,245,pass,nesle_bad,False,0.0195,660,1.0,0.4926,reports/romlib/screen_png/Ying Lie Qun Xia Zhuan (Chinese).png
+CMC 80's Demo (PD).nes,3,pass,nesle_bad,False,0.7437,1730,0.9917,0.95,reports/romlib/screen_png/CMC 80's Demo (PD).png
+Drop Zone (E).nes,3,pass,nesle_bad,False,0.2173,1170,0.9976,0.9789,reports/romlib/screen_png/Drop Zone (E).png
+Ganso Saiyuuki - Super Monkey Dai Bouken (J) [p1].nes,3,pass,nesle_bad,False,0.1755,1840,0.9966,0.8761,reports/romlib/screen_png/Ganso Saiyuuki - Super Monkey Dai Bouken (J) [p1].png
+Hot Slot (UE).nes,3,pass,nesle_bad,False,0.0,10,1.0,0.8014,reports/romlib/screen_png/Hot Slot (UE).png
+Aladdin 2.nes,4,pass,nesle_bad,False,0.1866,790,1.0,0.9777,reports/romlib/screen_png/Aladdin 2.png
+Alien Syndrome (U).nes,4,suspect,nesle_bad,True,0.7273,320,1.0,0.9247,reports/romlib/screen_png/Alien Syndrome (U).png
+Blink 2 - Lost in Tokyo (Gauntlet Hack).nes,4,matches_ref,nesle_bad,False,0.379,1770,0.9996,0.7012,reports/romlib/screen_png/Blink 2 - Lost in Tokyo (Gauntlet Hack).png
+Boogerman.nes,4,pass,nesle_bad,False,0.6583,630,1.0,0.9687,reports/romlib/screen_png/Boogerman.png
+Days of Thunder (U).nes,4,pass,nesle_bad,False,0.2089,1090,1.0,0.9619,reports/romlib/screen_png/Days of Thunder (U).png
+Final Fantasy Epic (Gauntlet Hack).nes,4,pass,nesle_bad,False,0.3705,3340,0.9996,0.7045,reports/romlib/screen_png/Final Fantasy Epic (Gauntlet Hack).png
+Gauntlet (Nude Valkyrie Hack).nes,4,pass,nesle_bad,False,0.3649,2080,0.9903,0.6711,reports/romlib/screen_png/Gauntlet (Nude Valkyrie Hack).png
+Gauntlet (PC10).nes,4,pass,nesle_bad,False,0.3844,2140,0.9993,0.6527,reports/romlib/screen_png/Gauntlet (PC10).png
+Gauntlet (U).nes,4,pass,nesle_bad,False,0.3788,2850,0.9996,0.6725,reports/romlib/screen_png/Gauntlet (U).png
+Gauntlet (Unl) (U).nes,4,pass,nesle_bad,False,0.376,3180,0.9997,0.6775,reports/romlib/screen_png/Gauntlet (Unl) (U).png
+Gauntlet XXX (Gauntlet Hack).nes,4,pass,nesle_bad,False,0.3677,1930,0.9992,0.6829,reports/romlib/screen_png/Gauntlet XXX (Gauntlet Hack).png
+Jia A Fung Yun (Chinese).nes,4,pass,nesle_bad,True,0.2006,600,1.0,0.9168,reports/romlib/screen_png/Jia A Fung Yun (Chinese).png
+Mauntlet (Gauntlet Hack).nes,4,pass,nesle_bad,False,0.4178,2020,0.9996,0.6798,reports/romlib/screen_png/Mauntlet (Gauntlet Hack).png
+Mickey's Adventures in Numberland (U).nes,4,pass,nesle_bad,False,0.2953,1070,1.0,0.9816,reports/romlib/screen_png/Mickey's Adventures in Numberland (U).png
+Mortal Kombat V1996 Turbo 30 Peoples [!].nes,4,natural,nesle_bad,False,0.7944,900,1.0,0.9631,reports/romlib/screen_png/Mortal Kombat V1996 Turbo 30 Peoples [!].png
+Rad Racer 2 (PC10) [!].nes,4,pass,nesle_bad,False,0.0752,610,0.9998,0.8168,reports/romlib/screen_png/Rad Racer 2 (PC10) [!].png
+Rad Racer 2 (U) [!].nes,4,pass,nesle_bad,True,0.0752,610,0.9998,0.8168,reports/romlib/screen_png/Rad Racer 2 (U) [!].png
+Rolling Thunder (U).nes,4,pass,nesle_bad,True,0.0167,50,1.0,0.9842,reports/romlib/screen_png/Rolling Thunder (U).png
+Super Turrican (E).nes,4,suspect,nesle_bad,False,0.1379,50,1.0,0.8483,reports/romlib/screen_png/Super Turrican (E).png
+ZZZ_UNK_SOF_v1b.nes,4,pass,nesle_bad,False,0.0,30,1.0,0.9425,reports/romlib/screen_png/ZZZ_UNK_SOF_v1b.png
+Be-Bop-Highschool - Koukousei Gokuraku Densetsu (J) [hFFE].nes,6,matches_ref,nesle_bad,False,0.0288,1150,0.9958,0.8214,reports/romlib/screen_png/Be-Bop-Highschool - Koukousei Gokuraku Densetsu (J) [hFFE].png
+Gegege no Kitarou 2 - Youkai Gundan no Chousen (J) [hFFE].nes,6,pass,nesle_bad,False,0.7688,520,0.9997,0.6309,reports/romlib/screen_png/Gegege no Kitarou 2 - Youkai Gundan no Chousen (J) [hFFE].png
+Kamen Rider Kurabu (J) [hFFE].nes,6,suspect,nesle_bad,False,0.0492,250,1.0,0.9661,reports/romlib/screen_png/Kamen Rider Kurabu (J) [hFFE].png
+Mito Koumon (J) [hFFE].nes,6,suspect,nesle_bad,False,0.1972,120,1.0,0.4641,reports/romlib/screen_png/Mito Koumon (J) [hFFE].png
+Saint Seiya - Ougon Densetsu Kanketsu Hen (J) [hFFE].nes,6,pass,nesle_bad,False,0.0724,260,1.0,0.8381,reports/romlib/screen_png/Saint Seiya - Ougon Densetsu Kanketsu Hen (J) [hFFE].png
+Sekiryuuou (J) [hFFE][p1].nes,6,pass,nesle_bad,False,0.039,450,1.0,0.6237,reports/romlib/screen_png/Sekiryuuou (J) [hFFE][p1].png
+World Boxing (J) [hFFE][p1].nes,6,pass,nesle_bad,False,0.1281,620,1.0,0.8554,reports/romlib/screen_png/World Boxing (J) [hFFE][p1].png
+ZZZ_UNK_Saint Seiya - Ougon Densetsu (FFE Hack) (J) (262160).nes,6,pass,nesle_bad,False,0.2173,430,1.0,0.8396,reports/romlib/screen_png/ZZZ_UNK_Saint Seiya - Ougon Densetsu (FFE Hack) (J) (262160).png
+Klax (U).nes,64,pass,nesle_bad,False,0.0557,380,1.0,0.8272,reports/romlib/screen_png/Klax (U).png
+Skull & Crossbones (U).nes,64,pass,nesle_bad,False,0.0,90,1.0,0.7668,reports/romlib/screen_png/Skull & Crossbones (U).png
+Mr. Gimmick (E) [!].nes,69,matches_ref,nesle_bad,False,0.5714,350,0.9979,0.8595,reports/romlib/screen_png/Mr. Gimmick (E) [!].png
+Castle of Deceit (U).nes,7,pass,nesle_bad,True,0.0919,640,0.9983,0.509,reports/romlib/screen_png/Castle of Deceit (U).png
+Cobra Triangle (U).nes,7,pass,nesle_bad,False,0.2173,2710,1.0,0.9885,reports/romlib/screen_png/Cobra Triangle (U).png
+Deadly Towers (U).nes,7,natural,nesle_bad,True,0.8077,20,1.0,0.838,reports/romlib/screen_png/Deadly Towers (U).png
+Super Off-Road (E) [!].nes,7,suspect,nesle_bad,False,0.2652,2630,1.0,0.9077,reports/romlib/screen_png/Super Off-Road (E) [!].png
+Ultimate League Soccer (U).nes,79,natural,nesle_bad,False,0.0,40,1.0,0.9744,reports/romlib/screen_png/Ultimate League Soccer (U).png
+Shin Samurai Spirits 2 - Haoumaru Jigoku Hen.nes,90,suspect,nesle_bad,True,0.2045,750,1.0,0.5035,reports/romlib/screen_png/Shin Samurai Spirits 2 - Haoumaru Jigoku Hen.png
+"Adventures of Bayou Billy, The (E).nes",?,new,nesle_bad,False,0.8903,250,0.9975,0.9863,"reports/romlib/screen_png/Adventures of Bayou Billy, The (E).png"
+Captain Silver (J) [hFFE].nes,?,new,nesle_bad,False,0.0919,270,1.0,0.922,reports/romlib/screen_png/Captain Silver (J) [hFFE].png
+"Flintstones - The Rescue of Dino & Hoppy, The (E).nes",?,new,nesle_bad,False,0.3925,150,1.0,0.9589,"reports/romlib/screen_png/Flintstones - The Rescue of Dino & Hoppy, The (E).png"
+Pro Action Replay (E) [!].nes,?,new,nesle_bad,False,0.0419,1660,1.0,0.4974,reports/romlib/screen_png/Pro Action Replay (E) [!].png
+Solstice (E) [!].nes,?,new,nesle_bad,False,0.8923,1130,1.0,0.9328,reports/romlib/screen_png/Solstice (E) [!].png
+Wizards & Warriors (E).nes,?,new,nesle_bad,False,0.3902,210,0.9993,0.9721,reports/romlib/screen_png/Wizards & Warriors (E).png
+Pro Action Replay (Rev B) (U) [!].nes,0,pass,nesle_ok,False,0.0446,3180,0.7282,0.9992,reports/romlib/screen_png/Pro Action Replay (Rev B) (U) [!].png
+Wavy & Stretch Demo V0.3 by Chris Covell (PD).nes,0,pass,nesle_ok,False,0.0,100,0.9649,0.9915,reports/romlib/screen_png/Wavy & Stretch Demo V0.3 by Chris Covell (PD).png
+Mei Tantei Holmes - Kiri no London Satsujin Jiken (J) [hM02].nes,2,matches_ref,nesle_ok,False,0.2333,70,0.434,1.0,reports/romlib/screen_png/Mei Tantei Holmes - Kiri no London Satsujin Jiken (J) [hM02].png
+1991 Du Ma Racing (Enjoyable Horse Racing 1991).nes,3,pass,nesle_ok,False,0.2157,670,0.7013,1.0,reports/romlib/screen_png/1991 Du Ma Racing (Enjoyable Horse Racing 1991).png
+Atlantis no Nazo (J) [hM03].nes,3,pass,nesle_ok,False,0.0,360,0.8148,1.0,reports/romlib/screen_png/Atlantis no Nazo (J) [hM03].png
+Chou Hen (J) [p1].nes,3,natural,nesle_ok,False,0.0315,160,0.8871,1.0,reports/romlib/screen_png/Chou Hen (J) [p1].png
+Cybernoid - The Fighting Machine (U).nes,3,matches_ref,nesle_ok,False,0.4182,290,0.684,1.0,reports/romlib/screen_png/Cybernoid - The Fighting Machine (U).png
+Kanshakudama Nage Kantarou no Toukaidou Gojuusan Tsugi (J) [hM03].nes,3,pass,nesle_ok,False,0.0056,1070,0.8646,1.0,reports/romlib/screen_png/Kanshakudama Nage Kantarou no Toukaidou Gojuusan Tsugi (J) [hM03].png
+Moby Demo (PD).nes,3,pass,nesle_ok,False,0.0,10,0.6169,0.9999,reports/romlib/screen_png/Moby Demo (PD).png
+Ninja Jajamaru Kun (J) [hM03].nes,3,matches_ref,nesle_ok,False,0.5588,10,0.918,1.0,reports/romlib/screen_png/Ninja Jajamaru Kun (J) [hM03].png
+Porno Island (Hack).nes,3,pass,nesle_ok,False,0.8997,70,0.2999,0.9984,reports/romlib/screen_png/Porno Island (Hack).png
+Shin Jinrui - The New Type (J) [h1].nes,3,pass,nesle_ok,False,0.1086,3560,0.3736,1.0,reports/romlib/screen_png/Shin Jinrui - The New Type (J) [h1].png
+Side Winder (Xiang Wei She) (Joy Van).nes,3,natural,nesle_ok,False,0.6901,70,0.6444,1.0,reports/romlib/screen_png/Side Winder (Xiang Wei She) (Joy Van).png
+Star Soldier (LifeSpace Hack).nes,3,matches_ref,nesle_ok,False,0.0,10,0.6218,1.0,reports/romlib/screen_png/Star Soldier (LifeSpace Hack).png
+Takahashi Meijin no Boukenjima (Rinkaku Hack) (J).nes,3,pass,nesle_ok,False,0.8997,70,0.3542,0.9987,reports/romlib/screen_png/Takahashi Meijin no Boukenjima (Rinkaku Hack) (J).png
+Colours Demo (PD).nes,0,pass,unclear,False,0.415,2640,1.0,0.9958,reports/romlib/screen_png/Colours Demo (PD).png
+"Duel, The by Bokudono (PD).nes",0,pass,unclear,False,0.0,420,0.6608,0.5952,"reports/romlib/screen_png/Duel, The by Bokudono (PD).png"
+Game II (PD).nes,0,pass,unclear,False,0.376,2690,0.9595,0.9394,reports/romlib/screen_png/Game II (PD).png
+Lunar Pool (U).nes,0,natural,unclear,False,0.2198,1850,0.9786,0.9811,reports/romlib/screen_png/Lunar Pool (U).png
+Mr. Happyface (Ms Pac-Man Hack).nes,0,natural,unclear,False,0.7027,30,0.9937,0.9937,reports/romlib/screen_png/Mr. Happyface (Ms Pac-Man Hack).png
+Ms Pac-Man (U).nes,0,natural,unclear,False,0.7027,30,0.9937,0.9937,reports/romlib/screen_png/Ms Pac-Man (U).png
+VS Slalom (VS).nes,0,pass,unclear,False,0.0,10,1.0,1.0,reports/romlib/screen_png/VS Slalom (VS).png
+ZZZ_UNK_Jajamaru.nes,0,suspect,unclear,False,0.8696,420,1.0,1.0,reports/romlib/screen_png/ZZZ_UNK_Jajamaru.png
+Zero Pong (PD).nes,0,pass,unclear,False,0.0195,1780,0.9999,0.993,reports/romlib/screen_png/Zero Pong (PD).png
+"Addams Family - Pugsley's Scavenger Hunt, The (U).nes",1,suspect,unclear,False,0.1176,30,1.0,1.0,"reports/romlib/screen_png/Addams Family - Pugsley's Scavenger Hunt, The (U).png"
+Bomberman Collection (U) [p1].nes,1,fault,unclear,False,0.0,10,0.7073,0.6434,reports/romlib/screen_png/Bomberman Collection (U) [p1].png
+Ghoul School (U).nes,1,pass,unclear,False,0.2674,900,0.4517,0.4287,reports/romlib/screen_png/Ghoul School (U).png
+Goomba's Revenge (SMB1 Hack).nes,1,pass,unclear,False,0.0223,2950,0.6306,0.5728,reports/romlib/screen_png/Goomba's Revenge (SMB1 Hack).png
+Hudson Hawk (U).nes,1,pass,unclear,False,0.8552,790,1.0,0.9977,reports/romlib/screen_png/Hudson Hawk (U).png
+Muppet Adventure - Chaos at the Carnival (U).nes,1,natural,unclear,True,0.7542,950,0.4743,0.5565,reports/romlib/screen_png/Muppet Adventure - Chaos at the Carnival (U).png
+Overlord (U).nes,1,pass,unclear,False,0.3454,2300,1.0,0.9918,reports/romlib/screen_png/Overlord (U).png
+SMB Challenge v5.0 (SMB1 Hack).nes,1,pass,unclear,False,0.039,30,1.0,1.0,reports/romlib/screen_png/SMB Challenge v5.0 (SMB1 Hack).png
+ZZZ_UNK_2600 Bros (SMB1 Hack) (UNL).nes,1,pass,unclear,False,0.0306,30,1.0,1.0,reports/romlib/screen_png/ZZZ_UNK_2600 Bros (SMB1 Hack) (UNL).png
+ZZZ_UNK_Predator (Bad CHR 820203f0) (J) (245776).nes,1,suspect,unclear,False,0.3768,510,0.9647,0.9029,reports/romlib/screen_png/ZZZ_UNK_Predator (Bad CHR 820203f0) (J) (245776).png
+Dragon Ball Z - Kyoushuu! Saiya Jin (J) [T-Eng].nes,16,pass,unclear,False,0.078,1590,1.0,0.9937,reports/romlib/screen_png/Dragon Ball Z - Kyoushuu! Saiya Jin (J) [T-Eng].png
+Thunder Warrior.nes,189,suspect,unclear,False,0.2857,30,1.0,1.0,reports/romlib/screen_png/Thunder Warrior.png
+Final Fantasy 2 Special Edition v1.02 (Hack).nes,2,suspect,unclear,False,0.0,10,1.0,1.0,reports/romlib/screen_png/Final Fantasy 2 Special Edition v1.02 (Hack).png
+Final Fantasy 2 Special Edition v1.03 (Hack).nes,2,suspect,unclear,False,0.0,10,1.0,1.0,reports/romlib/screen_png/Final Fantasy 2 Special Edition v1.03 (Hack).png
+Pro Yakyuu Satsujin Jiken! (J) [hM02].nes,2,natural,unclear,False,0.7714,10,1.0,1.0,reports/romlib/screen_png/Pro Yakyuu Satsujin Jiken! (J) [hM02].png
+VS Castlevania (VS).nes,2,suspect,unclear,False,0.0,10,1.0,1.0,reports/romlib/screen_png/VS Castlevania (VS).png
+Sanrio Carnival 2 (J) [T-Eng1.0].nes,3,matches_ref,unclear,False,0.6944,2110,0.9454,0.9541,reports/romlib/screen_png/Sanrio Carnival 2 (J) [T-Eng1.0].png
+Beauty and the Beast (E) [!].nes,4,natural,unclear,False,0.7328,1140,0.7074,0.7298,reports/romlib/screen_png/Beauty and the Beast (E) [!].png
+Bubble Bobble Part 2 (U).nes,4,natural,unclear,False,0.875,70,1.0,0.9933,reports/romlib/screen_png/Bubble Bobble Part 2 (U).png
+Double Moon Densetsu (J) [T-Eng_Partial].nes,4,suspect,unclear,False,0.1667,10,1.0,1.0,reports/romlib/screen_png/Double Moon Densetsu (J) [T-Eng_Partial].png
+Downtown Special - Kunio Kun no Jidaigeki Dayo Zenin Shuugou! (J) [T-Eng].nes,4,pass,unclear,False,0.5534,2200,1.0,0.9982,reports/romlib/screen_png/Downtown Special - Kunio Kun no Jidaigeki Dayo Zenin Shuugou! (J) [T-Eng].png
+Freedom Force (VS).nes,4,pass,unclear,False,0.0306,10,1.0,1.0,reports/romlib/screen_png/Freedom Force (VS).png
+GI Joe (U).nes,4,natural,unclear,False,0.4231,1860,0.84,0.8315,reports/romlib/screen_png/GI Joe (U).png
+Great Battle Cyber (J) [h1].nes,4,natural,unclear,False,0.8333,310,1.0,0.9995,reports/romlib/screen_png/Great Battle Cyber (J) [h1].png
+"Hunt for Red October, The (U).nes",4,pass,unclear,False,0.1699,720,1.0,0.9946,"reports/romlib/screen_png/Hunt for Red October, The (U).png"
+Mickey's Safari in Letterland (U).nes,4,pass,unclear,False,0.3565,950,0.8903,0.8717,reports/romlib/screen_png/Mickey's Safari in Letterland (U).png
+Might and Magic (U).nes,4,suspect,unclear,False,0.4588,2000,1.0,0.991,reports/romlib/screen_png/Might and Magic (U).png
+NES Play Action Football (U).nes,4,pass,unclear,True,0.273,990,0.9227,0.7046,reports/romlib/screen_png/NES Play Action Football (U).png
+Noah's Ark (E).nes,4,matches_ref,unclear,False,0.04,20,1.0,0.9976,reports/romlib/screen_png/Noah's Ark (E).png
+Star Wars (U).nes,4,natural,unclear,False,0.7838,670,1.0,1.0,reports/romlib/screen_png/Star Wars (U).png
+Street Gangs (E).nes,4,natural,unclear,False,0.8431,560,1.0,1.0,reports/romlib/screen_png/Street Gangs (E).png
+Super Sky Kid (VS).nes,4,natural,unclear,False,0.0,10,1.0,1.0,reports/romlib/screen_png/Super Sky Kid (VS).png
+WWF Wrestlemania (U).nes,7,pass,unclear,False,0.6992,2590,0.9768,0.9764,reports/romlib/screen_png/WWF Wrestlemania (U).png
+Stunt Kids (U).nes,71,pass,unclear,False,0.1738,70,1.0,1.0,reports/romlib/screen_png/Stunt Kids (U).png
+ZZZ_UNK_Devil Man (Bad CHR 605af98a).nes,88,natural,unclear,False,0.5822,1290,0.7036,0.5889,reports/romlib/screen_png/ZZZ_UNK_Devil Man (Bad CHR 605af98a).png
+Blaster Master (E).nes,?,new,unclear,False,0.1429,20,1.0,1.0,reports/romlib/screen_png/Blaster Master (E).png
+Double Dragon (E).nes,?,new,unclear,False,0.6045,70,1.0,0.9923,reports/romlib/screen_png/Double Dragon (E).png
+Krazy Kreatures (U).nes,?,new,unclear,False,0.6555,1850,0.9374,0.9305,reports/romlib/screen_png/Krazy Kreatures (U).png
+Mission Impossible (E) [!].nes,?,new,unclear,False,0.3511,2100,0.8421,0.781,reports/romlib/screen_png/Mission Impossible (E) [!].png
+Slalom (E).nes,?,new,unclear,False,0.6061,60,0.9213,0.8448,reports/romlib/screen_png/Slalom (E).png
+Top Gun - The Second Mission (E).nes,?,new,unclear,False,0.8091,1370,0.9094,0.9044,reports/romlib/screen_png/Top Gun - The Second Mission (E).png

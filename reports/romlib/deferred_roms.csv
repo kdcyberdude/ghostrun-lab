@@ -1,0 +1,194 @@
+rom,moved_to,why,gpu
+"Addams Family - Pugsley's Scavenger Hunt, The (U).nes",roms_removed/deferred/emulator,NeSLE: suspect,suspect
+Adventures of Lolo 2 (U).nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,input_drift
+Aigiina no Yogen - From The Legend of Balubalouk (J) [p1].nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Akira (J) [hM04].nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,input_drift
+Aladdin (E) [!].nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,pass_ntsc
+Aladdin 3.nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,natural
+Aoki Ookami to Shiroki Mejika - Genghis Khan (J) [h1].nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,pass
+Arch Rivals (U).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Atari RBI Baseball (VS).nes,roms_removed/deferred/vs_system,VS System arcade game: needs coin / DIP switch support (not in NeSLE or the fceumm harness),no_mapper
+Bakushou Jinsei Gekijoh 3 (J) [p1][hM04].nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+"Bard's Tale - Tales of the Unknown, The (U) [!].nes",roms_removed/deferred/emulator,NeSLE: suspect,suspect
+Baseball Simulator 1.000 (U).nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,pass
+Battle City (VS) [p1][!].nes,roms_removed/deferred/vs_system,VS System arcade game: needs coin / DIP switch support (not in NeSLE or the fceumm harness),pass
+Bee 52 (U).nes,roms_removed/deferred/menu,boot stops on a menu,input_drift
+Big Nose Freaks Out (Aladdin) (U).nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,input_drift
+Big Nose Freaks Out (U).nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,natural
+Bloody Warriors - Shan-Go no Gyakushuu (J) [p1][hM02].nes,roms_removed/deferred/emulator,NeSLE: suspect,suspect
+Bokosuka Quest III (Hack).nes,roms_removed/deferred/menu,boot stops on a menu,pass
+Bokosuka Wars (ASCII Chinese) (Bokosuka Wars Hack).nes,roms_removed/deferred/menu,boot stops on a menu,pass
+Boku Koku Shuu Kin (J) [p1].nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,natural
+Bram Stoker's Dracula (U).nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,input_drift
+Burris Warrior (Dragon Warrior Hack).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+California Games (E) [!].nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+California Games (U).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Chaos World (J) [T-Eng0.98].nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,pass
+Chocobo DW V0.3 (Dragon Warrior Hack).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Choplifter (J) [hM03].nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",matches_ref
+Classic Concentration (U).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Clu Clu Land (FDS Hack) (J).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Clu Clu Land (VS).nes,roms_removed/deferred/vs_system,VS System arcade game: needs coin / DIP switch support (not in NeSLE or the fceumm harness),no_mapper
+Contra Force (U).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Cooey Found Weed (Earth Bound Hack).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Cosmo Genesis (J) [T-Eng1.0].nes,roms_removed/deferred/emulator,NeSLE: suspect,suspect
+Dai 2 Ji - Super Robot Taisen (J) [T-Eng].nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Dai Senryaku (J) [T-Eng1.0].nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,pass
+Dave Warrior (Dragon Warrior Hack).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Death Race (U).nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,natural
+Deep Dungeon 3 - Yuushi heno Tabi (J) [T-Eng].nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Deep Dungeon 4 - Kuro no Youjutsushi (J) [T-Eng1.0].nes,roms_removed/deferred/menu,boot stops on a menu,matches_ref
+Door Door (J) [p1].nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",input_drift
+Doraemon World 3 (Doraemon Hack).nes,roms_removed/deferred/menu,boot stops on a menu,pass
+Double Dare (U).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Double Moon Densetsu (J) [T-Eng_Partial].nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,input_drift
+Dr Mario (VS).nes,roms_removed/deferred/vs_system,VS System arcade game: needs coin / DIP switch support (not in NeSLE or the fceumm harness),suspect
+Dragon Buster (J) [h1].nes,roms_removed/deferred/emulator,"NeSLE: no_mapper (mapper 95, not supported)",no_mapper
+Dragon Pervert (New) (Dragon Warrior Hack).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Dragon Pervert (Old) (Dragon Warrior Hack).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Dragon Warrior (U) (PRG 0).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Dragon Warrior (U) (PRG 1).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Dragon Warrior 2 (U).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Dragon Warrior Special Ed. V1.3 (Hack).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Dragon Warrior Trip (Dragon Warrior Hack).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Dragoon X (Dragon Warrior Hack).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Dragoon X Omega V0.91 (Dragon Warrior Hack).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Dragoon X Omega V0.98 (Dragon Warrior Hack).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Dragoon X Omega Vx.xx (Dragon Warrior Hack).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Earth Bound (Prototype) (Time Hack) (U) [h1].nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Earth Bound Alpha (Hack).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Earth Bound Zero (Neo Demiforce Hack) (U).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Earth Bound Zero (Neo Demiforce v1.01 Hack-1) (U).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Earth Bound Zero (Neo Demiforce v1.01 Hack-2) (U).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Erika to Satoru no Yume Bouken (J) [h1].nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Excitebike (VS).nes,roms_removed/deferred/vs_system,VS System arcade game: needs coin / DIP switch support (not in NeSLE or the fceumm harness),no_mapper
+Excitebike Unicycle (Hack).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",seed_drift
+F-1 Sensation (E) [!].nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass_ntsc
+Family Feud (U).nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,input_drift
+Family Mahjong (Rickachu Hack).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Final Fantasy 2 Special Edition v1.02 (Hack).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",input_drift
+Final Fantasy 2 Special Edition v1.03 (Hack).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",input_drift
+Fire Emblem (J) [hM04].nes,roms_removed/deferred/emulator,NeSLE: fault,fault
+Fire Hawk (U).nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,natural
+Flappy (J) [p1].nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Frankenstein - The Monster Returns (U).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",input_drift
+Fushigi no Umi no Nadia (J) [T-Eng1.3].nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Galaxy 5000 (E).nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,input_drift
+Galaxy 5000 (U).nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,input_drift
+Gegege no Kitarou 2 - Youkai Gundan no Chousen (J) [hFFE].nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Golf (VS).nes,roms_removed/deferred/vs_system,VS System arcade game: needs coin / DIP switch support (not in NeSLE or the fceumm harness),no_mapper
+Gomoku Narabe (J) [p1].nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,pass
+Gradius (VS).nes,roms_removed/deferred/vs_system,VS System arcade game: needs coin / DIP switch support (not in NeSLE or the fceumm harness),no_mapper
+Great Tank (J) [hFFE][p1].nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,natural
+Gumshoe (UE).nes,roms_removed/deferred/menu,boot stops on a menu,input_drift
+Hayauchi Sokutei Game.nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Herakles no Eikou 2 - Titan no Metsubou (J) [T-Eng1.0].nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",matches_ref
+Hyper Olympic (J) [p1].nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Hyper Sports (J) [p1].nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Ice Climber (FDS Hack) (J).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Ice Climber (VS).nes,roms_removed/deferred/vs_system,VS System arcade game: needs coin / DIP switch support (not in NeSLE or the fceumm harness),no_mapper
+Ice Hockey (FDS Hack) (J).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Indora no Hikari (J) [hM02].nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",input_drift
+Jeopardy! (U).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Jeopardy! 25th Anniversary Edition (U).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",natural
+Jeopardy! Junior Edition (U).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Jewelry Multi Cart.nes,roms_removed/deferred/menu,boot stops on a menu,pass
+Kamen Rider Kurabu (J) [hFFE].nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",input_drift
+Kyuukyoku Harikiri Stadium (J) [hM04].nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+L'Empereur (U).nes,roms_removed/deferred/menu,boot stops on a menu,pass
+Ladies Golf (VS).nes,roms_removed/deferred/vs_system,VS System arcade game: needs coin / DIP switch support (not in NeSLE or the fceumm harness),no_mapper
+Legend of the Ghost Lion (U).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Loopz (U).nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,natural
+Mach Rider (E) [!].nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,pass_ntsc
+Mach Rider (VS).nes,roms_removed/deferred/vs_system,VS System arcade game: needs coin / DIP switch support (not in NeSLE or the fceumm harness),no_mapper
+Magic Block [p1].nes,roms_removed/deferred/menu,boot stops on a menu,pass
+Magic Jewelry (As) [p1].nes,roms_removed/deferred/menu,boot stops on a menu,pass
+Maison Ikkoku (J) [hM02].nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",matches_ref
+Major League Baseball (U).nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,pass
+Mario & Yoshi (E) [!].nes,roms_removed/deferred/menu,boot stops on a menu,input_drift
+Mario Fantasy Adventure (FF1 Hack).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Mario Warrior (Dragon Warrior Hack).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Marirankaa.nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,matches_ref
+Mei Nu Quan (Honey Peach).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Mig-29 Soviet Fighter (U).nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,input_drift
+Minelvaton Saga (J) [hM04].nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",matches_ref
+Mitsume ga Tooru (J) [T-Eng1.01].nes,roms_removed/deferred/menu,boot stops on a menu,pass
+Mortal Kombat 3 - Special 56 Peoples.nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,natural
+Mr. Saturn's Dragon Quest v1.21 (Dragon Warrior Hack).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Mr. Saturn's Dragon Quest vx.xx (Dragon Warrior Hack).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Ninja Jajamaru Kun (J) [hM03].nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,matches_ref
+Ninja Jajamaru Kun (VS).nes,roms_removed/deferred/vs_system,VS System arcade game: needs coin / DIP switch support (not in NeSLE or the fceumm harness),no_mapper
+Nintendo World Championships 1990 (U) [!].nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Othello (FDS Hack) (J).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Othello (HES) [!].nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Pachi Com (J) [p1].nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",matches_ref
+PepsiMan (Metro-Cross Hack).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Pikachu Bros V0.2 (SMB1 Hack).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Pinball (E) [!].nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",natural
+Pinball (JU).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Pinball (VS).nes,roms_removed/deferred/vs_system,VS System arcade game: needs coin / DIP switch support (not in NeSLE or the fceumm harness),no_mapper
+Platoon (VS).nes,roms_removed/deferred/vs_system,VS System arcade game: needs coin / DIP switch support (not in NeSLE or the fceumm harness),fault
+Pocket Zaurus - Juu Ouken no Nazo (J) [hFFE].nes,roms_removed/deferred/menu,boot stops on a menu,natural
+Poppy's Pinball (Pinball Hack).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Princess Tomato in Salad Kingdom (U).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Punch-Out!! (U).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Puzzle (U).nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,pass
+Quattro Adventure (Aladdin) (U).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",matches_ref
+RoadBlasters (U).nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,input_drift
+Rockin' Kats (PC10) [!].nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,pass
+Roger Clemens MVP Baseball (U).nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,pass
+San Guo Zhi - Ying Jie Zhan (Chinese).nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,pass
+Sanma no Mei Tantei (J) [h1].nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Shisen Mahjang - Seifuku Hen (Regular Edition) (Joy Van).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Shisen Mahjang - Seifuku Hen (Uniform Edition) (Joy Van).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Smash Ping Pong (FDS Hack) (J).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Snow Brothers (USA).nes,roms_removed/deferred/emulator,NeSLE: suspect,suspect
+Soccer (FDS Hack) (J).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Soccer (VS).nes,roms_removed/deferred/vs_system,VS System arcade game: needs coin / DIP switch support (not in NeSLE or the fceumm harness),no_mapper
+Solitaire (U).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Space Shadow (J) [hFFE][p1].nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Space Shuttle Project (U).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Spelunker (U) [!].nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,matches_ref
+Star Luster (VS).nes,roms_removed/deferred/vs_system,VS System arcade game: needs coin / DIP switch support (not in NeSLE or the fceumm harness),no_mapper
+Star Soldier (LifeSpace Hack).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Star Voyager (U).nes,roms_removed/deferred/emulator,NeSLE: suspect,suspect
+Stealth ATF (U).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Street Cop (U).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",matches_ref
+Stroke and Match Golf (VS) [!].nes,roms_removed/deferred/vs_system,VS System arcade game: needs coin / DIP switch support (not in NeSLE or the fceumm harness),no_mapper
+Super Carrots - A New Harvest (Release 5) (SMB2 Hack).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Super Chinese (J) [hM03].nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,input_drift
+Super Mario Bros (FDS Hack) (J).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Super Mario Kart Rider.nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Super Mario Remix 2 v1.0 (Dragon Warrior Hack).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Super Skater (VS).nes,roms_removed/deferred/vs_system,VS System arcade game: needs coin / DIP switch support (not in NeSLE or the fceumm harness),no_mapper
+Super Sky Kid (VS).nes,roms_removed/deferred/vs_system,VS System arcade game: needs coin / DIP switch support (not in NeSLE or the fceumm harness),natural
+Super Xevious (VS).nes,roms_removed/deferred/vs_system,VS System arcade game: needs coin / DIP switch support (not in NeSLE or the fceumm harness),suspect
+Sweet Home (J) [T-Eng1.0].nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+TMNT Bros (Rev 1) (SMB1 Hack).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Tetris (VS).nes,roms_removed/deferred/vs_system,VS System arcade game: needs coin / DIP switch support (not in NeSLE or the fceumm harness),no_mapper
+Three Stooges (U) (Prototype).nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,input_drift
+Thunder Warrior.nes,roms_removed/deferred/emulator,NeSLE: suspect,suspect
+Tiles of Fate (U).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Time Conquest.nes,roms_removed/deferred/menu,boot stops on a menu,pass
+To The Earth (U).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Top Gun (VS).nes,roms_removed/deferred/vs_system,VS System arcade game: needs coin / DIP switch support (not in NeSLE or the fceumm harness),input_drift
+Touch Down Fever (U).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Toxic Crusaders (U).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",natural
+TwinBee (J) (FDS Hack).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Ultima - Exodus (U).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Ultimate Air Combat (U).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+VS Castlevania (VS).nes,roms_removed/deferred/vs_system,VS System arcade game: needs coin / DIP switch support (not in NeSLE or the fceumm harness),input_drift
+VS Slalom (VS).nes,roms_removed/deferred/vs_system,VS System arcade game: needs coin / DIP switch support (not in NeSLE or the fceumm harness),pass
+VS Super Mario Bros (VS).nes,roms_removed/deferred/vs_system,VS System arcade game: needs coin / DIP switch support (not in NeSLE or the fceumm harness),suspect
+VS TKO Boxing (VS) [!].nes,roms_removed/deferred/vs_system,VS System arcade game: needs coin / DIP switch support (not in NeSLE or the fceumm harness),no_mapper
+Vindicators (U).nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,input_drift
+Volleyball (FDS Hack) (J).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Weirdo Warrior (Dragon Warrior Hack).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+World Games (U).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Ying Lie Qun Xia Zhuan (Chinese).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+Yoshi (U).nes,roms_removed/deferred/menu,boot stops on a menu,input_drift
+ZZZ_UNK_Battle Storm (Bad CHR 4e0d6650).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+ZZZ_UNK_Predator (Bad CHR 820203f0) (J) (245776).nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,input_drift
+ZZZ_UNK_Seifuku Hen - Shisen Mahjong (UNL).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",pass
+ZZZ_UNK_Trackandfield (40976).nes,roms_removed/deferred/no_control,"boot search never reached a point where the player moves (menus, text, demos)",matches_ref
+Zippy Race (J) [p1].nes,roms_removed/deferred/no_control_on_nesle,the boot gives control on fceumm but not on NeSLE,matches_ref
